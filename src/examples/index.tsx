@@ -1,6 +1,8 @@
 import React from 'react'
 import Box from '@/components/layout-structure/Box'
 import Page from '@/components/layout-structure/Page'
+import Layout from '@/components/layout-structure/Layout'
+import LegacyStack from '@/components/layout-structure/LegacyStack'
 
 export default function ExamplePage() {
   return (
@@ -13,6 +15,11 @@ export default function ExamplePage() {
         secondaryActions={[
           {
             label: 'Duplicate',
+            onAction: () => alert('Duplicate action'),
+          },
+          {
+            label: 'Duplicate',
+
             onAction: () => alert('Duplicate action'),
           },
           {
@@ -44,13 +51,23 @@ export default function ExamplePage() {
           },
         ]}
       >
-        <Box sectionned shadow="colored">
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
+        <Box sectionned shadow="colored" as="section" className="mb-6">
+          <LegacyStack alignment="center" spacing="loose" vertical={true}>
+            <p className="bg-indigo-100 text-indigo-700 px-2 rounded w-fit">test</p>
+            <p className="bg-indigo-100 text-indigo-700 px-2 rounded w-fit">test</p>
+            <p className="bg-indigo-100 text-indigo-700 px-2 rounded w-fit">test</p>
+            <p className="bg-indigo-100 text-indigo-700 px-2 rounded w-fit">test</p>
+            <p className="bg-indigo-100 text-indigo-700 px-2 rounded w-fit">test</p>
+          </LegacyStack>
         </Box>
+        <Layout as="section">
+          <Layout.Section primary> 1111</Layout.Section>
+          <Layout.Section> 222</Layout.Section>
+          <Layout.Section secondary> 1111</Layout.Section>
+          <Layout.Section> 222</Layout.Section>
+          {/* <Layout.Section> 222</Layout.Section> */}
+          {/* <Layout.AnnotatedSection>2222</Layout.AnnotatedSection> */}
+        </Layout>
       </Page>
     </div>
   )

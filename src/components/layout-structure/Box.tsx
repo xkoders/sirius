@@ -1,13 +1,15 @@
-import React, { HTMLAttributes, ReactNode } from 'react'
+import React, { ElementType, HTMLAttributes, ReactNode } from 'react'
 import type { ComponentProps } from 'react'
 
 interface IBoxProps {
-  as?: keyof JSX.IntrinsicElements
+  as?: ElementType
   children?: ReactNode
   rounded?: 'full' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
   shadow?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | 'colored'
   sectionned?: boolean
-  [x: string]: string | any
+  disabled?: boolean
+  className?: string
+  [x: string]: any
 }
 
 export default function Box({
@@ -15,6 +17,7 @@ export default function Box({
   children,
   rounded = 'md',
   shadow = 'md',
+  className = '',
   sectionned = false,
   ...rest
 }: IBoxProps) {
@@ -49,7 +52,7 @@ export default function Box({
         ROUNDED[rounded],
         SHADOW[shadow],
         sectionned ? 'px-2 py-3 md:px-3 md:py-4 lg:px-4 lg:py-5 bg-white' : '',
-        rest?.className || '',
+        className || '',
         'w-full relative',
       ].join(' ')}
       {...rest}
