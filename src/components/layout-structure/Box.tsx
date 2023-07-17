@@ -1,5 +1,5 @@
-import React, { ElementType, HTMLAttributes, ReactNode } from 'react'
-import type { ComponentProps } from 'react'
+import { ROUNDED, SHADOW } from '@/constants'
+import React, { ElementType, ReactNode } from 'react'
 
 interface IBoxProps {
   as?: ElementType
@@ -11,8 +11,9 @@ interface IBoxProps {
   className?: string
   [x: string]: any
 }
+const _shadow = Object.assign(SHADOW, { colored: 'colored' })
 
-export default function Box({
+export function Box({
   as = 'div',
   children,
   rounded = 'md',
@@ -22,35 +23,11 @@ export default function Box({
   ...rest
 }: IBoxProps) {
   const Wrapper = as || 'div'
-  const ROUNDED: { [x: string]: string } = {
-    full: 'rounded-full',
-    sm: 'rounded-sm',
-    md: 'rounded-md',
-    lg: 'rounded-lg',
-    xl: 'rounded-xl',
-    '2xl': 'rounded-2xl',
-    '3xl': 'rounded-3xl',
-    '4xl': 'rounded-4xl',
-    '5xl': 'rounded-5xl',
-  }
-  const SHADOW: { [x: string]: string } = {
-    none: 'shadow-none',
-    sm: 'shadow-sm',
-    md: 'shadow-md',
-    lg: 'shadow-lg',
-    xl: 'shadow-xl',
-    '2xl': 'shadow-2xl',
-    '3xl': 'shadow-3xl',
-    '4xl': 'shadow-4xl',
-    '5xl': 'shadow-5xl',
-    colored: 'colored',
-  }
-
   return (
     <Wrapper
       className={[
         ROUNDED[rounded],
-        SHADOW[shadow],
+        _shadow[shadow],
         sectionned ? 'px-2 py-3 md:px-3 md:py-4 lg:px-4 lg:py-5 bg-white' : '',
         className || '',
         'w-full relative',
@@ -60,7 +37,7 @@ export default function Box({
       {shadow === 'colored' && (
         <span className="bg-gradient-to-r from-blue-500 via-violet-500 to-orange-500 absolute z-[-1] inset-0 blur-xl opacity-80 mx-2 my-3 md:mx-3 md:my-4 lg:mx-4 lg:my-5"></span>
       )}
-      <div>{children}</div>
+      {children}
     </Wrapper>
   )
 }

@@ -21,7 +21,7 @@ const ALIGNMENT = {
   center: 'justify-center',
   end: 'justify-end',
 }
-export default function LegacyStack({
+export function LegacyStack({
   children,
   className,
   vertical,

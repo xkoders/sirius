@@ -1,9 +1,7 @@
-import ExamplePage from './examples'
+import ExamplePage from './examples/ExamplePage'
 
 function App() {
-
-  return (<ExamplePage />
-  )
+  return <ExamplePage />
 }
 
 export default App

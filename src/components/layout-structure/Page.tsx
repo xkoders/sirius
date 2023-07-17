@@ -3,8 +3,8 @@ import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
 export interface IAction {
-  label: React.ReactNode
-  target?: '_blank'
+  label: string
+  target?: '_blank' | '_self' | '_parent' | undefined
   url?: string
   disabled?: boolean
   rel?: 'noreferrer'
@@ -24,7 +24,7 @@ export interface IPageProps {
   }[]
   fullWidth?: boolean
 }
-export default function Page({
+export function Page({
   children,
   className = '',
   title,
@@ -61,8 +61,6 @@ export default function Page({
                 className="bg-white border border-gray-400 hover:text-indigo-700 font-medium py-2 h-fit px-4 rounded-md"
                 onClick={onAction}
                 title={label}
-                target={target}
-                rel={rel}
                 disabled={disabled}
               >
                 {label}
@@ -94,8 +92,6 @@ export default function Page({
                           key={index}
                           onClick={onAction}
                           title={label}
-                          target={target}
-                          rel={rel}
                           disabled={disabled}
                         >
                           {label}

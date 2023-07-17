@@ -17,7 +17,8 @@ export interface ISectionProps {
 export interface IAnnotatedSectionProps {
   children: ReactNode
   className?: string
-  primary?: boolean
+  title?: string
+  description?: string | ReactNode
 }
 
 function MainLayout({ children, className, as: Component = 'section' }: ILayoutProps) {
@@ -26,7 +27,7 @@ function MainLayout({ children, className, as: Component = 'section' }: ILayoutP
   )
 }
 
-function Section({
+export function Section({
   children,
   className,
   primary,
@@ -36,7 +37,6 @@ function Section({
   oneFourth,
 }: ISectionProps) {
   const classes = [
-    'bg-red-500 ',
     className,
     primary
       ? 'w-[calc(70%-10px)] peer/primary'
@@ -56,10 +56,21 @@ function Section({
   return <article className={classes.filter(Boolean).join(' ')}>{children}</article>
 }
 
-function AnnotatedSection({ children }: IAnnotatedSectionProps) {
-  return <article>{children}</article>
+export function AnnotatedSection({
+  children,
+  className = '',
+  title,
+  description,
+}: IAnnotatedSectionProps) {
+  return (
+    <article className={['flex w-full', className].join(' ')}>
+      <div className="w-1/3">
+        {title && <h1 className="text-[22px] font-medium">{title}</h1>}
+        {description && <h2 className="text-base opacity-75">{description}</h2>}
+      </div>
+      <div className="w-2/3">{children}</div>
+    </article>
+  )
 }
 
-const Layout = Object.assign(MainLayout, { Section, AnnotatedSection })
-
-export default Layout
+export const Layout = Object.assign(MainLayout, { Section, AnnotatedSection })

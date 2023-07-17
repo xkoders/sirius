@@ -1,8 +1,5 @@
 import React from 'react'
-import Box from '@/components/layout-structure/Box'
-import Page from '@/components/layout-structure/Page'
-import Layout from '@/components/layout-structure/Layout'
-import LegacyStack from '@/components/layout-structure/LegacyStack'
+import { Box, Page, Layout, LegacyStack, SkeletonBodyText, SkeletonDisplayText } from '@/components'
 
 export default function ExamplePage() {
   return (
@@ -54,19 +51,42 @@ export default function ExamplePage() {
         <Box sectionned shadow="colored" as="section" className="mb-6">
           <LegacyStack alignment="center" spacing="loose" vertical={true}>
             <p className="bg-indigo-100 text-indigo-700 px-2 rounded w-fit">test</p>
-            <p className="bg-indigo-100 text-indigo-700 px-2 rounded w-fit">test</p>
-            <p className="bg-indigo-100 text-indigo-700 px-2 rounded w-fit">test</p>
-            <p className="bg-indigo-100 text-indigo-700 px-2 rounded w-fit">test</p>
-            <p className="bg-indigo-100 text-indigo-700 px-2 rounded w-fit">test</p>
+            <SkeletonBodyText lines={15} />
           </LegacyStack>
         </Box>
-        <Layout as="section">
-          <Layout.Section primary> 1111</Layout.Section>
-          <Layout.Section> 222</Layout.Section>
-          <Layout.Section secondary> 1111</Layout.Section>
-          <Layout.Section> 222</Layout.Section>
-          {/* <Layout.Section> 222</Layout.Section> */}
-          {/* <Layout.AnnotatedSection>2222</Layout.AnnotatedSection> */}
+        <Layout className="mb-5">
+          <Layout.Section primary>
+            <SkeletonDisplayText size="5xl" width={100} />
+          </Layout.Section>
+          <Layout.Section>
+            <SkeletonDisplayText size="5xl" width={100} />
+          </Layout.Section>
+        </Layout>
+        <Layout className="mb-5">
+          <Layout.Section secondary>
+            <SkeletonDisplayText size="5xl" width={100} />
+          </Layout.Section>
+          <Layout.Section>
+            <SkeletonDisplayText size="5xl" width={100} />
+          </Layout.Section>
+        </Layout>
+        <Layout className="mb-5">
+          <Layout.AnnotatedSection
+            title="3/4 inch Leather pet collar"
+            description="Perfect for any pet"
+          >
+            <Box sectionned shadow="md">
+              <SkeletonBodyText lines={5} />
+            </Box>
+          </Layout.AnnotatedSection>
+          <Layout.AnnotatedSection
+            title="3/4 inch Leather pet collar"
+            description="Perfect for any pet"
+          >
+            <Box sectionned shadow="md">
+              <SkeletonBodyText lines={5} />
+            </Box>
+          </Layout.AnnotatedSection>
         </Layout>
       </Page>
     </div>
