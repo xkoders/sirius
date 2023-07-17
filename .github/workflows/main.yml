@@ -21,8 +21,8 @@ jobs:
         with:
           ref: main
       - run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name soufiyanbenallal
+          git config user.email benallalsoufiane1@gmail.com
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
