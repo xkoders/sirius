@@ -36,7 +36,7 @@ export function Page({
   fullWidth,
 }: IPageProps) {
   return (
-    <main className={`p-6 w-full ${className} ${fullWidth ? 'w-full' : 'max-w-5xl'}`}>
+    <main className={`mx-auto p-6 w-full ${className} ${fullWidth ? 'w-full' : 'max-w-5xl'}`}>
       <section className="flex gap-3 md:gap-6 mb-5">
         <article className="flex-1 flex gap-3 items-center">
           {backAction && (

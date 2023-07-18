@@ -1,9 +1,56 @@
 import React from 'react'
-import { Box, Page, Layout, LegacyStack, SkeletonBodyText, SkeletonDisplayText } from '@/components'
-
+import {
+  Box,
+  Page,
+  Layout,
+  LegacyStack,
+  SkeletonBodyText,
+  SkeletonDisplayText,
+  Navigation,
+  Frame,
+} from '@/components'
+import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 export default function ExamplePage() {
+  const navigation = (
+    <Navigation>
+      <Navigation.Section
+        items={[
+          {
+            url: '#',
+            label: 'Home',
+            disabled: true,
+            icon: HomeIcon,
+          },
+          {
+            url: '#',
+            label: 'Orders',
+            icon: InboxIcon,
+            badge: '15',
+          },
+          {
+            url: '#',
+            label: 'Products',
+            icon: TagIcon,
+            selected: true,
+            subNavigationItems: [
+              {
+                url: '#',
+                selected: true,
+                label: 'Collections',
+              },
+              {
+                url: '#',
+                disabled: true,
+                label: 'Inventory',
+              },
+            ],
+          },
+        ]}
+      />
+    </Navigation>
+  )
   return (
-    <div className="container mx-auto flex justify-center h-screen">
+    <Frame className="" sidebar={navigation}>
       <Page
         backAction={{ label: 'Products', url: '#' }}
         title="3/4 inch Leather pet collar"
@@ -89,6 +136,6 @@ export default function ExamplePage() {
           </Layout.AnnotatedSection>
         </Layout>
       </Page>
-    </div>
+    </Frame>
   )
 }
