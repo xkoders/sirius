@@ -39,14 +39,14 @@ export function Section({
   const classes = [
     className,
     primary
-      ? 'w-[calc(70%-10px)] peer/primary'
+      ? 'w-[calc(66.6666%-10px)] peer/primary'
       : !secondary
-      ? 'peer-first/primary:w-[calc(30%-10px)]'
+      ? 'peer-first/primary:w-[calc(33.3333%-10px)]'
       : '',
     secondary
-      ? 'w-[calc(30%-10px)] peer/secondary'
+      ? 'w-[calc(33.3333%-10px)] peer/secondary'
       : !primary
-      ? 'peer-first/secondary:w-[calc(70%-10px)]'
+      ? 'peer-first/secondary:w-[calc(66.6666%-10px)]'
       : '',
     oneTwo ? 'w-1/2' : '',
     oneThird ? 'w-1/3' : '',
@@ -63,7 +63,7 @@ export function AnnotatedSection({
   description,
 }: IAnnotatedSectionProps) {
   return (
-    <article className={['flex w-full', className].join(' ')}>
+    <article className={['flex w-full gap-5', className].join(' ')}>
       <div className="w-1/3">
         {title && <h1 className="text-[22px] font-medium">{title}</h1>}
         {description && <h2 className="text-base opacity-75">{description}</h2>}

@@ -37,7 +37,7 @@ export function Page({
 }: IPageProps) {
   return (
     <main className={`mx-auto p-6 w-full ${className} ${fullWidth ? 'w-full' : 'max-w-5xl'}`}>
-      <section className="flex gap-3 md:gap-6 mb-5">
+      <section className="flex gap-3 md:gap-6 mb-5 text-[15px]">
         <article className="flex-1 flex gap-3 items-center">
           {backAction && (
             <button
@@ -58,7 +58,7 @@ export function Page({
             secondaryActions.map(({ label, onAction, target, url, disabled, rel }, index) => (
               <button
                 key={index}
-                className="bg-white border border-gray-400 hover:text-indigo-700 font-medium py-2 h-fit px-4 rounded-md"
+                className="hover:text-indigo-700 font-medium py-2 h-fit  rounded-md"
                 onClick={onAction}
                 title={label}
                 disabled={disabled}
@@ -70,7 +70,7 @@ export function Page({
             actionGroups.map(({ title, actions }) => (
               <Menu key={title} as="div" className="relative inline-block text-left">
                 <div>
-                  <Menu.Button className="flex w-full gap-3 justify-center rounded-md bg-black/75  px-4 py-2 font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                  <Menu.Button className="flex w-full gap-3 justify-center rounded-md bg-black/75  px-4 py-2 px-1 font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                     <span>title</span>
                     <span>&darr;</span>
                   </Menu.Button>

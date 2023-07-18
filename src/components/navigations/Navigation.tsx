@@ -35,7 +35,7 @@ function MainNavigation({ children }: INavigationProps) {
 
 function Section({ items }: ISectionProps) {
   return (
-    <ul className="py-3 w-60 text-[15px] text-gray-950 border-r h-full max-h-screen sticky top-0">
+    <ul className="py-3 w-60 text-[15px] text-gray-950 border-r h-full max-h-screen sticky top-14">
       {items.map((item, index) => (
         <li key={index} className="px-3 flex flex-col gap-1">
           <a

@@ -11,7 +11,7 @@ import {
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 export default function ExamplePage() {
-  const navigation = (
+  const sidebar = (
     <Navigation>
       <Navigation.Section
         items={[
@@ -50,7 +50,7 @@ export default function ExamplePage() {
     </Navigation>
   )
   return (
-    <Frame className="" sidebar={navigation}>
+    <Frame sidebar={sidebar}>
       <Page
         backAction={{ label: 'Products', url: '#' }}
         title="3/4 inch Leather pet collar"
@@ -61,13 +61,9 @@ export default function ExamplePage() {
             label: 'Duplicate',
             onAction: () => alert('Duplicate action'),
           },
-          {
-            label: 'Duplicate',
 
-            onAction: () => alert('Duplicate action'),
-          },
           {
-            label: 'View on your store',
+            label: 'View on store',
             onAction: () => alert('View on your store action'),
           },
         ]}
