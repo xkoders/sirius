@@ -1,5 +1,5 @@
 import React, { ElementType, ReactNode } from 'react'
-export interface ILegacyStackProps {
+export interface IStackProps {
   children: ReactNode
   className?: string
   spacing?: 'extraTight' | 'tight' | 'baseTight' | 'loose' | 'extraLoose' | 'none'
@@ -21,7 +21,7 @@ const ALIGNMENT = {
   center: 'justify-center',
   end: 'justify-end',
 }
-export function LegacyStack({
+export function Stack({
   children,
   className,
   vertical,
@@ -29,7 +29,7 @@ export function LegacyStack({
   alignment,
   wrap,
   as: Component = 'div',
-}: ILegacyStackProps) {
+}: IStackProps) {
   // const
   return (
     <Component

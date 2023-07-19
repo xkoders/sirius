@@ -3,13 +3,18 @@ import {
   Box,
   Page,
   Layout,
-  LegacyStack,
+  Stack,
   SkeletonBodyText,
   SkeletonDisplayText,
   Navigation,
   Frame,
+  Table,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
+
+const Badge = () => {
+  return <span>15</span>
+}
 export default function ExamplePage() {
   const sidebar = (
     <Navigation>
@@ -49,6 +54,56 @@ export default function ExamplePage() {
       />
     </Navigation>
   )
+  const promotedBulkActions = [
+    {
+      label: 'Create shipping labels',
+      onAction: () => console.log('Todo: implement bulk edit'),
+    },
+  ]
+  const bulkActions = [
+    {
+      label: 'Add tags',
+      onAction: () => console.log('Todo: implement bulk add tags'),
+    },
+    {
+      label: 'Remove tags',
+      onAction: () => console.log('Todo: implement bulk remove tags'),
+    },
+    {
+      label: 'Delete orders',
+      onAction: () => console.log('Todo: implement bulk delete'),
+    },
+  ]
+
+  const orders = [
+    {
+      id: '1020',
+      order: '#1020',
+      date: 'Jul 20 at 4:34pm',
+      customer: 'Jaydon Stanton',
+      total: '$969.44',
+      paymentStatus: <Badge />,
+      fulfillmentStatus: <Badge />,
+    },
+    {
+      id: '1019',
+      order: '#1019',
+      date: 'Jul 20 at 3:46pm',
+      customer: 'Ruben Westerfelt',
+      total: '$701.19',
+      paymentStatus: <Badge />,
+      fulfillmentStatus: <Badge />,
+    },
+    {
+      id: '1018',
+      order: '#1018',
+      date: 'Jul 20 at 3.44pm',
+      customer: 'Leo Carder',
+      total: '$798.24',
+      paymentStatus: <Badge />,
+      fulfillmentStatus: <Badge />,
+    },
+  ]
   return (
     <Frame sidebar={sidebar}>
       <Page
@@ -91,11 +146,37 @@ export default function ExamplePage() {
           },
         ]}
       >
+        <Box className="bg-white rounded-lg shadow mb-20">
+          <Table
+            className=""
+            headings={[
+              { title: 'Order' },
+              { title: 'Date' },
+              { title: 'Customer' },
+              { title: 'Total', alignment: 'end' },
+              { title: 'Payment status' },
+              { title: 'Fulfillment status' },
+            ]}
+            bulkActions={bulkActions}
+            promotedBulkActions={promotedBulkActions}
+          >
+            {orders.map((order, index) => (
+              <Table.Row item={order} key={index}>
+                <Table.Cell>{order.order}</Table.Cell>
+                <Table.Cell>{order.date}</Table.Cell>
+                <Table.Cell>{order.customer}</Table.Cell>
+                <Table.Cell>{order.total}</Table.Cell>
+                <Table.Cell>{order.paymentStatus}</Table.Cell>
+                <Table.Cell>{order.fulfillmentStatus}</Table.Cell>
+              </Table.Row>
+            ))}
+          </Table>
+        </Box>
         <Box sectionned shadow="colored" as="section" className="mb-6">
-          <LegacyStack alignment="center" spacing="loose" vertical={true}>
+          <Stack alignment="center" spacing="loose" vertical={true}>
             <p className="bg-indigo-100 text-indigo-700 px-2 rounded w-fit">test</p>
             <SkeletonBodyText lines={15} />
-          </LegacyStack>
+          </Stack>
         </Box>
         <Layout className="mb-5">
           <Layout.Section primary>
