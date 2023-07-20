@@ -16,7 +16,7 @@ interface IItemProps {
           titleId?: string | undefined
         } & RefAttributes<SVGSVGElement>
       >
-  badge?: string
+  badge?: string | ReactNode
   className?: string
   disabled?: boolean
   selected?: boolean
@@ -50,7 +50,7 @@ function Section({ items }: ISectionProps) {
               <span className="absolute top-1/2 -left-2 w-1 h-6 -mt-3 rounded-full bg-orange-500"></span>
             )}
             {item.badge && (
-              <span className="absolute top-1/2 right-2 w-fit h-fit px-1.5 -translate-y-1/2 rounded-full bg-orange-500 text-xs text-white">
+              <span className="absolute top-1/2 right-2 w-fit h-fit -translate-y-1/2">
                 {item.badge}
               </span>
             )}

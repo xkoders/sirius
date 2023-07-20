@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
-import { Box } from '../layout-structure'
-import { classNames } from '@/helpers'
+import React, { ReactNode, useContext, useMemo, useRef } from 'react'
+import { classNames, stringify } from '@/helpers'
 import { Popover } from '@headlessui/react'
 import { AppContext } from '../provider/Provider'
 import { Checkbox } from '../forms'
+
 interface IBase {
-  children: React.ReactNode
+  children: ReactNode
   className?: string
 }
 interface IHeadings {
@@ -21,18 +21,31 @@ interface ITableProps extends IBase {
   children: React.ReactNode
   className?: string
   headings: IHeadings[]
+  items?: any[]
   bulkActions?: IBulkActions[]
   promotedBulkActions?: IBulkActions[]
 }
 
 function MainTable({
-  children,
+  children = <></>,
+  items = [],
   className,
   headings,
   bulkActions,
   promotedBulkActions,
 }: ITableProps) {
   const { dispatch, tableResources } = useContext(AppContext)
+  const cRef = useRef<HTMLInputElement>(null)
+  const checkboxType = useMemo(() => {
+    const selectedCount = tableResources.selectedItems.length
+    const itemsCount = items.length
+    if (selectedCount && selectedCount < itemsCount) {
+      return 'intermediate'
+    } else if (selectedCount === itemsCount) {
+      return 'all'
+    }
+    return 'none'
+  }, [tableResources.selectedItems])
   return (
     <div className="relative">
       <div className="overflow-x-auto h-fit rounded-md">
@@ -40,12 +53,16 @@ function MainTable({
           <thead className="bg-gray-200">
             <tr>
               {tableResources.select && (
-                <th className=" text-sm font-semibold text-gray-900 align-middle">
-                  <input
-                    aria-describedby="td-description"
-                    name="table-row-checkbox"
-                    type="checkbox"
-                    className="h-[18px] w-[18px] my-1 rounded-full checked:bg-slate-400 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                <th className=" text-sm  text-gray-900 align-middle">
+                  <Checkbox
+                    checked={checkboxType === 'all'}
+                    indeterminate={checkboxType === 'intermediate'}
+                    onChange={(value) => {
+                      dispatch({
+                        type: 'SELECT_ALL',
+                        payload: value ? items : [],
+                      })
+                    }}
                   />
                 </th>
               )}
@@ -53,14 +70,14 @@ function MainTable({
                 <th
                   key={index}
                   scope="col"
-                  className="py-2 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  className="py-2 pl-4 pr-3 text-left text-xs font-normal text-gray-900 sm:pl-6"
                 >
                   {heading.title}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 ">{children}</tbody>
+          <tbody className="divide-y divide-gray-200">{children}</tbody>
         </table>
       </div>
 
@@ -112,23 +129,22 @@ function MainTable({
 }
 function Row({ children, className, item }: { item: any } & IBase) {
   const { dispatch, tableResources } = useContext(AppContext)
-
-  const handleChangeSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.checked)
-    const type = e.target.checked ? 'addSelectedItem' : 'removeSelectedItem'
+  const isSelected = useMemo(
+    () => tableResources.selectedItems.some((i) => stringify(i) === stringify(item)),
+    [tableResources.selectedItems],
+  )
+  const handleChangeSelect = (checked: boolean) => {
+    const type = checked ? 'ADD_SELECTED_ITEM' : 'REMOVE_SELECTED_ITEM'
     dispatch({ type, payload: item })
   }
   return (
-    <tr className={classNames(className, '')}>
+    <tr className={classNames('relative', className, isSelected ? 'bg-slate-100' : '')}>
       {tableResources.select && (
         <td className="whitespace-nowrap py-1 text-sm font-medium text-gray-900 text-center px-2">
-          <input
-            aria-describedby="td-description"
-            name="table-row-checkbox"
-            type="checkbox"
-            onChange={handleChangeSelect}
-            className="h-[18px] w-[18px]  rounded-full checked:bg-slate-400 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-          />
+          {isSelected && (
+            <span className="absolute inset-y-1 left-px flex items-center w-1  bg-orange-500 rounded-full"></span>
+          )}
+          <Checkbox checked={isSelected} name="table-row-checkbox" onChange={handleChangeSelect} />
         </td>
       )}
       {children}

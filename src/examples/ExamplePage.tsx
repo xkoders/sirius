@@ -9,12 +9,10 @@ import {
   Navigation,
   Frame,
   Table,
+  Badge,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 
-const Badge = () => {
-  return <span>15</span>
-}
 export default function ExamplePage() {
   const sidebar = (
     <Navigation>
@@ -30,7 +28,7 @@ export default function ExamplePage() {
             url: '#',
             label: 'Orders',
             icon: InboxIcon,
-            badge: '15',
+            badge: <Badge status="critical">16</Badge>,
           },
           {
             url: '#',
@@ -82,8 +80,12 @@ export default function ExamplePage() {
       date: 'Jul 20 at 4:34pm',
       customer: 'Jaydon Stanton',
       total: '$969.44',
-      paymentStatus: <Badge />,
-      fulfillmentStatus: <Badge />,
+      paymentStatus: (
+        <Badge status="default" type="incomplete">
+          default - incomplete
+        </Badge>
+      ),
+      fulfillmentStatus: <Badge type="live">info - live</Badge>,
     },
     {
       id: '1019',
@@ -91,8 +93,16 @@ export default function ExamplePage() {
       date: 'Jul 20 at 3:46pm',
       customer: 'Ruben Westerfelt',
       total: '$701.19',
-      paymentStatus: <Badge />,
-      fulfillmentStatus: <Badge />,
+      paymentStatus: (
+        <Badge status="pending" type="halfComplete">
+          pending - halfComplete
+        </Badge>
+      ),
+      fulfillmentStatus: (
+        <Badge status="success" type="complete">
+          success - complete
+        </Badge>
+      ),
     },
     {
       id: '1018',
@@ -100,8 +110,16 @@ export default function ExamplePage() {
       date: 'Jul 20 at 3.44pm',
       customer: 'Leo Carder',
       total: '$798.24',
-      paymentStatus: <Badge />,
-      fulfillmentStatus: <Badge />,
+      paymentStatus: (
+        <Badge status="warning" type="dashed">
+          warning - dashed
+        </Badge>
+      ),
+      fulfillmentStatus: (
+        <Badge status="critical" type="publish">
+          critical - publish
+        </Badge>
+      ),
     },
   ]
   return (
@@ -148,7 +166,7 @@ export default function ExamplePage() {
       >
         <Box className="bg-white rounded-lg shadow mb-20">
           <Table
-            className=""
+            items={orders}
             headings={[
               { title: 'Order' },
               { title: 'Date' },

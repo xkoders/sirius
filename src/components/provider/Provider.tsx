@@ -1,3 +1,4 @@
+import { stringify } from '@/helpers'
 import { Dispatch, createContext, useReducer } from 'react'
 const initialData = {
   selectedItems: [],
@@ -25,20 +26,25 @@ export const AppContext = createContext<{
   tableResources: initialData,
   dispatch: () => null,
 })
-type ActionType = 'addSelectedItem' | 'removeSelectedItem'
+type ActionType = 'ADD_SELECTED_ITEM' | 'REMOVE_SELECTED_ITEM' | 'SELECT_ALL'
 
 function tasksReducer(data: IDataReducer, action: { type: ActionType; payload: any }) {
   switch (action.type) {
-    case 'addSelectedItem':
+    case 'ADD_SELECTED_ITEM':
       return {
         ...data,
         selectedItems: [...data.selectedItems, action.payload],
       }
-    case 'removeSelectedItem':
+    case 'REMOVE_SELECTED_ITEM':
       const d = data.selectedItems
       return {
         ...data,
-        selectedItems: d.filter((item) => JSON.stringify(item) !== JSON.stringify(action.payload)),
+        selectedItems: d.filter((item) => stringify(item) !== stringify(action.payload)),
+      }
+    case 'SELECT_ALL':
+      return {
+        ...data,
+        selectedItems: action.payload,
       }
     default: {
       throw Error('Unknown action: ' + action.type)
