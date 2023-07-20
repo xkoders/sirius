@@ -85,7 +85,7 @@ export default function ExamplePage() {
           default - incomplete
         </Badge>
       ),
-      fulfillmentStatus: <Badge type="live">info - live</Badge>,
+      fulfillmentStatus: <Badge>info - live</Badge>,
     },
     {
       id: '1019',
@@ -115,11 +115,7 @@ export default function ExamplePage() {
           warning - dashed
         </Badge>
       ),
-      fulfillmentStatus: (
-        <Badge status="critical" type="publish">
-          critical - publish
-        </Badge>
-      ),
+      fulfillmentStatus: <Badge status="critical">critical - publish</Badge>,
     },
   ]
   return (

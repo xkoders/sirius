@@ -1,11 +1,12 @@
 import { classNames } from '@/helpers'
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 interface IBadgeProps {
   children?: React.ReactNode
+  icon?: React.ReactNode
   className?: string
   status?: 'default' | 'info' | 'warning' | 'critical' | 'success' | 'pending'
-  type?: 'incomplete' | 'halfComplete' | 'complete' | 'publish' | 'live' | 'dashed'
+  type?: 'incomplete' | 'halfComplete' | 'complete' | 'dashed'
 }
 
 const STATUS = {
@@ -16,17 +17,31 @@ const STATUS = {
   pending: 'bg-gray-100 text-gray-600 border border-gray-300',
   default: 'bg-white text-gray-600 border border-gray-300',
 }
-const TYPE: Record<string, string> = {
-  // ○ ● ◐
-  incomplete: '○',
-  halfComplete: '◒',
-  complete: '◉',
-  publish: '●',
-  live: '•',
-  dashed: '◌',
-  //   ○ ◌   ◒ ◓
+const TYPE: Record<string, ReactNode> = {
+  incomplete: <circle cx="100" cy="100" r="89.5" stroke="black" stroke-width="21" />,
+  halfComplete: (
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M101 21.0062C144.17 21.5417 179 56.7033 179 100C179 143.297 144.17 178.458 101 178.994L101 21.0062ZM101 0.00489366C155.768 0.541436 200 45.1052 200 100C200 154.895 155.768 199.459 101 199.995L101 200C100.833 200 100.667 200 100.5 199.999C100.333 200 100.167 200 100 200C44.7715 200 -1.95703e-06 155.228 -4.37114e-06 100C-6.78525e-06 44.7715 44.7715 -1.95703e-06 100 -4.37114e-06C100.167 -4.37843e-06 100.333 0.000407602 100.5 0.00121631C100.667 0.000407587 100.833 -4.40756e-06 101 -4.41485e-06L101 0.00489366Z"
+      fill="currentColor"
+    />
+  ),
+  complete: <circle cx="100" cy="100" r="100" fill="currentColor" />,
+  dashed: (
+    <circle
+      cx="100"
+      cy="100"
+      r="89.5"
+      stroke="currentColor"
+      strokeWidth="21"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeDasharray="50 50"
+    />
+  ),
 }
-export function Badge({ children, status = 'default', type, className }: IBadgeProps) {
+export function Badge({ children, status = 'default', icon, type, className }: IBadgeProps) {
   return (
     <div
       className={classNames(
@@ -36,14 +51,13 @@ export function Badge({ children, status = 'default', type, className }: IBadgeP
       )}
     >
       {type && (
-        <div className="-ml-1 relative">
-          {type === 'live' ? (
-            <span className="block rounded-full w-2 h-2 bg-green-600 ring-4 ring-green-100 ml-0.5 mr-1 "></span>
-          ) : (
-            TYPE[type]
-          )}
+        <div className={classNames('-ml-1 flex ')}>
+          <svg viewBox="0 0 200 200" className="w-2.5" fill="none">
+            {TYPE[type]}
+          </svg>
         </div>
       )}
+      {icon}
       {children}
     </div>
   )
