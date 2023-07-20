@@ -1,9 +1,23 @@
 import { classNames } from '@/helpers'
-import React, { ReactNode } from 'react'
+import React, {
+  ForwardRefExoticComponent,
+  ReactNode,
+  RefAttributes,
+  SVGProps,
+  useCallback,
+} from 'react'
 
 interface IBadgeProps {
   children?: React.ReactNode
-  icon?: React.ReactNode
+  icon?:
+    | ReactNode
+    | any
+    | ForwardRefExoticComponent<
+        Omit<SVGProps<SVGSVGElement>, 'ref'> & {
+          title?: string | undefined
+          titleId?: string | undefined
+        } & RefAttributes<SVGSVGElement>
+      >
   className?: string
   status?: 'default' | 'info' | 'warning' | 'critical' | 'success' | 'pending'
   type?: 'incomplete' | 'halfComplete' | 'complete' | 'dashed'
@@ -18,7 +32,7 @@ const STATUS = {
   default: 'bg-white text-gray-600 border border-gray-300',
 }
 const TYPE: Record<string, ReactNode> = {
-  incomplete: <circle cx="100" cy="100" r="89.5" stroke="black" stroke-width="21" />,
+  incomplete: <circle cx="100" cy="100" r="89.5" stroke="black" strokeWidth="21" />,
   halfComplete: (
     <path
       fillRule="evenodd"
@@ -41,7 +55,7 @@ const TYPE: Record<string, ReactNode> = {
     />
   ),
 }
-export function Badge({ children, status = 'default', icon, type, className }: IBadgeProps) {
+export function Badge({ children, status = 'default', type, className, ...props }: IBadgeProps) {
   return (
     <div
       className={classNames(
@@ -50,14 +64,17 @@ export function Badge({ children, status = 'default', icon, type, className }: I
         'inline-flex gap-1 items-center px-2 py-0.5 rounded-full text-xs font-medium',
       )}
     >
-      {type && (
-        <div className={classNames('-ml-1 flex ')}>
-          <svg viewBox="0 0 200 200" className="w-2.5" fill="none">
-            {TYPE[type]}
-          </svg>
+      {(!!type || !!props.icon) && (
+        <div className="-ml-1 flex">
+          {type && (
+            <svg viewBox="0 0 200 200" className="w-2.5" fill="none">
+              {TYPE[type]}
+            </svg>
+          )}
+          {props.icon && <div>{<props.icon className="w-4 h-4 fill-current" />}</div>}
         </div>
       )}
-      {icon}
+      {/* <div>{<Icon />}</div> */}
       {children}
     </div>
   )

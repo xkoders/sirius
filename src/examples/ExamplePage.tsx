@@ -85,7 +85,11 @@ export default function ExamplePage() {
           default - incomplete
         </Badge>
       ),
-      fulfillmentStatus: <Badge>info - live</Badge>,
+      fulfillmentStatus: (
+        <Badge icon={TagIcon} status="info">
+          info - live
+        </Badge>
+      ),
     },
     {
       id: '1019',
