@@ -10,6 +10,8 @@ import {
   Frame,
   Table,
   Badge,
+  Text,
+  Banner,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 
@@ -164,7 +166,11 @@ export default function ExamplePage() {
           },
         ]}
       >
-        <Box className="bg-white rounded-lg shadow mb-20">
+        <Banner title="Title banner " status="critical" className="mb-5">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+        </Banner>
+
+        <Box className="bg-white rounded-lg shadow mb-5">
           <Table
             items={orders}
             headings={[
@@ -180,7 +186,11 @@ export default function ExamplePage() {
           >
             {orders.map((order, index) => (
               <Table.Row item={order} key={index}>
-                <Table.Cell>{order.order}</Table.Cell>
+                <Table.Cell>
+                  <Text color="info" variant="bodyMd" fontWeight="semibold">
+                    {order.order}
+                  </Text>
+                </Table.Cell>
                 <Table.Cell>{order.date}</Table.Cell>
                 <Table.Cell>{order.customer}</Table.Cell>
                 <Table.Cell>{order.total}</Table.Cell>
@@ -190,10 +200,31 @@ export default function ExamplePage() {
             ))}
           </Table>
         </Box>
-        <Box sectionned shadow="colored" as="section" className="mb-6">
-          <Stack alignment="center" spacing="loose" vertical={true}>
-            <p className="bg-indigo-100 text-indigo-700 px-2 rounded w-fit">test</p>
-            <SkeletonBodyText lines={15} />
+        <Box sectionned shadow="colored" as="section" className="mb-6 gap-2">
+          <Text variant="heading2xl" fontWeight="medium">
+            Text comp: heading2xl - medium
+          </Text>
+          <Text variant="bodySm" fontWeight="regular" color="subdued">
+            Text comp: bodySm - regular - subdued
+          </Text>
+          <br />
+          <Stack alignment="center" spacing="baseTight" vertical={true}>
+            <Banner title="Title banner " status="default">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+            <Banner title="Title banner " status="info">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+            <Banner title="Title banner " status="pending">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+            <Banner title="Title banner " status="success">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+            <Banner title="Title banner " status="warning">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+            <SkeletonBodyText lines={3} />
           </Stack>
         </Box>
         <Layout className="mb-5">

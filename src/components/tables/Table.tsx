@@ -82,7 +82,7 @@ function MainTable({
       </div>
 
       {!!tableResources.selectedItems?.length && (
-        <div className="absolute top-full translate-y-1 left-1/2 -translate-x-1/2 z-50 bg-white p-4 shadow-lg rounded-lg border flex gap-4 h-fit">
+        <div className="absolute top-full translate-y-1 left-1/2 -translate-x-1/2 z-50 bg-white p-4 shadow-lg rounded-md border flex gap-4 h-fit">
           {promotedBulkActions && (
             <div className="flex">
               {promotedBulkActions.map((action, index) => (
@@ -109,7 +109,7 @@ function MainTable({
                 </svg>
               </Popover.Button>
 
-              <Popover.Panel className="absolute z-10 bg-white shadow bottom-11 w-40 rounded-lg flex flex-col p-3 right-0 text-gray-600 text-[15px]">
+              <Popover.Panel className="absolute z-10 bg-white shadow bottom-11 w-40 rounded-md flex flex-col p-3 right-0 text-gray-600 text-[15px]">
                 {bulkActions.map((action, index) => (
                   <button
                     key={index}
@@ -153,12 +153,7 @@ function Row({ children, className, item }: { item: any } & IBase) {
 }
 function Cell({ children, className }: IBase) {
   return (
-    <td
-      className={classNames(
-        className,
-        'whitespace-nowrap py-1 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 h-10',
-      )}
-    >
+    <td className={classNames(className, 'whitespace-nowrap  pl-4 pr-3 text-sm sm:pl-6 h-9')}>
       {children}
     </td>
   )

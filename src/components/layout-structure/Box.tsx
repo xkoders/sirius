@@ -35,7 +35,7 @@ export function Box({
       {...rest}
     >
       {shadow === 'colored' && (
-        <span className="bg-gradient-to-r from-blue-500 via-violet-500 to-orange-500 absolute z-[-1] inset-0 blur-xl opacity-80 mx-2 my-3 md:mx-3 md:my-4 lg:mx-4 lg:my-5"></span>
+        <span className="bg-gradient-to-r from-blue-500 via-violet-500 to-orange-500 absolute z-[-1] inset-0 blur-[6px] opacity-90 m-1 mt-2"></span>
       )}
       {children}
     </Wrapper>
