@@ -79,7 +79,7 @@ const STATUS = {
   },
   default: {
     icon: null,
-    className: 'bg-white text-gray-600 border border-gray-300',
+    className: 'text-gray-600 border border-gray-300',
   },
 }
 export function Banner({
