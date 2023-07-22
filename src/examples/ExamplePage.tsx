@@ -12,6 +12,7 @@ import {
   Badge,
   Text,
   Banner,
+  Button,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 
@@ -166,6 +167,7 @@ export default function ExamplePage() {
           },
         ]}
       >
+        <Buttons />
         <Banner title="Title banner " status="critical" className="mb-5">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
         </Banner>
@@ -209,19 +211,19 @@ export default function ExamplePage() {
           </Text>
           <br />
           <Stack alignment="center" spacing="baseTight" vertical={true}>
-            <Banner title="Title banner " status="default">
+            <Banner status="default">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
             </Banner>
-            <Banner title="Title banner " status="info">
+            <Banner status="info">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
             </Banner>
-            <Banner title="Title banner " status="pending">
+            <Banner status="pending">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
             </Banner>
-            <Banner title="Title banner " status="success">
+            <Banner status="success">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
             </Banner>
-            <Banner title="Title banner " status="warning">
+            <Banner status="warning">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
             </Banner>
             <SkeletonBodyText lines={3} />
@@ -265,3 +267,33 @@ export default function ExamplePage() {
     </Frame>
   )
 }
+
+const Buttons = () => (
+  <>
+    <Box className="mb-6 flex gap-2">
+      <Button size="large" fullwidth>
+        default
+      </Button>
+      <Button>Button</Button>
+      <Button outline>Button</Button>
+      <Button size="small">Button</Button>
+      <Button size="slim">Button</Button>
+      <Button variant="info" link size="none">
+        link
+      </Button>
+    </Box>
+    <Box className="mb-6 flex gap-2">
+      <Button variant="ghost">ghost</Button>
+      <Button variant="danger">danger</Button>
+      <Button variant="primary">primary</Button>
+      <Button variant="subdued">subdued</Button>
+      <Button variant="success">success</Button>
+      <Button variant="warning">warning</Button>
+      <Button variant="info">info</Button>
+      <Button icon={TagIcon}>info</Button>
+      <Button icon={TagIcon} variant="info" rounded="full">
+        info
+      </Button>
+    </Box>
+  </>
+)

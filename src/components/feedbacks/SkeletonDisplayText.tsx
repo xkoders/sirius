@@ -1,9 +1,10 @@
 import { GAP, ROUNDED, SIZE } from '@/constants'
+import { RoundedType } from '@/types'
 import React from 'react'
 interface ISkeletonBodyTextProps {
   className?: string
   size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
-  rounded?: 'full' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
+  rounded?: RoundedType
   width?: 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100
 }
 

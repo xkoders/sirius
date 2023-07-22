@@ -1,4 +1,5 @@
 import { classNames } from '@/helpers'
+import { IconType } from '@/types'
 import React, {
   ForwardRefExoticComponent,
   ReactNode,
@@ -9,15 +10,7 @@ import React, {
 
 interface IBadgeProps {
   children?: React.ReactNode
-  icon?:
-    | ReactNode
-    | any
-    | ForwardRefExoticComponent<
-        Omit<SVGProps<SVGSVGElement>, 'ref'> & {
-          title?: string | undefined
-          titleId?: string | undefined
-        } & RefAttributes<SVGSVGElement>
-      >
+  icon?: IconType
   className?: string
   status?: 'default' | 'info' | 'warning' | 'critical' | 'success' | 'pending'
   type?: 'incomplete' | 'halfComplete' | 'complete' | 'dashed'

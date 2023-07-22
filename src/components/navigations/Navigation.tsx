@@ -1,3 +1,4 @@
+import { IconType } from '@/types'
 import React, { ForwardRefExoticComponent, ReactNode, RefAttributes, SVGProps } from 'react'
 
 interface INavigationProps {
@@ -7,15 +8,7 @@ interface INavigationProps {
 interface IItemProps {
   url: string
   label: string
-  icon?:
-    | ReactNode
-    | any
-    | ForwardRefExoticComponent<
-        Omit<SVGProps<SVGSVGElement>, 'ref'> & {
-          title?: string | undefined
-          titleId?: string | undefined
-        } & RefAttributes<SVGSVGElement>
-      >
+  icon?: IconType
   badge?: string | ReactNode
   className?: string
   disabled?: boolean

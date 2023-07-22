@@ -7,18 +7,11 @@ import React, {
   SVGProps,
 } from 'react'
 import { Text } from '../typography'
+import { IconType } from '@/types'
 interface IBannerProps {
   children?: React.ReactNode
   as?: ElementType
-  icon?:
-    | ReactNode
-    | any
-    | ForwardRefExoticComponent<
-        Omit<SVGProps<SVGSVGElement>, 'ref'> & {
-          title?: string | undefined
-          titleId?: string | undefined
-        } & RefAttributes<SVGSVGElement>
-      >
+  icon?: IconType
   className?: string
   status?: 'default' | 'info' | 'warning' | 'critical' | 'success' | 'pending'
   title?: string

@@ -1,11 +1,12 @@
 import { ROUNDED, SHADOW } from '@/constants'
+import { RoundedType, ShadowType } from '@/types'
 import React, { ElementType, ReactNode } from 'react'
 
 interface IBoxProps {
   as?: ElementType
   children?: ReactNode
-  rounded?: 'full' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
-  shadow?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | 'colored'
+  rounded?: RoundedType
+  shadow?: ShadowType | 'colored'
   sectionned?: boolean
   disabled?: boolean
   className?: string
@@ -17,7 +18,7 @@ export function Box({
   as = 'div',
   children,
   rounded = 'md',
-  shadow = 'md',
+  shadow = 'none',
   className = '',
   sectionned = false,
   ...rest
@@ -27,7 +28,7 @@ export function Box({
     <Wrapper
       className={[
         ROUNDED[rounded],
-        _shadow[shadow],
+        _shadow[shadow === 'none' && sectionned ? 'md' : shadow],
         sectionned ? 'px-2 py-3 md:px-3 md:py-4 lg:px-4 lg:py-5 bg-white' : '',
         className || '',
         'w-full relative',
