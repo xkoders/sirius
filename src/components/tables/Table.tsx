@@ -48,7 +48,7 @@ function MainTable({
   }, [tableResources.selectedItems])
   return (
     <div className="relative">
-      <div className="overflow-x-auto h-fit rounded-md">
+      <div className="overflow-x-auto h-fit rounded-md border shadow-sm">
         <table className={classNames('min-w-full divide-y divide-gray-300', className)}>
           <thead className="bg-gray-200">
             <tr>
