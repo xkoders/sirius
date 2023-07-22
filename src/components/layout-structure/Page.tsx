@@ -1,15 +1,8 @@
 import React from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import { IAction } from '@/types'
 
-export interface IAction {
-  label: string
-  target?: '_blank' | '_self' | '_parent' | undefined
-  url?: string
-  disabled?: boolean
-  rel?: 'noreferrer'
-  onAction?: () => void
-}
 export interface IPageProps {
   children: React.ReactNode
   backAction?: IAction

@@ -12,3 +12,21 @@ export type IconType =
         titleId?: string | undefined
       } & RefAttributes<SVGSVGElement>
     >
+
+export type ButtonType =
+  | 'primary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'info'
+  | 'ghost'
+  | 'subdued'
+  | 'default'
+export interface IAction {
+  label: string
+  target?: '_blank' | '_self' | '_parent' | undefined
+  url?: string
+  disabled?: boolean
+  rel?: 'noreferrer'
+  onAction?: () => void
+}

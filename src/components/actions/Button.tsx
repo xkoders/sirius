@@ -1,6 +1,6 @@
 import { ROUNDED } from '@/constants'
 import { classNames } from '@/helpers'
-import { IconType, RoundedType } from '@/types'
+import { ButtonType, IconType, RoundedType } from '@/types'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 interface IButtonProps {
@@ -8,7 +8,7 @@ interface IButtonProps {
   className?: string
   url?: string
   size?: 'medium' | 'large' | 'small' | 'slim' | 'none'
-  variant?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'ghost' | 'subdued' | 'default'
+  variant?: ButtonType
   submit?: boolean
   alignment?: 'center' | 'start' | 'end'
   rounded?: RoundedType

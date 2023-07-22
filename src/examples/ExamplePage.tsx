@@ -13,6 +13,7 @@ import {
   Text,
   Banner,
   Button,
+  EmptyState,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 
@@ -223,6 +224,34 @@ export default function ExamplePage() {
             <Banner status="success">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
             </Banner>
+          </Stack>
+        </Box>
+        <Box sectionned className="mb-5">
+          <EmptyState
+            heading="Upload a file to get started"
+            actions={[{ label: 'Upload files' }]}
+            thumb="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
+          >
+            <p>
+              You can use the Files section to upload images, videos, and other documents. This
+              example shows the content with a centered layout and full width.
+            </p>
+          </EmptyState>
+        </Box>
+        {/* <Box sectionned className="mb-5"> */}
+        <EmptyState
+          heading="Upload a file to get started"
+          actions={[{ label: 'Upload files' }]}
+          thumb={<TagIcon className="text-orange-500" />}
+        >
+          <p>
+            You can use the Files section to upload images, videos, and other documents. This
+            example shows the content with a centered layout and full width.
+          </p>
+        </EmptyState>
+        {/* </Box> */}
+        <Box sectionned as="section" className="mb-6 gap-2">
+          <Stack alignment="center" spacing="baseTight" vertical={true}>
             <Banner status="warning">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
             </Banner>

@@ -7,7 +7,7 @@ interface IBoxProps {
   children?: ReactNode
   rounded?: RoundedType
   shadow?: ShadowType | 'colored'
-  sectionned?: boolean
+  sectionned?: boolean | string
   disabled?: boolean
   className?: string
   [x: string]: any
