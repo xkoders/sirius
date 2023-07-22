@@ -65,8 +65,8 @@ export function AnnotatedSection({
   return (
     <article className={['flex w-full gap-5', className].join(' ')}>
       <div className="w-1/3">
-        {title && <h1 className="text-[22px] font-medium">{title}</h1>}
-        {description && <h2 className="text-base opacity-75">{description}</h2>}
+        {title && <h3 className="text-[22px] font-medium">{title}</h3>}
+        {description && <h4 className="text-base opacity-75">{description}</h4>}
       </div>
       <div className="w-2/3">{children}</div>
     </article>

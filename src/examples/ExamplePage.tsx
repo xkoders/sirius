@@ -301,7 +301,7 @@ const Buttons = () => (
   <>
     <Box className="mb-6 flex gap-2">
       <Button size="large" fullwidth>
-        default
+        Button: default - large - fullWidth
       </Button>
       <Button>Button</Button>
       <Button outline>Button</Button>
