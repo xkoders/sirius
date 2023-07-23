@@ -14,6 +14,7 @@ import {
   Banner,
   Button,
   EmptyState,
+  ChoiceList,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 
@@ -126,6 +127,11 @@ export default function ExamplePage() {
       fulfillmentStatus: <Badge status="critical">critical - publish</Badge>,
     },
   ]
+  const plans = [
+    { id: 'small', label: 'Small', description: '4 GB RAM / 2 CPUS / 80 GB SSD Storage' },
+    { id: 'medium', label: 'Medium', description: '8 GB RAM / 4 CPUS / 160 GB SSD Storage' },
+    { id: 'large', label: 'Large', description: '16 GB RAM / 8 CPUS / 320 GB SSD Storage' },
+  ]
   return (
     <Frame sidebar={sidebar}>
       <Page
@@ -168,6 +174,13 @@ export default function ExamplePage() {
           },
         ]}
       >
+        <ChoiceList
+          items={plans}
+          name="plans"
+          defaultChecked={plans[1]}
+          horizontal
+          className="my-10"
+        />
         <Buttons />
         <Banner title="Title banner " status="critical" className="mb-5">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
