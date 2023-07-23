@@ -15,6 +15,7 @@ import {
   Button,
   EmptyState,
   ChoiceList,
+  InlineError,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 
@@ -174,13 +175,10 @@ export default function ExamplePage() {
           },
         ]}
       >
-        <ChoiceList
-          items={plans}
-          name="plans"
-          defaultChecked={plans[1]}
-          horizontal
-          className="my-10"
-        />
+        <Box sectionned className="mb-5">
+          <ChoiceList items={plans} name="plans" defaultChecked={plans[1]} />
+          <InlineError message="Store name is required" />
+        </Box>
         <Buttons />
         <Banner title="Title banner " status="critical" className="mb-5">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
