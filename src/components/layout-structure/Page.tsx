@@ -84,8 +84,8 @@ export function Page({
               ),
             )}
           {actionGroups &&
-            actionGroups.map(({ title, actions }) => (
-              <Popover activator={activator}>
+            actionGroups.map(({ title, actions }, index) => (
+              <Popover activator={activator} key={index}>
                 <ul className=" divide-y divide-gray-100  ring-1 ring-black ring-opacity-5 focus:outline-none p-3 whitespace-nowrap">
                   {actions.map(
                     (

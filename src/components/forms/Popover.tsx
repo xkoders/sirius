@@ -33,9 +33,9 @@ export function Popover({ children, className, activator }: IPopoverProps) {
       ref={dropdownRef}
       className={classNames(className, 'relative inline-block text-left z-[1]')}
     >
-      <button className="focus:outline-none" onClick={() => setIsOpen((v) => !v)}>
+      <div className="focus:outline-none" onClick={() => setIsOpen((v) => !v)}>
         {activator}
-      </button>
+      </div>
       <Transition type="slide-down" timing="ease">
         {isOpen && (
           <div className="absolute z-10 right-0 mt-1 min-w-[10rem] origin-top-right rounded-md bg-white shadow-lg border ">

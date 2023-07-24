@@ -18,6 +18,7 @@ import {
   InlineError,
   MediaCard,
   Popover,
+  Spinner,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 
@@ -188,6 +189,11 @@ export default function ExamplePage() {
           primaryAction={secondaryActions}
           popoverActions={secondaryActions}
         >
+          <div className="flex gap-3">
+            <Spinner size="large" />
+            <Spinner />
+            <Spinner size="small" />
+          </div>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, iste. Lorem ipsum
             dolor sit amet consectetur adipisicing elit. Eveniet, iste. Lorem ipsum dolor sit amet
@@ -349,7 +355,9 @@ const Buttons = () => (
       <Button variant="subdued">subdued</Button>
       <Button variant="success">success</Button>
       <Button variant="warning">warning</Button>
-      <Button variant="info">info</Button>
+      <Button variant="info" loading>
+        info
+      </Button>
       <Button icon={TagIcon}>info</Button>
       <Button icon={TagIcon} variant="info" rounded="full">
         info

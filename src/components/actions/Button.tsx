@@ -2,6 +2,7 @@ import { ROUNDED } from '@/constants'
 import { classNames } from '@/helpers'
 import { VariantType, IconType, RoundedType } from '@/types'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { Spinner } from '../feedbacks'
 
 interface IButtonProps {
   children: React.ReactNode
@@ -32,8 +33,8 @@ const ALIGNMENT = {
 const SIZE = {
   large: 'text-lg px-6 py-2',
   medium: 'text-sm px-4 py-1.5 !h-9',
-  small: 'text-[14px] px-3 py-0',
-  slim: 'text-xs px-2 py-px',
+  small: 'text-[14px] px-3 py-1',
+  slim: 'text-xs px-2 py-px !h-6',
   none: '',
 }
 
@@ -108,8 +109,12 @@ export const Button = ({
       disabled={disabled}
       onClick={handleClick}
     >
-      {props.icon && (
-        <div>{<props.icon className={classNames(SIZE_ICON[size], 'fill-current')} />}</div>
+      {loading ? (
+        <Spinner className={classNames(SIZE_ICON[size], 'fill-current')} size="none" />
+      ) : (
+        props.icon && (
+          <div>{<props.icon className={classNames(SIZE_ICON[size], 'fill-current')} />}</div>
+        )
       )}
 
       {children}
