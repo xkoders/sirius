@@ -57,7 +57,7 @@ a {
 @keyframes slide-up {
   0% {
     opacity: 0;
-    transform: translateY(0.7rem);
+    transform: translateY(0.5rem);
   }
   100% {
     opacity: 1;
@@ -67,7 +67,7 @@ a {
 @keyframes slide-down {
   0% {
     opacity: 0;
-    transform: translateY(-0.7rem);
+    transform: translateY(-0.5rem);
   }
   100% {
     opacity: 1;

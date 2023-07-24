@@ -92,7 +92,7 @@ export function MediaCard({
             )}
           </div>
         </div>
-        <div className="text-sm text-gray-500">{children}</div>
+        <div className="text-sm text-gray-600">{children}</div>
         {!!primaryAction?.length && (
           <div className="flex gap-2 mt-4">
             {primaryAction.map(

@@ -31,7 +31,7 @@ const ALIGNMENT = {
 
 const SIZE = {
   large: 'text-lg px-6 py-2',
-  medium: 'text-sm px-4 py-1.5',
+  medium: 'text-sm px-4 py-1.5 !h-9',
   small: 'text-[14px] px-3 py-0',
   slim: 'text-xs px-2 py-px',
   none: '',
@@ -46,11 +46,11 @@ const SIZE_ICON = {
 }
 const VARIANT = {
   default: 'bg-white border border-gray-400 text-gray-900 shadow-sm hover:bg-gray-100',
-  primary: 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700',
-  success: 'bg-green-600 border-transparent text-white hover:bg-green-700',
-  warning: 'bg-orange-400 border-transparent text-white hover:bg-orange-500',
-  danger: 'bg-red-600 border-transparent text-white hover:bg-red-700',
-  info: 'bg-blue-600 border-transparent text-white hover:bg-blue-700',
+  primary: 'bg-indigo-600 border-indigo-900 text-white hover:bg-indigo-700',
+  success: 'bg-green-600 border-green-800 text-white hover:bg-green-700',
+  warning: 'bg-orange-400 border-orange-600 text-white hover:bg-orange-500',
+  danger: 'bg-red-600 border-red-800 text-white hover:bg-red-700',
+  info: 'bg-blue-600 border-blue-800 text-white hover:bg-blue-700',
   ghost: 'shadow-none text-slate-700 hover:bg-slate-100',
   subdued: 'text-gray-600 hover:text-gray-700 bg-gray-200 hover:bg-gray-300',
 }
