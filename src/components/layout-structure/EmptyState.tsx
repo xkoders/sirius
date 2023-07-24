@@ -1,9 +1,9 @@
 import { classNames } from '@/helpers'
-import { ButtonType, IAction, IconType } from '@/types'
+import { VariantType, IAction, IconType } from '@/types'
 import React, { ReactNode, useMemo } from 'react'
 
 interface IActionVariant extends IAction {
-  variant?: ButtonType
+  variant?: VariantType
 }
 interface IEmptyStateProps {
   className?: string

@@ -16,165 +16,185 @@ import {
   EmptyState,
   ChoiceList,
   InlineError,
+  MediaCard,
+  Popover,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 
-export default function ExamplePage() {
-  const sidebar = (
-    <Navigation>
-      <Navigation.Section
-        items={[
-          {
-            url: '#',
-            label: 'Home',
-            disabled: true,
-            icon: HomeIcon,
-          },
-          {
-            url: '#',
-            label: 'Orders',
-            icon: InboxIcon,
-            badge: <Badge status="critical">16</Badge>,
-          },
-          {
-            url: '#',
-            label: 'Products',
-            icon: TagIcon,
-            selected: true,
-            subNavigationItems: [
-              {
-                url: '#',
-                selected: true,
-                label: 'Collections',
-              },
-              {
-                url: '#',
-                disabled: true,
-                label: 'Inventory',
-              },
-            ],
-          },
-        ]}
-      />
-    </Navigation>
-  )
-  const promotedBulkActions = [
-    {
-      label: 'Create shipping labels',
-      onAction: () => console.log('Todo: implement bulk edit'),
-    },
-  ]
-  const bulkActions = [
-    {
-      label: 'Add tags',
-      onAction: () => console.log('Todo: implement bulk add tags'),
-    },
-    {
-      label: 'Remove tags',
-      onAction: () => console.log('Todo: implement bulk remove tags'),
-    },
-    {
-      label: 'Delete orders',
-      onAction: () => console.log('Todo: implement bulk delete'),
-    },
-  ]
+const sidebar = (
+  <Navigation>
+    <Navigation.Section
+      items={[
+        {
+          url: '#',
+          label: 'Home',
+          disabled: true,
+          icon: HomeIcon,
+        },
+        {
+          url: '#',
+          label: 'Orders',
+          icon: InboxIcon,
+          badge: <Badge status="critical">16</Badge>,
+        },
+        {
+          url: '#',
+          label: 'Products',
+          icon: TagIcon,
+          selected: true,
+          subNavigationItems: [
+            {
+              url: '#',
+              selected: true,
+              label: 'Collections',
+            },
+            {
+              url: '#',
+              disabled: true,
+              label: 'Inventory',
+            },
+          ],
+        },
+      ]}
+    />
+  </Navigation>
+)
+const primaryAction = { label: 'Save', disabled: false }
+const secondaryActions = [
+  {
+    label: 'Duplicate',
+    onAction: () => alert('Duplicate action'),
+  },
 
-  const orders = [
-    {
-      id: '1020',
-      order: '#1020',
-      date: 'Jul 20 at 4:34pm',
-      customer: 'Jaydon Stanton',
-      total: '$969.44',
-      paymentStatus: (
-        <Badge status="default" type="incomplete">
-          default - incomplete
-        </Badge>
-      ),
-      fulfillmentStatus: (
-        <Badge icon={TagIcon} status="info">
-          info - live
-        </Badge>
-      ),
-    },
-    {
-      id: '1019',
-      order: '#1019',
-      date: 'Jul 20 at 3:46pm',
-      customer: 'Ruben Westerfelt',
-      total: '$701.19',
-      paymentStatus: (
-        <Badge status="pending" type="halfComplete">
-          pending - halfComplete
-        </Badge>
-      ),
-      fulfillmentStatus: (
-        <Badge status="success" type="complete">
-          success - complete
-        </Badge>
-      ),
-    },
-    {
-      id: '1018',
-      order: '#1018',
-      date: 'Jul 20 at 3.44pm',
-      customer: 'Leo Carder',
-      total: '$798.24',
-      paymentStatus: (
-        <Badge status="warning" type="dashed">
-          warning - dashed
-        </Badge>
-      ),
-      fulfillmentStatus: <Badge status="critical">critical - publish</Badge>,
-    },
-  ]
-  const plans = [
-    { id: 'small', label: 'Small', description: '4 GB RAM / 2 CPUS / 80 GB SSD Storage' },
-    { id: 'medium', label: 'Medium', description: '8 GB RAM / 4 CPUS / 160 GB SSD Storage' },
-    { id: 'large', label: 'Large', description: '16 GB RAM / 8 CPUS / 320 GB SSD Storage' },
-  ]
+  {
+    label: 'View on store',
+    onAction: () => alert('View on your store action'),
+  },
+]
+const promotedBulkActions = [
+  {
+    label: 'Create shipping labels',
+    onAction: () => console.log('Todo: implement bulk edit'),
+  },
+]
+const bulkActions = [
+  {
+    label: 'Add tags',
+    onAction: () => console.log('Todo: implement bulk add tags'),
+  },
+  {
+    label: 'Remove tags',
+    onAction: () => console.log('Todo: implement bulk remove tags'),
+  },
+  {
+    label: 'Delete orders',
+    onAction: () => console.log('Todo: implement bulk delete'),
+  },
+]
+const actionGroups = [
+  {
+    title: 'Promote',
+    actions: [
+      {
+        label: 'Share on Facebook',
+        onAction: () => alert('Share on Facebook action'),
+      },
+      {
+        label: 'Share on Facebook',
+        onAction: () => alert('Share on Facebook action'),
+      },
+      {
+        label: 'Share on Facebook',
+        onAction: () => alert('Share on Facebook action'),
+      },
+      {
+        label: 'Share on Facebook',
+        onAction: () => alert('Share on Facebook action'),
+      },
+    ],
+  },
+]
+
+const orders = [
+  {
+    id: '1020',
+    order: '#1020',
+    date: 'Jul 20 at 4:34pm',
+    customer: 'Jaydon Stanton',
+    total: '$969.44',
+    paymentStatus: (
+      <Badge status="default" type="incomplete">
+        default - incomplete
+      </Badge>
+    ),
+    fulfillmentStatus: (
+      <Badge icon={TagIcon} status="info">
+        info - live
+      </Badge>
+    ),
+  },
+  {
+    id: '1019',
+    order: '#1019',
+    date: 'Jul 20 at 3:46pm',
+    customer: 'Ruben Westerfelt',
+    total: '$701.19',
+    paymentStatus: (
+      <Badge status="pending" type="halfComplete">
+        pending - halfComplete
+      </Badge>
+    ),
+    fulfillmentStatus: (
+      <Badge status="success" type="complete">
+        success - complete
+      </Badge>
+    ),
+  },
+  {
+    id: '1018',
+    order: '#1018',
+    date: 'Jul 20 at 3.44pm',
+    customer: 'Leo Carder',
+    total: '$798.24',
+    paymentStatus: (
+      <Badge status="warning" type="dashed">
+        warning - dashed
+      </Badge>
+    ),
+    fulfillmentStatus: <Badge status="critical">critical - publish</Badge>,
+  },
+]
+const plans = [
+  { id: 'small', label: 'Small', description: '4 GB RAM / 2 CPUS / 80 GB SSD Storage' },
+  { id: 'medium', label: 'Medium', description: '8 GB RAM / 4 CPUS / 160 GB SSD Storage' },
+  { id: 'large', label: 'Large', description: '16 GB RAM / 8 CPUS / 320 GB SSD Storage' },
+]
+export default function ExamplePage() {
   return (
     <Frame sidebar={sidebar}>
       <Page
         backAction={{ label: 'Products', url: '#' }}
         title="3/4 inch Leather pet collar"
         subtitle="Perfect for any pet"
-        primaryAction={{ label: 'Save', disabled: true }}
-        secondaryActions={[
-          {
-            label: 'Duplicate',
-            onAction: () => alert('Duplicate action'),
-          },
-
-          {
-            label: 'View on store',
-            onAction: () => alert('View on your store action'),
-          },
-        ]}
-        actionGroups={[
-          {
-            title: 'Promote',
-            actions: [
-              {
-                label: 'Share on Facebook',
-                onAction: () => alert('Share on Facebook action'),
-              },
-              {
-                label: 'Share on Facebook',
-                onAction: () => alert('Share on Facebook action'),
-              },
-              {
-                label: 'Share on Facebook',
-                onAction: () => alert('Share on Facebook action'),
-              },
-              {
-                label: 'Share on Facebook',
-                onAction: () => alert('Share on Facebook action'),
-              },
-            ],
-          },
-        ]}
+        primaryAction={primaryAction}
+        secondaryActions={secondaryActions}
+        actionGroups={actionGroups}
       >
+        <MediaCard
+          url="https://picsum.photos/300/300"
+          title="Lorem ipsum"
+          className="mb-5"
+          promotedAction={primaryAction}
+          primaryAction={secondaryActions}
+          popoverActions={secondaryActions}
+        >
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, iste. Lorem ipsum
+            dolor sit amet consectetur adipisicing elit. Eveniet, iste. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Eveniet, iste. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Eveniet, iste.
+          </p>
+        </MediaCard>
         <Box sectionned className="mb-5">
           <ChoiceList items={plans} name="plans" defaultChecked={plans[1]} />
           <InlineError message="Store name is required" />

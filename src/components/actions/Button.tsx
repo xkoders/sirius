@@ -1,23 +1,25 @@
 import { ROUNDED } from '@/constants'
 import { classNames } from '@/helpers'
-import { ButtonType, IconType, RoundedType } from '@/types'
+import { VariantType, IconType, RoundedType } from '@/types'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 interface IButtonProps {
   children: React.ReactNode
   className?: string
-  url?: string
   size?: 'medium' | 'large' | 'small' | 'slim' | 'none'
-  variant?: ButtonType
+  variant?: VariantType
   submit?: boolean
   alignment?: 'center' | 'start' | 'end'
   rounded?: RoundedType
   fullwidth?: boolean
   outline?: boolean
-  link?: boolean
   loading?: boolean
   disabled?: boolean
   icon?: IconType
+  link?: boolean
+  url?: string
+  target?: '_blank' | '_self' | '_parent' | undefined
+  rel?: 'noreferrer' | undefined
   onClick?: () => void
 }
 
@@ -30,7 +32,7 @@ const ALIGNMENT = {
 const SIZE = {
   large: 'text-lg px-6 py-2',
   medium: 'text-sm px-4 py-1.5',
-  small: 'text-xs px-3 py-1',
+  small: 'text-[14px] px-3 py-0',
   slim: 'text-xs px-2 py-px',
   none: '',
 }
@@ -49,7 +51,7 @@ const VARIANT = {
   warning: 'bg-orange-400 border-transparent text-white hover:bg-orange-500',
   danger: 'bg-red-600 border-transparent text-white hover:bg-red-700',
   info: 'bg-blue-600 border-transparent text-white hover:bg-blue-700',
-  ghost: 'shadow-none text-slate-700',
+  ghost: 'shadow-none text-slate-700 hover:bg-slate-100',
   subdued: 'text-gray-600 hover:text-gray-700 bg-gray-200 hover:bg-gray-300',
 }
 const COLOR = {
@@ -71,7 +73,9 @@ export const Button = ({
   loading,
   outline,
   link,
+  target,
   url,
+  rel,
   rounded = 'md',
   alignment = 'center',
   fullwidth,
@@ -99,6 +103,8 @@ export const Button = ({
       )}
       {...(url ? { href: url || '#' } : {})}
       type={submit ? 'submit' : 'button'}
+      target={target}
+      rel={rel}
       disabled={disabled}
       onClick={handleClick}
     >

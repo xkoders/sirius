@@ -13,7 +13,7 @@ export type IconType =
       } & RefAttributes<SVGSVGElement>
     >
 
-export type ButtonType =
+export type VariantType =
   | 'primary'
   | 'success'
   | 'warning'
@@ -27,6 +27,9 @@ export interface IAction {
   target?: '_blank' | '_self' | '_parent' | undefined
   url?: string
   disabled?: boolean
+  loading?: boolean
+  icon?: IconType
+  variant?: VariantType
   rel?: 'noreferrer'
   onAction?: () => void
 }
