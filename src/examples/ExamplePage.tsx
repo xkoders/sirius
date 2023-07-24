@@ -336,7 +336,7 @@ export default function ExamplePage() {
 
 const Buttons = () => (
   <>
-    <Box className="mb-6 flex gap-2">
+    <Box className="mb-6 flex gap-2 flex-wrap">
       <Button size="large" fullwidth>
         Button: default - large - fullWidth
       </Button>
@@ -348,7 +348,7 @@ const Buttons = () => (
         link
       </Button>
     </Box>
-    <Box className="mb-6 flex gap-2">
+    <Box className="mb-6 flex gap-2 flex-wrap">
       <Button variant="ghost">ghost</Button>
       <Button variant="danger">danger</Button>
       <Button variant="primary">primary</Button>

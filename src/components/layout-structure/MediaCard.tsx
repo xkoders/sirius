@@ -41,7 +41,7 @@ export function MediaCard({
   )
   return (
     <Box
-      className={classNames(className, 'bg-white flex overflow-hidden')}
+      className={classNames(className, 'bg-white flex flex-col lg:flex-row overflow-hidden')}
       rounded="md"
       shadow="md"
       as="section"

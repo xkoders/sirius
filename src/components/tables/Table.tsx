@@ -48,9 +48,9 @@ function MainTable({
   }, [tableResources.selectedItems])
   return (
     <div className="relative">
-      <div className="overflow-x-auto h-fit rounded-md border shadow-sm">
+      <div className="overflow-x-auto h-fit rounded-md border shadow-sm grid">
         <table className={classNames('min-w-full divide-y divide-gray-300', className)}>
-          <thead className="bg-gray-200">
+          <thead className="bg-slate-200/70">
             <tr>
               {tableResources.select && (
                 <th className=" text-sm  text-gray-900 align-middle">
