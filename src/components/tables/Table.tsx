@@ -2,7 +2,8 @@ import React, { ReactNode, useContext, useMemo, useRef } from 'react'
 import { classNames, stringify } from '@/helpers'
 import { Popover } from '@headlessui/react'
 import { AppContext } from '../provider/Provider'
-import { Checkbox } from '../forms'
+import { Checkbox } from '../forms-selections'
+import { Transition } from '../feedbacks'
 
 interface IBase {
   children: ReactNode
@@ -80,50 +81,51 @@ function MainTable({
           <tbody className="divide-y divide-gray-200">{children}</tbody>
         </table>
       </div>
-
-      {!!tableResources.selectedItems?.length && (
-        <div className="absolute top-full translate-y-1 left-1/2 -translate-x-1/2 z-50 bg-white p-4 shadow-lg rounded-md border flex gap-4 h-fit">
-          {promotedBulkActions && (
-            <div className="flex">
-              {promotedBulkActions.map((action, index) => (
-                <button
-                  key={index}
-                  onClick={action.onAction}
-                  className="bg-white shadow-sm border border-gray-400 hover:text-indigo-700 flex justify-center items-center h-9 px-3 rounded-md"
-                >
-                  {action.label}
-                </button>
-              ))}
-            </div>
-          )}
-          {bulkActions && (
-            <Popover className="relative h-9">
-              <Popover.Button className="focus:outline-none">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="w-9 h-9 p-1.5 bg-white shadow-sm border border-gray-400 rounded-md"
-                >
-                  <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
-                </svg>
-              </Popover.Button>
-
-              <Popover.Panel className="absolute z-10 bg-white shadow bottom-11 w-40 rounded-md flex flex-col p-3 right-0 text-gray-600 text-[15px]">
-                {bulkActions.map((action, index) => (
+      <Transition>
+        {!!tableResources.selectedItems?.length && (
+          <div className="absolute top-full translate-y-1 left-1/2 -translate-x-1/2 z-50 bg-white p-4 shadow-lg rounded-md border flex gap-4 h-fit">
+            {promotedBulkActions && (
+              <div className="flex">
+                {promotedBulkActions.map((action, index) => (
                   <button
                     key={index}
                     onClick={action.onAction}
-                    className="hover:text-indigo-700 flex items-center h-9 px-3 rounded-md"
+                    className="bg-white shadow-sm border border-gray-400 hover:text-indigo-700 flex justify-center items-center h-9 px-3 rounded-md"
                   >
                     {action.label}
                   </button>
                 ))}
-              </Popover.Panel>
-            </Popover>
-          )}
-        </div>
-      )}
+              </div>
+            )}
+            {bulkActions && (
+              <Popover className="relative h-9">
+                <Popover.Button className="focus:outline-none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className="w-9 h-9 p-1.5 bg-white shadow-sm border border-gray-400 rounded-md"
+                  >
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+                  </svg>
+                </Popover.Button>
+
+                <Popover.Panel className="absolute z-10 bg-white shadow bottom-11 w-40 rounded-md flex flex-col p-3 right-0 text-gray-600 text-[15px]">
+                  {bulkActions.map((action, index) => (
+                    <button
+                      key={index}
+                      onClick={action.onAction}
+                      className="hover:text-indigo-700 flex items-center h-9 px-3 rounded-md"
+                    >
+                      {action.label}
+                    </button>
+                  ))}
+                </Popover.Panel>
+              </Popover>
+            )}
+          </div>
+        )}
+      </Transition>
     </div>
   )
 }

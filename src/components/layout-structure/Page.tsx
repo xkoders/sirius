@@ -3,7 +3,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { IAction } from '@/types'
 import { classNames } from '@/helpers'
-import { Popover } from '../forms'
+import { Popover } from '../forms-selections'
 import { Button } from '../actions'
 
 export interface IPageProps {

@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Spinner } from '../feedbacks'
 
 interface IButtonProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   className?: string
   size?: 'medium' | 'large' | 'small' | 'slim' | 'none'
   variant?: VariantType

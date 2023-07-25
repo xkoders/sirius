@@ -3,7 +3,7 @@ import { Box } from './Box'
 import { classNames } from '@/helpers'
 import { IAction } from '@/types'
 import { Button } from '../actions'
-import { Popover } from '../forms'
+import { Popover } from '../forms-selections'
 interface IMediaCardProps {
   children?: React.ReactNode
   className?: string

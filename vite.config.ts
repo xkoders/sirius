@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path from 'path'
+import path from 'node:path'
 import dts from 'vite-plugin-dts'
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,8 +19,9 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/components/index.ts'),
       name: 'MyLib',
-      formats: ['es', 'umd'],
-      fileName: (format) => `my-lib.${format}.js`,
+      fileName: 'my-lib',
+      // formats: ['es', 'umd'],
+      // fileName: (format) => `my-lib.${format}.js`,
     },
     rollupOptions: {
       external: ['react', 'react-dom'],

@@ -19,8 +19,10 @@ import {
   MediaCard,
   Popover,
   Spinner,
+  IndexFilters,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
+// import {} from '@'
 
 const sidebar = (
   <Navigation>
@@ -181,36 +183,15 @@ export default function ExamplePage() {
         secondaryActions={secondaryActions}
         actionGroups={actionGroups}
       >
-        <MediaCard
-          url="https://picsum.photos/300/300"
-          title="Lorem ipsum"
-          className="mb-5"
-          promotedAction={primaryAction}
-          primaryAction={secondaryActions}
-          popoverActions={secondaryActions}
-        >
-          <div className="flex gap-3">
-            <Spinner size="large" />
-            <Spinner />
-            <Spinner size="small" />
-          </div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, iste. Lorem ipsum
-            dolor sit amet consectetur adipisicing elit. Eveniet, iste. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Eveniet, iste. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Eveniet, iste.
-          </p>
-        </MediaCard>
-        <Box sectionned className="mb-5">
-          <ChoiceList items={plans} name="plans" defaultChecked={plans[1]} />
-          <InlineError message="Store name is required" />
-        </Box>
-        <Buttons />
-        <Banner title="Title banner " status="critical" className="mb-5">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
-        </Banner>
-
         <Box className="bg-white rounded-lg shadow mb-5">
+          <IndexFilters
+            sortOptions={
+              <Box className="p-3 min-w-fit whitespace-nowrap">
+                <ChoiceList items={plans} name="plans" defaultChecked={plans[1]} />
+                <InlineError message="Store name is required" />
+              </Box>
+            }
+          />
           <Table
             items={orders}
             headings={[
@@ -240,6 +221,32 @@ export default function ExamplePage() {
             ))}
           </Table>
         </Box>
+
+        <MediaCard
+          url="https://picsum.photos/300/300"
+          title="Lorem ipsum"
+          className="mb-5"
+          promotedAction={primaryAction}
+          primaryAction={secondaryActions}
+          popoverActions={secondaryActions}
+        >
+          <div className="flex gap-3">
+            <Spinner size="large" />
+            <Spinner />
+            <Spinner size="small" />
+          </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, iste. Lorem ipsum
+            dolor sit amet consectetur adipisicing elit. Eveniet, iste. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Eveniet, iste. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Eveniet, iste.
+          </p>
+        </MediaCard>
+
+        <Buttons />
+        <Banner title="Title banner " status="critical" className="mb-5">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+        </Banner>
         <Box sectionned shadow="colored" as="section" className="mb-6 gap-2">
           <Text variant="heading2xl" fontWeight="medium">
             Text comp: heading2xl - medium

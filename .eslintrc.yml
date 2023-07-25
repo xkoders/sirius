@@ -16,6 +16,8 @@ plugins:
   - 'react-hooks'
   - prettier
   - 'simple-import-sort'
+ignorePatterns: 
+  - "dist"
 rules: {}
 settings: {
   'import/resolver' : {
