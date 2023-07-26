@@ -38,7 +38,7 @@ jobs:
 
       - name: Create version
         run: |
-          if [ -z "${github.event.inputs.version}" ]; then
+          if [ -z "${{github.event.inputs.version}}" ]; then
             npm version patch
           else
             npm version ${{ github.event.inputs.version }}
