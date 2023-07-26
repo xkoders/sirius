@@ -5,25 +5,45 @@ on:
     branches:
       - main
 
+# jobs:
+#   create_version:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: '14.x'
+
+#       - name: Install dependencies
+#         run: npm install
+
+#       - name: Create version
+#         run: npm version patch # Or your preferred versioning command
 jobs:
-  create_version:
+  version:
+    name: Create new version ${{ github.event.inputs.version }}
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
         with:
-          node-version: '14.x'
+          ref: main
+      - run: |
+          git config user.name soufiyanbenallal
+          git config user.email benallalsoufiane1@gmail.com
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
 
-      - name: Install dependencies
-        run: npm install
+      - name: Generate new version
+        run: npm version ${{ github.event.inputs.version }}
 
-      - name: Create version
-        run: npm version patch # Or your preferred versioning command
-
+      - name: Push new version tag to repository
+        run: git push origin main --tags
 # name: Generate tag version
 # on:
 #   push:
@@ -40,24 +60,3 @@ jobs:
 #           - minor
 #           - major
 
-# jobs:
-#   version:
-#     name: Create new version ${{ github.event.inputs.version }}
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v3
-#         with:
-#           ref: main
-#       - run: |
-#           git config user.name soufiyanbenallal
-#           git config user.email benallalsoufiane1@gmail.com
-#       - name: Use Node.js ${{ matrix.node-version }}
-#         uses: actions/setup-node@v1
-#         with:
-#           node-version: 14.x
-
-#       - name: Generate new version
-#         run: npm version ${{ github.event.inputs.version }}
-
-#       - name: Push new version tag to repository
-#         run: git push origin main --tags
