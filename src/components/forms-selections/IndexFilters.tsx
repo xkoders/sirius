@@ -7,15 +7,23 @@ import { Box } from '../layout-structure'
 import { SearchField } from './SearchField'
 import { Transition } from '../feedbacks'
 import { Text } from '../typography'
-
+interface IFilters {
+  key: string
+  label: string
+  filter: React.ReactNode
+  shortcut?: Boolean
+}
 interface IIndexFiltersProps {
   className?: string
   sortOptions?: React.ReactNode
+  filters?: IFilters[]
   onChange?: (value: boolean, e?: React.ChangeEvent<HTMLInputElement>) => void
 }
-export const IndexFilters = ({ onChange, className, sortOptions }: IIndexFiltersProps) => {
+export const IndexFilters = ({ onChange, className, sortOptions, filters }: IIndexFiltersProps) => {
   const [selectedTab, setSelectedTab] = useState(0)
   const [showSearch, setShowSearch] = useState(true)
+  const [activeFilters, setActiveFilters] = useState<IFilters[]>([])
+  const [initialFilters, setInitialFilters] = useState<IFilters[]>(filters || [])
   const [search, setSearch] = useState('')
   const handleChange = useCallback(
     (idx: number, item: any) => {
@@ -23,7 +31,16 @@ export const IndexFilters = ({ onChange, className, sortOptions }: IIndexFilters
     },
     [onChange],
   )
-  useEffect(() => {}, [])
+  const handleAddFilter = useCallback((item: IFilters) => {
+    setActiveFilters((v: IFilters[]) => [...v, item])
+    setInitialFilters((value: IFilters[]) => value.filter(({ key }) => key !== item.key))
+  }, [])
+
+  const handleClearAll = useCallback(() => {
+    setActiveFilters([])
+    filters && setInitialFilters(filters)
+  }, [])
+
   const tabs = [
     { label: 'My Account' },
     { label: 'Company' },
@@ -33,6 +50,7 @@ export const IndexFilters = ({ onChange, className, sortOptions }: IIndexFilters
   const Search = () => {
     // return (div.re)
   }
+
   return (
     <section className={classNames('flex flex-col', className)}>
       <article className="p-1.5 flex gap-2">
@@ -122,6 +140,62 @@ export const IndexFilters = ({ onChange, className, sortOptions }: IIndexFilters
           </Popover>
         )}
       </article>
+      <Transition type="collapsible" duration={500} timing="ease-out">
+        {showSearch && !!filters?.length && (
+          <>
+            <div className="px-2 py-3 h-full flex flex-wrap items-center gap-2 text-gray-950 border-t">
+              {/* {!!filters?.length && filters.map((item, idx) => <div key={idx}>{item.label}</div>)} */}
+              {activeFilters &&
+                activeFilters.map((item, idx) => (
+                  <Popover
+                    key={idx}
+                    activator={
+                      <button className="text-xs rounded-full border border-dashed border-gray-300 bg-gray-100 hover:bg-gray-200 px-3 h-6 flex items-center gap-1">
+                        {item.label}
+                      </button>
+                    }
+                  >
+                    {item.filter}
+                  </Popover>
+                ))}
+
+              <Popover
+                disabled={!initialFilters.length}
+                activator={
+                  <button className="text-xs rounded-full border border-dashed border-gray-300 bg-gray-100 hover:bg-gray-200 px-3 h-6 flex items-center gap-1">
+                    <span> Add filter</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="w-5 h-5 -mr-1.5"
+                    >
+                      <path d="M10.75 6.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z" />
+                    </svg>
+                  </button>
+                }
+              >
+                <ul className="p-2 text-sm flex flex-col gap-px">
+                  {initialFilters?.map((item: IFilters, idx) => (
+                    <li
+                      className="py-2 px-2 rounded-md hover:bg-gray-100"
+                      key={idx}
+                      onClick={() => handleAddFilter(item)}
+                    >
+                      {item.label}
+                    </li>
+                  ))}
+                </ul>
+              </Popover>
+              {!!activeFilters.length && (
+                <Button variant="info" link size="slim" onClick={handleClearAll}>
+                  Clear All
+                </Button>
+              )}
+            </div>
+          </>
+        )}
+      </Transition>
     </section>
   )
 }

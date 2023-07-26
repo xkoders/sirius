@@ -172,6 +172,64 @@ const plans = [
   { id: 'medium', label: 'Medium', description: '8 GB RAM / 4 CPUS / 160 GB SSD Storage' },
   { id: 'large', label: 'Large', description: '16 GB RAM / 8 CPUS / 320 GB SSD Storage' },
 ]
+const FILTERS = [
+  {
+    key: 'accountStatus',
+    label: 'Account status',
+    filter: (
+      <></>
+
+      // <ChoiceList
+      //   title="Account status"
+      //   titleHidden
+      //   choices={[
+      //     { label: 'Enabled', value: 'enabled' },
+      //     { label: 'Not invited', value: 'not invited' },
+      //     { label: 'Invited', value: 'invited' },
+      //     { label: 'Declined', value: 'declined' },
+      //   ]}
+      //   selected={accountStatus || []}
+      //   onChange={handleAccountStatusChange}
+      //   allowMultiple
+      // />
+    ),
+    shortcut: true,
+  },
+  {
+    key: 'taggedWith',
+    label: 'Tagged with',
+    filter: (
+      <></>
+
+      // <TextField
+      //   label="Tagged with"
+      //   value={taggedWith}
+      //   onChange={handleTaggedWithChange}
+      //   autoComplete="off"
+      //   labelHidden
+      // />
+    ),
+    shortcut: true,
+  },
+  {
+    key: 'moneySpent',
+    label: 'Money spent',
+    filter: (
+      <></>
+      // <RangeSlider
+      //   label="Money spent is between"
+      //   labelHidden
+      //   value={moneySpent || [0, 500]}
+      //   prefix="$"
+      //   output
+      //   min={0}
+      //   max={2000}
+      //   step={1}
+      //   onChange={handleMoneySpentChange}
+      // />
+    ),
+  },
+]
 export default function ExamplePage() {
   return (
     <Frame sidebar={sidebar}>
@@ -185,6 +243,7 @@ export default function ExamplePage() {
       >
         <Box className="bg-white rounded-lg shadow mb-5">
           <IndexFilters
+            filters={FILTERS}
             sortOptions={
               <Box className="p-3 min-w-fit whitespace-nowrap">
                 <ChoiceList items={plans} name="plans" defaultChecked={plans[1]} />

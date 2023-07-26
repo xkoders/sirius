@@ -20,6 +20,23 @@ export interface IPageProps {
   }[]
   fullWidth?: boolean
 }
+const Activator = ({ title }: { title: string }) => (
+  <div>
+    <Button className="">
+      <span>{title}</span>
+      <span className="-mr-2.5 ml-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          className="w-5 h-5"
+        >
+          <path d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z" />
+        </svg>
+      </span>
+    </Button>
+  </div>
+)
 export function Page({
   children,
   className = '',
@@ -31,14 +48,6 @@ export function Page({
   actionGroups,
   fullWidth,
 }: IPageProps) {
-  const activator = (
-    <div>
-      <Button variant="default" className="gap-2">
-        <span>title</span>
-        <span className="-mr-2">&darr;</span>
-      </Button>
-    </div>
-  )
   return (
     <main
       className={classNames(className, fullWidth ? 'w-full' : 'max-w-5xl', 'mx-auto p-6 w-full')}
@@ -85,8 +94,8 @@ export function Page({
             )}
           {actionGroups &&
             actionGroups.map(({ title, actions }, index) => (
-              <Popover activator={activator} key={index}>
-                <ul className=" divide-y divide-gray-100  ring-1 ring-black ring-opacity-5 focus:outline-none p-3 whitespace-nowrap">
+              <Popover activator={<Activator title={title} />} key={index}>
+                <ul className="  focus:outline-none p-3 whitespace-nowrap">
                   {actions.map(
                     (
                       { label, onAction, target, url, disabled, loading, variant = 'ghost', rel },

@@ -87,7 +87,7 @@ export const Button = ({
   const handleClick = useCallback(() => {
     onClick?.()
   }, [])
-  const Component = link ? 'a' : 'button'
+  const Component = url ? 'a' : 'button'
   return (
     <Component
       className={classNames(

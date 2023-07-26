@@ -43,6 +43,9 @@ a {
   &.slide-down > * {
     animation-name: slide-down;
   }
+  &.collapsible > * {
+    animation-name: collapsible;
+  }
 }
 
 @keyframes fade-in {
@@ -72,5 +75,16 @@ a {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes collapsible {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    max-height: 8rem;
   }
 }

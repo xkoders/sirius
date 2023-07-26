@@ -4,11 +4,12 @@ import { Transition } from '../feedbacks'
 interface IPopoverProps {
   children?: ReactNode
   className?: string
+  disabled?: boolean
   items?: string
   activator?: string | ReactNode
 }
 
-export function Popover({ children, className, activator }: IPopoverProps) {
+export function Popover({ children, className, activator, disabled }: IPopoverProps) {
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
 
@@ -30,7 +31,13 @@ export function Popover({ children, className, activator }: IPopoverProps) {
   }, [])
   return (
     <div ref={dropdownRef} className={classNames(className, 'relative inline-block text-left')}>
-      <div className="focus:outline-none" onClick={() => setIsOpen((v) => !v)}>
+      <div
+        className={classNames(
+          disabled ? 'pointer-events-none opacity-75' : '',
+          'focus:outline-none',
+        )}
+        onClick={() => setIsOpen((v) => !v)}
+      >
         {activator}
       </div>
       <Transition type="slide-down" timing="ease" className="z-10">
