@@ -1,7 +1,7 @@
 import { ROUNDED } from '@/constants'
 import { classNames } from '@/helpers'
 import { VariantType, IconType, RoundedType } from '@/types'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback } from 'react'
 import { Spinner } from '../feedbacks'
 
 interface IButtonProps {
