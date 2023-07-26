@@ -4,6 +4,17 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      version:
+        description: New version
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 jobs:
   create_version:
@@ -26,8 +37,12 @@ jobs:
         run: npm install
 
       - name: Create version
-        run: npm version patch # Or your preferred versioning command
-
+        run: |
+          if [ -z "${github.event.inputs.version}" ]; then
+            npm version patch
+          else
+            npm version ${{ github.event.inputs.version }}
+          fi
       - name: Push new version tag to repository
         run: git push origin main --tags
 # jobs:
@@ -47,7 +62,7 @@ jobs:
 #           node-version: 14.x
 
 #       - name: Generate new version
-#         run: npm version ${{ github.event.inputs.version }}
+#         run: npm version ${{ coalesce(github.event.inputs.version, 'default-value') }}
 
 #       - name: Push new version tag to repository
 #         run: git push origin main --tags
@@ -55,15 +70,3 @@ jobs:
 # on:
 #   push:
 #     branches: ['main']
-#   workflow_dispatch:
-#     inputs:
-#       version:
-#         description: New version
-#         required: true
-#         default: 'patch'
-#         type: choice
-#         options:
-#           - patch
-#           - minor
-#           - major
-
