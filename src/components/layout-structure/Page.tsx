@@ -22,7 +22,7 @@ export interface IPageProps {
 }
 const Activator = ({ title }: { title: string }) => (
   <div>
-    <Button className="">
+    <Button>
       <span>{title}</span>
       <span className="-mr-2.5 ml-1">
         <svg
@@ -95,7 +95,7 @@ export function Page({
           {actionGroups &&
             actionGroups.map(({ title, actions }, index) => (
               <Popover activator={<Activator title={title} />} key={index}>
-                <ul className="  focus:outline-none p-3 whitespace-nowrap">
+                <ul className="  focus:outline-none p-2 whitespace-nowrap min-w-[12rem]">
                   {actions.map(
                     (
                       { label, onAction, target, url, disabled, loading, variant = 'ghost', rel },
@@ -112,6 +112,8 @@ export function Page({
                           loading={loading}
                           fullwidth
                           alignment="start"
+                          size="none"
+                          className="p-2"
                         >
                           {label}
                         </Button>
