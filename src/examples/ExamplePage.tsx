@@ -23,8 +23,18 @@ import {
   Thumbnail,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
+import { useToast } from '@/hooks'
+import { IAction } from '@/types'
 // import {} from '@'
-
+const toastData = {
+  id: 1,
+  content: 'This is a toast content',
+  duration: 1000000,
+  action: {
+    label: 'Undo',
+    onAction: () => {},
+  },
+}
 const sidebar = (
   <Navigation>
     <Navigation.Section
@@ -63,7 +73,6 @@ const sidebar = (
     />
   </Navigation>
 )
-const primaryAction = { label: 'Save', disabled: false }
 const secondaryActions = [
   {
     label: 'Duplicate',
@@ -235,6 +244,16 @@ const FILTERS = [
   },
 ]
 export default function ExamplePage() {
+  const toast = useToast()
+  const primaryAction: IAction = {
+    label: 'Save s',
+    // disabled: false,
+    onAction: () => {
+      console.log('Save action')
+      toast.show(toastData)
+    },
+  }
+
   return (
     <Frame sidebar={sidebar}>
       <Page
