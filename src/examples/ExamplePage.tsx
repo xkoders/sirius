@@ -20,6 +20,7 @@ import {
   Popover,
   Spinner,
   IndexFilters,
+  Thumbnail,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 // import {} from '@'
@@ -121,6 +122,7 @@ const actionGroups = [
 const orders = [
   {
     id: '1020',
+    src: 'https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg',
     order: '#1020',
     date: 'Jul 20 at 4:34pm',
     customer: 'Jaydon Stanton',
@@ -138,6 +140,7 @@ const orders = [
   },
   {
     id: '1019',
+    src: 'https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg',
     order: '#1019',
     date: 'Jul 20 at 3:46pm',
     customer: 'Ruben Westerfelt',
@@ -155,6 +158,7 @@ const orders = [
   },
   {
     id: '1018',
+    src: 'https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg',
     order: '#1018',
     date: 'Jul 20 at 3.44pm',
     customer: 'Leo Carder',
@@ -241,6 +245,37 @@ export default function ExamplePage() {
         secondaryActions={secondaryActions}
         actionGroups={actionGroups}
       >
+        <Stack>
+          <Thumbnail
+            size="xs"
+            src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
+          />
+          <Thumbnail
+            size="sm"
+            src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
+          />
+          <Thumbnail
+            size="md"
+            src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
+          />
+          <Thumbnail
+            size="lg"
+            src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
+          />
+
+          <Thumbnail
+            size="xl"
+            src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
+          />
+
+          <Thumbnail size="xs" src={TagIcon} />
+          <Thumbnail size="sm" src={TagIcon} />
+          <Thumbnail size="md" src={TagIcon} />
+          <Thumbnail size="lg" src={TagIcon} />
+
+          <Thumbnail size="xl" src={TagIcon} />
+        </Stack>
+
         <Box className="bg-white rounded-lg shadow mb-5">
           <IndexFilters
             filters={FILTERS}
@@ -254,6 +289,7 @@ export default function ExamplePage() {
           <Table
             items={orders}
             headings={[
+              { title: 'photo' },
               { title: 'Order' },
               { title: 'Date' },
               { title: 'Customer' },
@@ -266,6 +302,9 @@ export default function ExamplePage() {
           >
             {orders.map((order, index) => (
               <Table.Row item={order} key={index}>
+                <Table.Cell>
+                  <Thumbnail src={order.src} alt={order.order} size="sm" />
+                </Table.Cell>
                 <Table.Cell>
                   <Text color="info" variant="bodyMd" fontWeight="semibold">
                     {order.order}
