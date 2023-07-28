@@ -247,7 +247,7 @@ export default function ExamplePage() {
   }
   const secondaryActions = [
     {
-      label: 'Duplicate',
+      label: 'Modal',
       onAction: () => setShowModal(true),
     },
 
