@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Page,
@@ -20,10 +20,22 @@ import {
   Popover,
   Spinner,
   IndexFilters,
+  Thumbnail,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
+import { useToast } from '@/hooks'
+import { IAction } from '@/types'
+import { Modal } from '@/components/overleys'
 // import {} from '@'
-
+const toastData = {
+  id: 1,
+  content: 'This is a toast content',
+  duration: 1000000,
+  action: {
+    label: 'Undo',
+    onAction: () => {},
+  },
+}
 const sidebar = (
   <Navigation>
     <Navigation.Section
@@ -62,18 +74,7 @@ const sidebar = (
     />
   </Navigation>
 )
-const primaryAction = { label: 'Save', disabled: false }
-const secondaryActions = [
-  {
-    label: 'Duplicate',
-    onAction: () => alert('Duplicate action'),
-  },
 
-  {
-    label: 'View on store',
-    onAction: () => alert('View on your store action'),
-  },
-]
 const promotedBulkActions = [
   {
     label: 'Create shipping labels',
@@ -121,6 +122,7 @@ const actionGroups = [
 const orders = [
   {
     id: '1020',
+    src: 'https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg',
     order: '#1020',
     date: 'Jul 20 at 4:34pm',
     customer: 'Jaydon Stanton',
@@ -138,6 +140,7 @@ const orders = [
   },
   {
     id: '1019',
+    src: 'https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg',
     order: '#1019',
     date: 'Jul 20 at 3:46pm',
     customer: 'Ruben Westerfelt',
@@ -155,6 +158,7 @@ const orders = [
   },
   {
     id: '1018',
+    src: 'https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg',
     order: '#1018',
     date: 'Jul 20 at 3.44pm',
     customer: 'Leo Carder',
@@ -231,6 +235,28 @@ const FILTERS = [
   },
 ]
 export default function ExamplePage() {
+  const toast = useToast()
+  const [showModal, setShowModal] = useState(false)
+  const primaryAction: IAction = {
+    label: 'Save s',
+    // disabled: false,
+    onAction: () => {
+      console.log('Save action')
+      toast.show(toastData)
+    },
+  }
+  const secondaryActions = [
+    {
+      label: 'Modal',
+      onAction: () => setShowModal(true),
+    },
+
+    {
+      label: 'View on store',
+      onAction: () => alert('View on your store action'),
+    },
+  ]
+
   return (
     <Frame sidebar={sidebar}>
       <Page
@@ -241,6 +267,53 @@ export default function ExamplePage() {
         secondaryActions={secondaryActions}
         actionGroups={actionGroups}
       >
+        <Modal show={showModal} onClose={() => setShowModal(false)}>
+          <Stack alignment="center" spacing="baseTight" vertical={true}>
+            <Banner status="default">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+            <Banner status="info">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+            <Banner status="pending">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+            <Banner status="success">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+          </Stack>
+        </Modal>
+        <Stack>
+          <Thumbnail
+            size="xs"
+            src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
+          />
+          <Thumbnail
+            size="sm"
+            src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
+          />
+          <Thumbnail
+            size="md"
+            src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
+          />
+          <Thumbnail
+            size="lg"
+            src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
+          />
+
+          <Thumbnail
+            size="xl"
+            src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
+          />
+
+          <Thumbnail size="xs" src={TagIcon} />
+          <Thumbnail size="sm" src={TagIcon} />
+          <Thumbnail size="md" src={TagIcon} />
+          <Thumbnail size="lg" src={TagIcon} />
+
+          <Thumbnail size="xl" src={TagIcon} />
+        </Stack>
+
         <Box className="bg-white rounded-lg shadow mb-5">
           <IndexFilters
             filters={FILTERS}
@@ -254,6 +327,7 @@ export default function ExamplePage() {
           <Table
             items={orders}
             headings={[
+              { title: 'photo' },
               { title: 'Order' },
               { title: 'Date' },
               { title: 'Customer' },
@@ -266,6 +340,9 @@ export default function ExamplePage() {
           >
             {orders.map((order, index) => (
               <Table.Row item={order} key={index}>
+                <Table.Cell>
+                  <Thumbnail src={order.src} alt={order.order} size="sm" />
+                </Table.Cell>
                 <Table.Cell>
                   <Text color="info" variant="bodyMd" fontWeight="semibold">
                     {order.order}

@@ -8,7 +8,7 @@ interface IButtonProps {
   children?: React.ReactNode
   className?: string
   size?: 'medium' | 'large' | 'small' | 'slim' | 'none'
-  variant?: VariantType
+  variant?: VariantType | 'none'
   submit?: boolean
   alignment?: 'center' | 'start' | 'end'
   rounded?: RoundedType
@@ -54,6 +54,7 @@ const VARIANT = {
   info: 'bg-blue-600 border-blue-800 text-white hover:bg-blue-700',
   ghost: 'shadow-none text-slate-700 hover:bg-slate-100',
   subdued: 'text-gray-600 hover:text-gray-700 bg-gray-200 hover:bg-gray-300',
+  none: '',
 }
 const COLOR = {
   default: 'text-gray-900 hover:bg-gray-200 ',
@@ -64,6 +65,7 @@ const COLOR = {
   info: 'text-blue-600 hover:bg-blue-100',
   ghost: 'text-slate-700',
   subdued: 'hover:bg-gray-200 !border-gray-300',
+  none: '',
 }
 export const Button = ({
   children,
@@ -86,7 +88,7 @@ export const Button = ({
 }: IButtonProps) => {
   const handleClick = useCallback(() => {
     onClick?.()
-  }, [])
+  }, [onClick])
   const Component = url ? 'a' : 'button'
   return (
     <Component
