@@ -87,8 +87,7 @@ export function ProviderSirius({ children }: { children: React.ReactNode }) {
           action={{ label: 'Undo', onAction: () => {} }}
           key={idx}
         />
-      ))}
-      {/* </Transition> */}
+      ))} {/* </Transition> */}
       {children}
     </AppContext.Provider>
   )

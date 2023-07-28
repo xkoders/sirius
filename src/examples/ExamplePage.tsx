@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Page,
@@ -25,6 +25,7 @@ import {
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 import { useToast } from '@/hooks'
 import { IAction } from '@/types'
+import { Modal } from '@/components/overleys'
 // import {} from '@'
 const toastData = {
   id: 1,
@@ -73,17 +74,7 @@ const sidebar = (
     />
   </Navigation>
 )
-const secondaryActions = [
-  {
-    label: 'Duplicate',
-    onAction: () => alert('Duplicate action'),
-  },
 
-  {
-    label: 'View on store',
-    onAction: () => alert('View on your store action'),
-  },
-]
 const promotedBulkActions = [
   {
     label: 'Create shipping labels',
@@ -245,6 +236,7 @@ const FILTERS = [
 ]
 export default function ExamplePage() {
   const toast = useToast()
+  const [showModal, setShowModal] = useState(false)
   const primaryAction: IAction = {
     label: 'Save s',
     // disabled: false,
@@ -253,6 +245,17 @@ export default function ExamplePage() {
       toast.show(toastData)
     },
   }
+  const secondaryActions = [
+    {
+      label: 'Duplicate',
+      onAction: () => setShowModal(true),
+    },
+
+    {
+      label: 'View on store',
+      onAction: () => alert('View on your store action'),
+    },
+  ]
 
   return (
     <Frame sidebar={sidebar}>
@@ -264,6 +267,22 @@ export default function ExamplePage() {
         secondaryActions={secondaryActions}
         actionGroups={actionGroups}
       >
+        <Modal show={showModal} onClose={() => setShowModal(false)}>
+          <Stack alignment="center" spacing="baseTight" vertical={true}>
+            <Banner status="default">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+            <Banner status="info">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+            <Banner status="pending">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+            <Banner status="success">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+            </Banner>
+          </Stack>
+        </Modal>
         <Stack>
           <Thumbnail
             size="xs"
