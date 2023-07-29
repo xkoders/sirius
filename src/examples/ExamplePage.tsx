@@ -23,8 +23,9 @@ import {
   Thumbnail,
   Tooltip,
   Modal,
+  ExceptionList,
 } from '@/components'
-import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
+import { HomeIcon, InboxIcon, TagIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
 import { useToast } from '@/hooks'
 import { IAction } from '@/types'
 
@@ -285,6 +286,7 @@ export default function ExamplePage() {
             </Banner>
           </Stack>
         </Modal>
+
         <Stack>
           <Tooltip content="Store name is required" align="left" dark>
             <Thumbnail
@@ -318,7 +320,20 @@ export default function ExamplePage() {
 
           <Thumbnail size="xl" src={TagIcon} />
         </Stack>
-
+        <ExceptionList
+          className="text-gray-600 my-5"
+          gap={2}
+          items={[
+            {
+              icon: InformationCircleIcon,
+              description: 'This customer is awesome. Make sure to treat them right!',
+            },
+            {
+              icon: InformationCircleIcon,
+              description: 'lorem ipsum dolor sit amet',
+            },
+          ]}
+        />
         <Box className="bg-white rounded-lg shadow mb-5">
           <IndexFilters
             filters={FILTERS}
