@@ -21,12 +21,13 @@ import {
   Spinner,
   IndexFilters,
   Thumbnail,
+  Tooltip,
+  Modal,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon } from '@heroicons/react/20/solid'
 import { useToast } from '@/hooks'
 import { IAction } from '@/types'
-import { Modal } from '@/components/overleys'
-// import {} from '@'
+
 const toastData = {
   id: 1,
   content: 'This is a toast content',
@@ -36,6 +37,7 @@ const toastData = {
     onAction: () => {},
   },
 }
+
 const sidebar = (
   <Navigation>
     <Navigation.Section
@@ -238,7 +240,7 @@ export default function ExamplePage() {
   const toast = useToast()
   const [showModal, setShowModal] = useState(false)
   const primaryAction: IAction = {
-    label: 'Save s',
+    label: 'Save',
     // disabled: false,
     onAction: () => {
       console.log('Save action')
@@ -284,10 +286,13 @@ export default function ExamplePage() {
           </Stack>
         </Modal>
         <Stack>
-          <Thumbnail
-            size="xs"
-            src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
-          />
+          <Tooltip content="Store name is required" align="left" dark>
+            <Thumbnail
+              size="xs"
+              src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
+            />
+          </Tooltip>
+
           <Thumbnail
             size="sm"
             src="https://burst.shopifycdn.com/photos/black-leather-choker-necklace_373x@2x.jpg"
