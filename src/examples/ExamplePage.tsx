@@ -289,6 +289,7 @@ export default function ExamplePage() {
         </Modal>
         <Box className="mb-5 flex flex-col gap-2">
           <TextField
+            type="ra"
             suffix="$"
             helpText={'Help text'}
             placeholder="Placeholder text"
