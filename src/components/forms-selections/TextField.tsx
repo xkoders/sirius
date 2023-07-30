@@ -16,6 +16,11 @@ type InputAttributeType = {
   name?: string
   label?: string | ReactNode
   fieldID?: string
+  labelAction?: {
+    icon?: IconType
+    onClick?: (value?: any) => void
+    content?: string
+  }
   prefix?: string | IconType
   suffix?: string | IconType
   multiline?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
@@ -48,6 +53,7 @@ export function TextField({
   inputClassName,
   label,
   fieldID,
+  labelAction,
   size = 'md',
   ...props
 }: ITextFieldProps) {
@@ -69,19 +75,30 @@ export function TextField({
   }, [suffix])
   return (
     <div className={classNames(className)}>
-      {label && (
-        <label className="text-gray-900 font-medium text-sm" htmlFor={textFieldId}>
-          {label}
-        </label>
-      )}
+      <div className="flex justify-between">
+        {label && (
+          <label className="text-gray-900 font-normal text-sm" htmlFor={textFieldId}>
+            {label}
+          </label>
+        )}
+        {labelAction && (
+          <button
+            className="text-blue-500 hover:text-blue-600 hover:underline font-normal text-sm"
+            onClick={labelAction.onClick}
+          >
+            {labelAction.icon && labelAction.icon}
+            {labelAction.content}
+          </button>
+        )}
+      </div>
       <div className="relative">
         {prefix && (
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-8 p-1.5 text-gray-500">
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-8 p-[7px] text-gray-500">
             {_prefix}
           </div>
         )}
         {suffix && (
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 h-8 w-8 p-1.5 text-gray-500">
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 h-8 w-8 p-[7px] text-gray-500">
             {_suffix}
           </div>
         )}
