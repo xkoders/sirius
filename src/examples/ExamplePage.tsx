@@ -28,6 +28,7 @@ import {
 import { HomeIcon, InboxIcon, TagIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
 import { useToast } from '@/hooks'
 import { IAction } from '@/types'
+import { TextField } from '@/components/forms-selections/TextField'
 
 const toastData = {
   id: 1,
@@ -286,7 +287,17 @@ export default function ExamplePage() {
             </Banner>
           </Stack>
         </Modal>
-
+        <Box className="mb-5 flex flex-col gap-4">
+          <TextField suffix="$" prefix="$" helpText={'Help text'} label="Username" />
+          <TextField
+            error="Error text here"
+            required
+            autoComplete="off"
+            prefix={<TagIcon />}
+            suffix={<TagIcon />}
+          />
+          <TextField multiline={3} />
+        </Box>
         <Stack>
           <Tooltip content="Store name is required" align="left" dark>
             <Thumbnail

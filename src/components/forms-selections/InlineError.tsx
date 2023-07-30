@@ -6,7 +6,7 @@ export function InlineError({ message, className = '' }: { message?: string; cla
     return null
   }
   return (
-    <div className={classNames('text-red-600 flex gap-2 text-xs items-center mt-1', className)}>
+    <div className={classNames('text-red-600 flex gap-1 text-xs items-center mt-1', className)}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

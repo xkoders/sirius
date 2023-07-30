@@ -4,7 +4,7 @@ import { GAP } from '@/constants'
 import { IconType } from '@/types'
 
 export interface IExceptionListItem {
-  icon: IconType
+  icon?: IconType
   description: string
 }
 interface IExceptionListProps {
