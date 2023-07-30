@@ -287,16 +287,17 @@ export default function ExamplePage() {
             </Banner>
           </Stack>
         </Modal>
-        <Box className="mb-5 flex flex-col gap-4">
-          <TextField suffix="$" prefix="$" helpText={'Help text'} label="Username" />
+        <Box className="mb-5 flex flex-col gap-4 ">
           <TextField
-            error="Error text here"
-            required
-            autoComplete="off"
-            prefix={<TagIcon />}
-            suffix={<TagIcon />}
+            suffix="$"
+            helpText={'Help text'}
+            placeholder="Placeholder text"
+            label="Username"
           />
-          <TextField multiline={3} />
+          <TextField prefix={<TagIcon />} size="sm" suffix="$" />
+          <TextField prefix={<InboxIcon />} size="md" suffix="$" />
+          <TextField prefix={<HomeIcon />} size="lg" suffix="$" />
+          <TextField multiline={3} placeholder="text area" label="text area" />
         </Box>
         <Stack>
           <Tooltip content="Store name is required" align="left" dark>

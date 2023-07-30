@@ -26,6 +26,12 @@ type InputAttributeType = {
 
 type ITextFieldProps = InputAttributeType & Omit<InputType, keyof InputAttributeType>
 
+const SIZE = {
+  sm: 'text-xs min-h-[1.7rem] py-0.5',
+  md: 'text-sm min-h-[2rem] py-1',
+  lg: 'text-md min-h-[2.5rem] py-2',
+}
+
 export function TextField({
   value,
   placeholder = '',
@@ -41,9 +47,11 @@ export function TextField({
   suffix,
   inputClassName,
   label,
+  fieldID,
+  size = 'md',
   ...props
 }: ITextFieldProps) {
-  const [textFieldId] = useState(props.fieldID || (props.name || 'sirius-') + performance.now())
+  const [textFieldId] = useState(fieldID || (props.name || 'sirius-') + performance.now())
   const Component = multiline ? 'textarea' : 'input'
   const _prefix = useMemo(() => {
     if (typeof prefix === 'string') {
@@ -68,20 +76,25 @@ export function TextField({
       )}
       <div className="relative">
         {prefix && (
-          <div className="absolute left-0 top-0 h-8 w-8 p-1.5 text-gray-500">{_prefix}</div>
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-8 p-1.5 text-gray-500">
+            {_prefix}
+          </div>
         )}
         {suffix && (
-          <div className="absolute right-0 top-0 h-8 w-8 p-1.5 text-gray-500">{_suffix}</div>
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 h-8 w-8 p-1.5 text-gray-500">
+            {_suffix}
+          </div>
         )}
         <Component
           {...(props as any)}
           type={type}
           className={classNames(
             inputClassName,
-            'min-h-[2rem] py-1 rounded-md w-full border text-gray-950 placeholder-gray-600 focus:ring-2 focus:ring-offset-1 focus:ring-orange-500 focus:outline-none sm:text-sm',
-            prefix ? 'pl-8' : 'pl-4',
-            suffix ? 'pr-8' : 'pr-4',
-            error ? 'border-red-500 bg-red-50' : 'border-gray-400  bg-transparent',
+            'rounded-md w-full border text-gray-950 placeholder-gray-600 focus:ring-2 focus:ring-offset-1 focus:ring-orange-500 focus:outline-none',
+            SIZE[size],
+            prefix ? 'pl-7' : 'pl-2',
+            suffix ? 'pr-7' : 'pr-2',
+            error ? 'border-red-500 bg-red-400/10' : 'border-gray-400  bg-transparent',
           )}
           placeholder={placeholder}
           autoFocus
