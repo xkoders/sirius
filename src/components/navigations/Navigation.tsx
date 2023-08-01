@@ -1,8 +1,10 @@
+import { classNames } from '@/helpers'
 import { IconType } from '@/types'
 import React, { ForwardRefExoticComponent, ReactNode, RefAttributes, SVGProps } from 'react'
 
 interface INavigationProps {
   children: React.ReactNode
+  minimized?: boolean
 }
 
 interface IItemProps {
@@ -22,19 +24,28 @@ interface ISectionProps {
   items: IItemsProps[]
 }
 
-function MainNavigation({ children }: INavigationProps) {
-  return <aside>{children}</aside>
+function MainNavigation({ children, minimized }: INavigationProps) {
+  return (
+    <aside
+      className={classNames(
+        minimized ? 'w-[61px] md:w-60' : 'hidden md:block w-60',
+        'transition-all duration-500',
+      )}
+    >
+      {children}
+    </aside>
+  )
 }
 
 function Section({ items }: ISectionProps) {
   return (
-    <ul className="py-3 w-60 text-[15px] text-gray-950 border-r h-full max-h-screen sticky top-14">
+    <ul className="py-3 w-full text-[15px] text-gray-950 border-r h-full max-h-[calc(100vh-58px)] sticky top-14">
       {items.map((item, index) => (
         <li key={index} className="px-3 flex flex-col gap-1">
           <a
             href={item.url}
             className={[
-              'py-1 flex flex-1 gap-2 relative hover:bg-gray-200 hover:text-orange-500 px-2 rounded-md',
+              'py-1 flex items-center flex-1 gap-2 relative hover:bg-gray-200 hover:text-orange-500 px-2 rounded-md',
               item.disabled && 'pointer-events-none opacity-50',
               item.className,
             ].join(' ')}
@@ -51,7 +62,7 @@ function Section({ items }: ISectionProps) {
               <span>
                 {
                   <item.icon
-                    className={['w-5', item.selected && 'text-orange-500']
+                    className={['w-5 h-7 md:h-5', item.selected && 'text-orange-500']
                       .filter(Boolean)
                       .join(' ')}
                   />

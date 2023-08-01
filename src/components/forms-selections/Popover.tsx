@@ -1,15 +1,22 @@
 import { classNames } from '@/helpers'
-import React, { ReactNode, useEffect, useRef, useState, useTransition } from 'react'
+import React, { ElementType, ReactNode, useEffect, useRef, useState, useTransition } from 'react'
 import { Transition } from '../feedbacks'
 interface IPopoverProps {
   children?: ReactNode
   className?: string
   disabled?: boolean
   items?: string
+  as?: ElementType
   activator?: string | ReactNode
 }
 
-export function Popover({ children, className, activator, disabled }: IPopoverProps) {
+export function Popover({
+  children,
+  className,
+  as: Component = 'div',
+  activator,
+  disabled,
+}: IPopoverProps) {
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
 
@@ -30,7 +37,10 @@ export function Popover({ children, className, activator, disabled }: IPopoverPr
     }
   }, [])
   return (
-    <div ref={dropdownRef} className={classNames(className, 'relative inline-block text-left')}>
+    <Component
+      ref={dropdownRef}
+      className={classNames(className, 'relative inline-block text-left')}
+    >
       <div
         className={classNames(
           disabled ? 'pointer-events-none opacity-75' : '',
@@ -47,6 +57,6 @@ export function Popover({ children, className, activator, disabled }: IPopoverPr
           </div>
         )}
       </Transition>
-    </div>
+    </Component>
   )
 }

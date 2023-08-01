@@ -41,7 +41,7 @@ const toastData = {
 }
 
 const sidebar = (
-  <Navigation>
+  <Navigation minimized>
     <Navigation.Section
       items={[
         {

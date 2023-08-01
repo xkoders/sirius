@@ -1,8 +1,6 @@
 import React, { ReactNode } from 'react'
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { classNames } from '@/helpers'
+import { Popover } from '../forms-selections'
 
 interface Props {
   children: ReactNode
@@ -83,12 +81,7 @@ const user = {
   imageUrl:
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-]
+
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
@@ -97,124 +90,73 @@ const userNavigation = [
 
 export function Header() {
   return (
-    <>
-      <Disclosure as="nav" className="shadow-sm bg-white sticky top-0 z-50">
-        {({ open }) => (
-          <>
-            <header className="flex h-14 w-full">
-              <div className="w-60 flex items-center px-5 ">
-                <Logo />
-                {/* <img
-                  className="block h-8 w-auto lg:hidden"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt="Your Company"
-                />
-                <img
-                  className="hidden h-8 w-auto lg:block"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt="Your Company"
-                /> */}
-              </div>
-              <div className="flex items-center justify-between flex-1 max-w-5xl mx-auto px-6">
-                <div className="h-9 w-full max-w-md bg-gray-100 rounded-md relative border border-gray-300 flex justify-between items-center px-3 text-gray-500 text-sm">
-                  <span>search by keyword</span>
-                  <span>⌘K</span>
-                </div>
-                <div className="flex">
-                  <button
-                    type="button"
-                    className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-5 w-5" aria-hidden="true" />
-                  </button>
+    <header className="flex h-14 w-full sticky top-0 z-50 bg-white border-b shadow-sm">
+      <div className="w-60 flex items-center px-5 ">
+        <Logo />
+        {/* <img
+        className="block h-8 w-auto lg:hidden"
+        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+        alt="Your Company"
+      />
+      <img
+        className="hidden h-8 w-auto lg:block"
+        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+        alt="Your Company"
+      /> */}
+      </div>
+      <div className="flex items-center justify-end md:justify-between flex-1 max-w-5xl mx-auto px-6">
+        <div className="h-9 w-full max-w-md bg-gray-100 rounded-md relative border border-gray-300 hidden md:flex justify-between items-center px-3 text-gray-500 text-sm">
+          <span>search by keyword</span>
+          <span>⌘K</span>
+        </div>
+        <div className="flex">
+          <button
+            type="button"
+            className="rounded-full bg-white p-1 w-8 flex justify-center items-center text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 "
+          >
+            <span className="sr-only">View notifications</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="w-5 h-5"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 2a6 6 0 00-6 6c0 1.887-.454 3.665-1.257 5.234a.75.75 0 00.515 1.076 32.91 32.91 0 003.256.508 3.5 3.5 0 006.972 0 32.903 32.903 0 003.256-.508.75.75 0 00.515-1.076A11.448 11.448 0 0116 8a6 6 0 00-6-6zM8.05 14.943a33.54 33.54 0 003.9 0 2 2 0 01-3.9 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
 
-                  {/* Profile dropdown */}
-                  <Menu as="div" className="relative ml-3">
-                    <div>
-                      <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                        <span className="sr-only">Open user menu</span>
-                        <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
-                      </Menu.Button>
-                    </div>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        {userNavigation.map((item) => (
-                          <Menu.Item key={item.name}>
-                            {({ active }) => (
-                              <a
-                                href={item.href}
-                                className={classNames(
-                                  active ? 'bg-gray-100' : '',
-                                  'block px-4 py-2 text-sm text-gray-700',
-                                )}
-                              >
-                                {item.name}
-                              </a>
-                            )}
-                          </Menu.Item>
-                        ))}
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
-                </div>
+          {/* Profile dropdown */}
+          <Popover
+            as="div"
+            activator={
+              <div>
+                <button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                  <span className="sr-only">Open user menu</span>
+                  <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                </button>
               </div>
-              <div className="-mr-2 flex items-center sm:hidden ">
-                {/* Mobile menu button */}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
-            </header>
-
-            <Disclosure.Panel className="sm:hidden">
-              <div className="border-t border-gray-200 pb-3 pt-4">
-                <div className="flex items-center px-4">
-                  <div className="flex-shrink-0">
-                    <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
-                  </div>
-                  <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800">{user.name}</div>
-                    <div className="text-sm font-medium text-gray-500">{user.email}</div>
-                  </div>
-                  <button
-                    type="button"
-                    className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            }
+            className="relative ml-3"
+          >
+            <ul className="w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              {userNavigation.map((item) => (
+                <li key={item.name}>
+                  <a
+                    href={item.href}
+                    className={classNames('block px-4 py-2 text-sm text-gray-700')}
                   >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div>
-                <div className="mt-3 space-y-1">
-                  {userNavigation.map((item) => (
-                    <Disclosure.Button
-                      key={item.name}
-                      as="a"
-                      href={item.href}
-                      className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-                    >
-                      {item.name}
-                    </Disclosure.Button>
-                  ))}
-                </div>
-              </div>
-            </Disclosure.Panel>
-          </>
-        )}
-      </Disclosure>
-    </>
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Popover>
+        </div>
+      </div>
+    </header>
   )
 }
