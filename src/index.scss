@@ -16,6 +16,7 @@ a {
 .cbx svg.indeterminate {
   stroke-dashoffset: 0 !important;
 }
+
 .inp-cbx {
   &:checked + .cbx {
     span {

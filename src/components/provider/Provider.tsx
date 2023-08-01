@@ -4,6 +4,7 @@ import { IToastProps, Toast, Transition } from '../feedbacks'
 const initialData = {
   selectedItems: [],
   select: true,
+  isFramePresent: false,
   isSticky: {
     first: false,
     second: false,
@@ -34,12 +35,16 @@ type CreateContextType = {
   dispatch: Dispatch<{ type: ActionType; payload: any }>
   toasts: IToastProps[]
   setToasts: any
+  isFramePresent: boolean
+  setIsFramePresent: any
 }
 export const AppContext = createContext<CreateContextType>({
   tableResources: initialData,
   dispatch: () => null,
   toasts: [],
   setToasts: () => null,
+  setIsFramePresent: () => null,
+  isFramePresent: false,
 })
 type ActionType = 'ADD_SELECTED_ITEM' | 'REMOVE_SELECTED_ITEM' | 'SELECT_ALL'
 
@@ -70,13 +75,16 @@ function tableReducer(data: IDataReducer, action: { type: ActionType; payload: a
 export function ProviderSirius({ children }: { children: React.ReactNode }) {
   const [tableResources, dispatch] = useReducer(tableReducer, initialData)
   const [toasts, setToasts] = useState<IToastProps[]>([])
+  const [isFramePresent, setIsFramePresent] = useState<boolean>(false)
   const removeToast = useCallback(
     (item: IToastProps) =>
       setToasts(toasts.filter((t) => t.id !== item.id || stringify(t) !== stringify(item))),
     [toasts],
   )
   return (
-    <AppContext.Provider value={{ tableResources, dispatch, toasts, setToasts }}>
+    <AppContext.Provider
+      value={{ tableResources, dispatch, toasts, setToasts, isFramePresent, setIsFramePresent }}
+    >
       {/* <Transition type="slide-up"> */}
       {toasts.map((item, idx) => (
         <Toast
@@ -87,7 +95,8 @@ export function ProviderSirius({ children }: { children: React.ReactNode }) {
           action={{ label: 'Undo', onAction: () => {} }}
           key={idx}
         />
-      ))} {/* </Transition> */}
+      ))}{' '}
+      {/* </Transition> */}
       {children}
     </AppContext.Provider>
   )

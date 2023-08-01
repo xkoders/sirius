@@ -24,6 +24,7 @@ import {
   Tooltip,
   Modal,
   ExceptionList,
+  Header,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
 import { useToast } from '@/hooks'
@@ -39,43 +40,82 @@ const toastData = {
     onAction: () => {},
   },
 }
-
+const NAVIGATION_SECTION_ITEM = [
+  {
+    url: '#',
+    label: 'Home',
+    disabled: true,
+    icon: HomeIcon,
+  },
+  {
+    url: '#',
+    label: 'Orders',
+    // selected: true,
+    icon: InboxIcon,
+    badge: <Badge status="critical">16</Badge>,
+  },
+  {
+    url: '#',
+    label: 'Products',
+    icon: TagIcon,
+    subNavigationItems: [
+      {
+        disabled: true,
+        url: '#',
+        label: 'Collections',
+      },
+      {
+        url: '#',
+        label: 'Inventory',
+      },
+    ],
+  },
+]
+const NAVIGATION_SECTION_ITEM_2 = [
+  {
+    url: '#',
+    label: 'Home',
+    disabled: true,
+    icon: HomeIcon,
+  },
+  {
+    url: '#',
+    label: 'Orders',
+    // selected: true,
+    icon: InboxIcon,
+    badge: <Badge status="critical">16</Badge>,
+  },
+  {
+    url: '#',
+    label: 'Products',
+    icon: TagIcon,
+    selected: true,
+    subNavigationItems: [
+      {
+        url: '#',
+        label: 'Collections',
+      },
+      {
+        url: '#',
+        label: 'Inventory',
+      },
+      {
+        url: '#',
+        selected: true,
+        label: 'stock',
+      },
+      {
+        url: '#',
+        label: 'another one',
+      },
+    ],
+  },
+]
 const sidebar = (
   <Navigation minimized>
-    <Navigation.Section
-      items={[
-        {
-          url: '#',
-          label: 'Home',
-          disabled: true,
-          icon: HomeIcon,
-        },
-        {
-          url: '#',
-          label: 'Orders',
-          icon: InboxIcon,
-          badge: <Badge status="critical">16</Badge>,
-        },
-        {
-          url: '#',
-          label: 'Products',
-          icon: TagIcon,
-          selected: true,
-          subNavigationItems: [
-            {
-              url: '#',
-              selected: true,
-              label: 'Collections',
-            },
-            {
-              url: '#',
-              disabled: true,
-              label: 'Inventory',
-            },
-          ],
-        },
-      ]}
-    />
+    <Navigation.Section items={NAVIGATION_SECTION_ITEM} />
+    <Navigation.Section items={NAVIGATION_SECTION_ITEM_2} title="These icons should have" />
+    <Navigation.SectionFooter>this is footer</Navigation.SectionFooter>
   </Navigation>
 )
 
@@ -262,7 +302,7 @@ export default function ExamplePage() {
   ]
 
   return (
-    <Frame sidebar={sidebar}>
+    <Frame sidebar={sidebar} header={<Header />}>
       <Page
         backAction={{ label: 'Products', url: '#' }}
         title="3/4 inch Leather pet collar"
