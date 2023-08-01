@@ -80,10 +80,10 @@ const NAVIGATION_SECTION_ITEM_2 = [
   },
   {
     url: '#',
-    label: 'Orders',
+    label: 'Mail',
     // selected: true,
     icon: InboxIcon,
-    badge: <Badge status="critical">16</Badge>,
+    badge: <Badge status="default">new</Badge>,
   },
   {
     url: '#',
