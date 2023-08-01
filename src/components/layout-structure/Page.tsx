@@ -37,6 +37,18 @@ const Activator = ({ title }: { title: string }) => (
     </Button>
   </div>
 )
+const ActivatorMobile = () => (
+  <Button outline>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      className="w-5 h-5 -mx-2"
+    >
+      <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+    </svg>
+  </Button>
+)
 export function Page({
   children,
   className = '',
@@ -71,37 +83,70 @@ export function Page({
           </div>
         </article>
         <article className="flex gap-3">
-          {secondaryActions &&
-            secondaryActions.map(
-              (
-                { label, onAction, target, url, disabled, loading, variant = 'ghost', rel },
-                index,
-              ) => (
-                <Button
-                  key={index}
-                  className="hover:text-indigo-700 font-medium py-2 h-fit rounded-md"
-                  onClick={onAction}
-                  disabled={disabled}
-                  loading={loading}
-                  variant={variant}
-                  url={url}
-                  rel={rel}
-                  target={target}
-                >
-                  {label}
-                </Button>
-              ),
-            )}
-          {actionGroups &&
-            actionGroups.map(({ title, actions }, index) => (
-              <Popover activator={<Activator title={title} />} key={index}>
-                <ul className="  focus:outline-none p-2 whitespace-nowrap min-w-[12rem]">
-                  {actions.map(
+          <div className="hidden lg:flex gap-3">
+            {secondaryActions &&
+              secondaryActions.map(
+                (
+                  { label, onAction, target, url, disabled, loading, variant = 'ghost', rel },
+                  index,
+                ) => (
+                  <Button
+                    key={index}
+                    className="hover:text-indigo-700 font-medium py-2 h-fit rounded-md"
+                    onClick={onAction}
+                    disabled={disabled}
+                    loading={loading}
+                    variant={variant}
+                    url={url}
+                    rel={rel}
+                    target={target}
+                  >
+                    {label}
+                  </Button>
+                ),
+              )}
+            {actionGroups &&
+              actionGroups.map(({ title, actions }, index) => (
+                <Popover activator={<Activator title={title} />} key={index}>
+                  <ul className="  focus:outline-none p-2 whitespace-nowrap min-w-[12rem]">
+                    {actions.map(
+                      (
+                        { label, onAction, target, url, disabled, loading, variant = 'ghost', rel },
+                        idx,
+                      ) => (
+                        <li key={idx}>
+                          <Button
+                            disabled={disabled}
+                            onClick={onAction}
+                            url={url}
+                            rel={rel}
+                            target={target}
+                            variant={variant}
+                            loading={loading}
+                            fullwidth
+                            alignment="start"
+                            size="none"
+                            className="p-2"
+                          >
+                            {label}
+                          </Button>
+                        </li>
+                      ),
+                    )}
+                  </ul>
+                </Popover>
+              ))}
+          </div>
+          <div className="block lg:hidden">
+            <Popover activator={<ActivatorMobile />}>
+              <ul className="py-2">
+                {secondaryActions &&
+                  secondaryActions.map(
                     (
                       { label, onAction, target, url, disabled, loading, variant = 'ghost', rel },
-                      idx,
+                      index,
                     ) => (
-                      <li key={idx}>
+                      <li key={index} className="px-2">
                         <Button
                           disabled={disabled}
                           onClick={onAction}
@@ -112,17 +157,59 @@ export function Page({
                           loading={loading}
                           fullwidth
                           alignment="start"
-                          size="none"
-                          className="p-2"
+                          size="small"
                         >
                           {label}
                         </Button>
                       </li>
                     ),
                   )}
-                </ul>
-              </Popover>
-            ))}
+                {actionGroups &&
+                  actionGroups.map(({ title, actions }, index) => (
+                    <li key={index}>
+                      <span className="text-xs font-medium px-4 py-2.5 mt-2 border-t w-full flex">
+                        {title}
+                      </span>
+                      <ul className="focus:outline-none px-2 whitespace-nowrap min-w-[12rem]">
+                        {actions.map(
+                          (
+                            {
+                              label,
+                              onAction,
+                              target,
+                              url,
+                              disabled,
+                              loading,
+                              variant = 'ghost',
+                              rel,
+                            },
+                            idx,
+                          ) => (
+                            <li key={idx}>
+                              <Button
+                                disabled={disabled}
+                                onClick={onAction}
+                                url={url}
+                                rel={rel}
+                                target={target}
+                                variant={variant}
+                                loading={loading}
+                                fullwidth
+                                alignment="start"
+                                size="small"
+                                className=""
+                              >
+                                {label}
+                              </Button>
+                            </li>
+                          ),
+                        )}
+                      </ul>
+                    </li>
+                  ))}
+              </ul>
+            </Popover>
+          </div>
 
           {primaryAction && (
             <Button onClick={primaryAction.onAction} variant="primary">

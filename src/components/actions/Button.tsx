@@ -33,7 +33,7 @@ const ALIGNMENT = {
 const SIZE = {
   large: 'text-lg px-6 py-2',
   medium: 'text-sm px-4 py-1.5 !h-9',
-  small: 'text-[14px] px-3 py-1',
+  small: 'text-[14px] px-2 py-1',
   slim: 'text-xs px-2 py-px !h-6',
   none: '',
 }
@@ -46,7 +46,8 @@ const SIZE_ICON = {
   none: 'h-full w-full',
 }
 const VARIANT = {
-  default: 'bg-white border border-gray-400 text-gray-900 shadow-sm hover:bg-gray-100',
+  default:
+    'bg-white border border-gray-400 disabled:bg-gray-100 text-gray-900 shadow-sm hover:bg-gray-100',
   primary: 'bg-indigo-600 border-indigo-900 text-white hover:bg-indigo-700',
   success: 'bg-green-600 border-green-800 text-white hover:bg-green-700',
   warning: 'bg-orange-400 border-orange-600 text-white hover:bg-orange-500',
@@ -57,7 +58,7 @@ const VARIANT = {
   none: '',
 }
 const COLOR = {
-  default: 'text-gray-900 hover:bg-gray-200 ',
+  default: 'text-gray-900 hover:bg-gray-200',
   primary: 'text-indigo-600 hover:bg-indigo-100',
   success: 'text-green-600 hover:bg-green-100',
   warning: 'text-orange-600 hover:bg-orange-100',
@@ -101,6 +102,7 @@ export const Button = ({
         ROUNDED[rounded],
         outline || link ? COLOR[variant] : VARIANT[variant],
         outline && !link ? ' border border-current' : '',
+        outline && variant === 'default' ? '!border-gray-400' : '',
         link ? '!bg-transparent  hover:underline' : '',
         className,
       )}
