@@ -114,7 +114,6 @@ export function TextField({
             error ? 'border-red-500 bg-red-400/10' : 'border-gray-400  bg-transparent',
           )}
           placeholder={placeholder}
-          autoFocus
           value={value}
           rows={multiline}
           onClick={onClick}

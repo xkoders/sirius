@@ -299,6 +299,7 @@ export default function ExamplePage() {
           <TextField prefix={<TagIcon />} size="sm" suffix="$" />
           <TextField prefix={<InboxIcon />} type="number" min={1} size="md" suffix="$" />
           <TextField prefix={<HomeIcon />} size="lg" suffix="$" />
+
           <TextField multiline={3} placeholder="text area" label="text area" />
         </Box>
         <Stack>
@@ -528,6 +529,7 @@ const Buttons = () => (
     <Box className="mb-6 flex gap-2 flex-wrap">
       <Button variant="ghost">ghost</Button>
       <Button variant="danger">danger</Button>
+      <Button variant="dark">dark</Button>
       <Button variant="primary">primary</Button>
       <Button variant="subdued">subdued</Button>
       <Button variant="success">success</Button>

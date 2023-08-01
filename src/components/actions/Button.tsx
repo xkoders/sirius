@@ -55,6 +55,7 @@ const VARIANT = {
   info: 'bg-blue-600 border-blue-800 text-white hover:bg-blue-700',
   ghost: 'shadow-none text-slate-700 hover:bg-slate-100',
   subdued: 'text-gray-600 hover:text-gray-700 bg-gray-200 hover:bg-gray-300',
+  dark: 'text-gray-100 hover:text-white bg-gray-950 hover:bg-gray-900',
   none: '',
 }
 const COLOR = {

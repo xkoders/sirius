@@ -1,10 +1,11 @@
 import { classNames } from '@/helpers'
 import { IconType } from '@/types'
-import React, { ForwardRefExoticComponent, ReactNode, RefAttributes, SVGProps } from 'react'
+import React, { ReactNode } from 'react'
 
 interface INavigationProps {
   children: React.ReactNode
   minimized?: boolean
+  className?: string
 }
 
 interface IItemProps {
@@ -24,10 +25,11 @@ interface ISectionProps {
   items: IItemsProps[]
 }
 
-function MainNavigation({ children, minimized }: INavigationProps) {
+function MainNavigation({ children, minimized, className }: INavigationProps) {
   return (
     <aside
       className={classNames(
+        className,
         minimized ? 'w-[61px] md:w-60' : 'hidden md:block w-60',
         'transition-all duration-500',
       )}
@@ -45,7 +47,7 @@ function Section({ items }: ISectionProps) {
           <a
             href={item.url}
             className={[
-              'py-1 flex items-center flex-1 gap-2 relative hover:bg-gray-200 hover:text-orange-500 px-2 rounded-md',
+              'py-1 flex items-center flex-1 gap-2 relative hover:bg-gray-200/50 hover:text-orange-500 px-2 rounded-md',
               item.disabled && 'pointer-events-none opacity-50',
               item.className,
             ].join(' ')}
@@ -78,9 +80,9 @@ function Section({ items }: ISectionProps) {
                   <a
                     href={item.url}
                     className={[
-                      'py-1 flex flex-1 gap-2 relative hover:bg-gray-200 hover:text-orange-500 pl-9 pr-2 rounded-md',
+                      'py-1 flex flex-1 gap-2 relative hover:bg-gray-200/50 hover:text-orange-500 pl-9 pr-2 rounded-md',
                       subItem.className,
-                      subItem.selected && !subItem.disabled && 'bg-gray-200 text-orange-500',
+                      subItem.selected && !subItem.disabled && 'bg-gray-200/50 text-orange-500',
                       subItem.disabled && 'pointer-events-none opacity-50',
                     ].join(' ')}
                   >
