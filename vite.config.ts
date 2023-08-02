@@ -2,12 +2,16 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'node:path'
 import dts from 'vite-plugin-dts'
+import tsConfigPaths from 'vite-tsconfig-paths'
+import * as packageJson from './package.json'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
+    tsConfigPaths(),
     dts({
       insertTypesEntry: true,
+      include: ['src/component/'],
     }),
   ],
   resolve: {
@@ -20,12 +24,13 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),
       name: 'alioth',
-      fileName: 'index',
+      formats: ['es', 'umd'],
+      fileName: (format) => `alioth.${format}.js`,
       // formats: ['es', 'umd'],
       // fileName: (format) => `my-lib.${format}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: [...Object.keys(packageJson.peerDependencies)],
       output: {
         globals: {
           react: 'React',

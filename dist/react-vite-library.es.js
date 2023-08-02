@@ -2158,7 +2158,7 @@ function mn({ children: e, minimized: t, className: l }) {
         "transition-all duration-500 overflow-y-auto sticky z-10 hidden border-r divide-y flex-col",
         l,
         t ? "w-[61px] md:w-60 sm:flex" : " md:flex w-60",
-        a ? " max-h-[calc(100vh-56px)] top-14" : " max-h-screen top-0"
+        a ? " h-[calc(100vh-56px)] top-14" : "h-screen top-0"
       ),
       children: e
     }
@@ -2278,7 +2278,7 @@ const Dl = Object.assign(mn, {
   SectionFooter: xn
 });
 function Bl({ children: e, sidebar: t, header: l, className: a }) {
-  return /* @__PURE__ */ r.jsxs("div", { className: C("w-full", a), children: [
+  return /* @__PURE__ */ r.jsxs("div", { className: C("w-full h-screen bg-gray-100", a), children: [
     l,
     /* @__PURE__ */ r.jsxs("div", { className: "flex w-full", children: [
       t,

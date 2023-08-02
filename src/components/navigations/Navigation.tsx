@@ -36,7 +36,7 @@ function MainNavigation({ children, minimized, className }: INavigationProps) {
         'transition-all duration-500 overflow-y-auto sticky z-10 hidden border-r divide-y flex-col',
         className,
         minimized ? 'w-[61px] md:w-60 sm:flex' : ' md:flex w-60',
-        isFramePresent ? ' max-h-[calc(100vh-56px)] top-14' : ' max-h-screen top-0',
+        isFramePresent ? ' h-[calc(100vh-56px)] top-14' : 'h-screen top-0',
       )}
     >
       {children}
