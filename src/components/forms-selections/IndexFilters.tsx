@@ -21,7 +21,7 @@ interface IIndexFiltersProps {
 }
 export const IndexFilters = ({ onChange, className, sortOptions, filters }: IIndexFiltersProps) => {
   const [selectedTab, setSelectedTab] = useState(0)
-  const [showSearch, setShowSearch] = useState(true)
+  const [showSearch, setShowSearch] = useState(false)
   const [activeFilters, setActiveFilters] = useState<IFilters[]>([])
   const [initialFilters, setInitialFilters] = useState<IFilters[]>(filters || [])
   const [search, setSearch] = useState('')

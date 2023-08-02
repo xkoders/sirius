@@ -32,9 +32,9 @@ type InputAttributeType = {
 type ITextFieldProps = InputAttributeType & Omit<InputType, keyof InputAttributeType>
 
 const SIZE = {
-  sm: 'text-xs min-h-[1.7rem] py-0.5',
+  sm: 'text-xs min-h-[1.8rem] py-1',
   md: 'text-sm min-h-[2rem] py-1',
-  lg: 'text-md min-h-[2.5rem] py-2',
+  lg: 'text-md min-h-[2rem] py-1.5',
 }
 
 export function TextField({
@@ -114,7 +114,6 @@ export function TextField({
             error ? 'border-red-500 bg-red-400/10' : 'border-gray-400  bg-transparent',
           )}
           placeholder={placeholder}
-          autoFocus
           value={value}
           rows={multiline}
           onClick={onClick}

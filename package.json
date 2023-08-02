@@ -50,13 +50,13 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/my-lib.umd.js",
-  "module": "./dist/my-lib.es.js",
+  "main": "./dist/alioth.umd.cjs",
+  "module": "./dist/alioth.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.es.js",
-      "require": "./dist/my-lib.umd.js"
+      "import": "./dist/alioth.js",
+      "require": "./dist/alioth.umd.cjs"
     }
   }
 }

@@ -21,6 +21,7 @@ export type VariantType =
   | 'info'
   | 'ghost'
   | 'subdued'
+  | 'dark'
   | 'default'
 export interface IAction {
   label: string
