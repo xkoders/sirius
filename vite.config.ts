@@ -20,7 +20,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),
       name: 'alioth',
-      fileName: 'alioth',
+      fileName: 'index',
       // formats: ['es', 'umd'],
       // fileName: (format) => `my-lib.${format}.js`,
     },

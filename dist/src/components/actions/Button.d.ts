@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { VariantType, IconType, RoundedType } from '../../types';
+import { VariantType, IconType, RoundedType } from '../../../../../../../../src/types';
 interface IButtonProps {
     children?: React.ReactNode;
     className?: string;
