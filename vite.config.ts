@@ -10,7 +10,7 @@ export default defineConfig({
     react(),
     tsConfigPaths(),
     dts({
-      insertTypesEntry: true,
+      // insertTypesEntry: true,
       include: ['src/component/'],
     }),
   ],
@@ -22,13 +22,19 @@ export default defineConfig({
 
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/main.ts'),
+      entry: resolve('src', 'src/main.ts'),
       name: 'alioth',
-      formats: ['es', 'umd'],
-      fileName: (format) => `alioth.${format}.js`,
-      // formats: ['es', 'umd'],
-      // fileName: (format) => `my-lib.${format}.js`,
+      formats: ['es', 'cjs'],
+      fileName: (format) => `alioth.${format === 'cjs' ? 'cjs' : 'es.js'}`,
     },
+
+    // optimizeDeps: {
+    //   exclude: Object.keys(packageJson.peerDependencies),
+    // },
+    // esbuild: {
+    //   minify: true,
+    // },
+    cssMinify: true,
     rollupOptions: {
       external: [...Object.keys(packageJson.peerDependencies)],
       output: {
