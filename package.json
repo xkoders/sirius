@@ -1,5 +1,5 @@
 {
-  "name": "sirius",
+  "name": "alioth",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -33,6 +33,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "husky": "^8.0.3",
     "json": "^11.0.0",
+    "mini-css-extract-plugin": "^2.7.6",
     "path": "^0.12.7",
     "postcss": "^8.4.26",
     "prettier": "^3.0.0",
@@ -50,13 +51,13 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/alioth.umd.cjs",
-  "module": "./dist/alioth.js",
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/alioth.js",
-      "require": "./dist/alioth.umd.cjs"
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
     }
   }
 }
