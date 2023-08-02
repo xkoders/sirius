@@ -65,6 +65,7 @@ const COLOR = {
   warning: 'text-orange-600 hover:bg-orange-100',
   danger: 'text-red-600 hover:bg-red-100',
   info: 'text-blue-600 hover:bg-blue-100',
+  dark: 'text-black hover:bg-gray-100',
   ghost: 'text-slate-700',
   subdued: 'hover:bg-gray-200 !border-gray-300',
   none: '',
