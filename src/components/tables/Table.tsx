@@ -36,7 +36,7 @@ function MainTable({
   promotedBulkActions,
 }: ITableProps) {
   const { dispatch, tableResources } = useContext(AppContext)
-  const cRef = useRef<HTMLInputElement>(null)
+  // const cRef = useRef<HTMLInputElement>(null)
   const checkboxType = useMemo(() => {
     const selectedCount = tableResources.selectedItems.length
     const itemsCount = items.length

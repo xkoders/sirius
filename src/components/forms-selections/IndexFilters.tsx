@@ -1,9 +1,8 @@
 import { classNames } from '@/helpers'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback,  useState } from 'react'
 import { Tabs } from './Tabs'
 import { Button } from '../actions'
 import { Popover } from './Popover'
-import { Box } from '../layout-structure'
 import { SearchField } from './SearchField'
 import { Transition } from '../feedbacks'
 import { Text } from '../typography'
@@ -11,7 +10,7 @@ interface IFilters {
   key: string
   label: string
   filter: React.ReactNode
-  shortcut?: Boolean
+  shortcut?: boolean
 }
 interface IIndexFiltersProps {
   className?: string
@@ -26,7 +25,7 @@ export const IndexFilters = ({ onChange, className, sortOptions, filters }: IInd
   const [initialFilters, setInitialFilters] = useState<IFilters[]>(filters || [])
   const [search, setSearch] = useState('')
   const handleChange = useCallback(
-    (idx: number, item: any) => {
+    (idx: number) => {
       setSelectedTab(idx)
     },
     [onChange],
@@ -47,9 +46,7 @@ export const IndexFilters = ({ onChange, className, sortOptions, filters }: IInd
     { label: 'Team Members' },
     { label: 'Billing' },
   ]
-  const Search = () => {
-    // return (div.re)
-  }
+
 
   return (
     <section className={classNames('flex flex-col', className)}>

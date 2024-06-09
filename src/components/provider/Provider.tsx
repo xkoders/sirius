@@ -1,6 +1,6 @@
 import { stringify } from '@/helpers'
-import { Dispatch, createContext, useCallback, useReducer, useState } from 'react'
-import { IToastProps, Toast, Transition } from '../feedbacks'
+import React, { Dispatch, createContext, useCallback, useReducer, useState } from 'react'
+import { IToastProps, Toast } from '../feedbacks'
 const initialData = {
   selectedItems: [],
   select: true,
@@ -56,10 +56,9 @@ function tableReducer(data: IDataReducer, action: { type: ActionType; payload: a
         selectedItems: [...data.selectedItems, action.payload],
       }
     case 'REMOVE_SELECTED_ITEM':
-      const d = data.selectedItems
       return {
         ...data,
-        selectedItems: d.filter((item) => stringify(item) !== stringify(action.payload)),
+        selectedItems: data.selectedItems.filter((item) => stringify(item) !== stringify(action.payload)),
       }
     case 'SELECT_ALL':
       return {

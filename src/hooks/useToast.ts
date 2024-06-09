@@ -1,5 +1,5 @@
 import { AppContext, IToastProps } from '@/components'
-import React, { useCallback, useContext } from 'react'
+import { useCallback, useContext } from 'react'
 
 export function useToast() {
   const { toasts, setToasts } = useContext(AppContext)

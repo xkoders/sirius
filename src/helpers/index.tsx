@@ -3,7 +3,7 @@ export function classNames(...classes: (string | undefined)[]) {
 }
 export function stringify(obj: any) {
   let cache: any = []
-  let str = JSON.stringify(obj, function (key, value) {
+  const str = JSON.stringify(obj, function (key, value) {
     if (typeof value === 'object' && value !== null) {
       if (cache.indexOf(value) !== -1) {
         // Circular reference found, discard key

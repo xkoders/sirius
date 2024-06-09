@@ -1,5 +1,5 @@
 import { classNames } from '@/helpers'
-import { CSSProperties, ElementType, ReactNode } from 'react'
+import React, { ElementType, ReactNode } from 'react'
 
 interface ITransitionProps {
   children: ReactNode
@@ -17,7 +17,7 @@ export const Transition = ({
   type = 'fade-in',
   timing = 'ease-out',
 }: ITransitionProps) => {
-  const styles: any = {
+  const styles: Record<string, string> = {
     '--x-duration': `${duration}ms`,
     '--x-timing': timing,
   }

@@ -1,4 +1,5 @@
 import { classNames, stringify } from '@/helpers'
+import React from 'react'
 
 interface IChoiceListItem {
   id?: string

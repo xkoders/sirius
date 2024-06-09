@@ -1,22 +1,17 @@
 import { classNames } from '@/helpers'
-import React, {
-  ElementType,
-  ForwardRefExoticComponent,
-  ReactNode,
-  RefAttributes,
-  SVGProps,
-} from 'react'
+import React, {ElementType} from 'react'
 import { Text } from '../typography'
 import { IconType } from '@/types'
 interface IBannerProps {
   children?: React.ReactNode
   as?: ElementType
-  icon?: IconType
+  icon?: IconType 
   className?: string
   status?: 'default' | 'info' | 'warning' | 'critical' | 'success' | 'pending'
   title?: string
   onDismiss?: () => void
 }
+
 
 const STATUS = {
   info: {

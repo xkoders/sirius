@@ -1,3 +1,4 @@
+import React from 'react'
 import { ProviderSirius } from './components'
 import ExamplePage from './examples/ExamplePage'
 

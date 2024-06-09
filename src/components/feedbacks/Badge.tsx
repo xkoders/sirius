@@ -1,12 +1,6 @@
 import { classNames } from '@/helpers'
 import { IconType } from '@/types'
-import React, {
-  ForwardRefExoticComponent,
-  ReactNode,
-  RefAttributes,
-  SVGProps,
-  useCallback,
-} from 'react'
+import React, { ReactNode } from 'react'
 
 interface IBadgeProps {
   children?: React.ReactNode

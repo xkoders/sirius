@@ -30,9 +30,6 @@ export function Toast({
   action,
 }: IToastProps) {
   const [dismissed, setDismissed] = useState(false)
-  const onDismissHandler = () => {
-    onDismiss()
-  }
 
   useEffect(() => {
     setTimeout(() => {

@@ -17,7 +17,6 @@ import {
   ChoiceList,
   InlineError,
   MediaCard,
-  Popover,
   Spinner,
   IndexFilters,
   Thumbnail,
