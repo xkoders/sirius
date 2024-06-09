@@ -1,6 +1,10 @@
 {
-  "name": "@alioth",
+  "name": "@sirius",
   "private": true,
+  "author": {
+    "name": "Soufiyan",
+    "email": "benallalsoufiane1@gmail.com"
+  },
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -33,7 +37,6 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "husky": "^8.0.3",
     "json": "^11.0.0",
-    "mini-css-extract-plugin": "^2.7.6",
     "path": "^0.12.7",
     "postcss": "^8.4.26",
     "prettier": "^3.0.0",
@@ -47,7 +50,9 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
-    "@heroicons/react": "^2.0.18"
+    "@heroicons/react": "^2.1.3",
+    "react": "^18.2.0 || >=17.x",
+    "react-dom": "^18.2.0 || >=17.x"
   },
   "files": [
     "dist"
