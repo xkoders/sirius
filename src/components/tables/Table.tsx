@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext, useMemo, useRef } from 'react'
+import React, { ReactNode, useContext, useMemo } from 'react'
 import { classNames, stringify } from '@/helpers'
 import { Popover } from '@headlessui/react'
 import { AppContext } from '../provider/Provider'
@@ -22,7 +22,7 @@ interface ITableProps extends IBase {
   children: React.ReactNode
   className?: string
   headings: IHeadings[]
-  items?: any[]
+  items?: unknown[]
   bulkActions?: IBulkActions[]
   promotedBulkActions?: IBulkActions[]
 }
@@ -46,7 +46,7 @@ function MainTable({
       return 'all'
     }
     return 'none'
-  }, [tableResources.selectedItems])
+  }, [tableResources.selectedItems, items.length])
   return (
     <div className="relative">
       <div className="overflow-x-auto h-fit rounded-md border shadow-sm grid">
@@ -129,11 +129,11 @@ function MainTable({
     </div>
   )
 }
-function Row({ children, className, item }: { item: any } & IBase) {
+function Row({ children, className, item }: { item: unknown } & IBase) {
   const { dispatch, tableResources } = useContext(AppContext)
   const isSelected = useMemo(
     () => tableResources.selectedItems.some((i) => stringify(i) === stringify(item)),
-    [tableResources.selectedItems],
+    [tableResources.selectedItems, item],
   )
   const handleChangeSelect = (checked: boolean) => {
     const type = checked ? 'ADD_SELECTED_ITEM' : 'REMOVE_SELECTED_ITEM'

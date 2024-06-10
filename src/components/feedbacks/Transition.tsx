@@ -8,6 +8,7 @@ interface ITransitionProps {
   timing?: 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'linear'
   className?: string
   as?: ElementType
+  onClick?: () => void
 }
 export const Transition = ({
   children,
@@ -16,13 +17,14 @@ export const Transition = ({
   as: Component = 'div',
   type = 'fade-in',
   timing = 'ease-out',
+  onClick = () => {},
 }: ITransitionProps) => {
   const styles: Record<string, string> = {
     '--x-duration': `${duration}ms`,
     '--x-timing': timing,
   }
   return (
-    <Component style={styles} className={classNames('animate', className, type)}>
+    <Component style={styles} className={classNames('animate', className, type)} onClick={onClick}>
       {children}
     </Component>
   )

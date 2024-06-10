@@ -9,8 +9,8 @@ type InputAttributeType = {
   size?: 'sm' | 'md' | 'lg'
   value?: string
   onChange?: (value: string) => void
-  onClick?: (value: any) => void
-  onBlur?: (value: any) => void
+  onClick?: (value: unknown) => void
+  onBlur?: (value: unknown) => void
   className?: string
   inputClassName?: string
   name?: string
@@ -18,7 +18,7 @@ type InputAttributeType = {
   fieldID?: string
   labelAction?: {
     icon?: IconType
-    onClick?: (value?: any) => void
+    onClick?: (value?: unknown) => void
     content?: string
   }
   prefix?: string | IconType
@@ -103,7 +103,7 @@ export function TextField({
           </div>
         )}
         <Component
-          {...(props as any)}
+          {...props}
           type={type}
           className={classNames(
             inputClassName,

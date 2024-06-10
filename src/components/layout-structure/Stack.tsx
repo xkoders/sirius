@@ -4,8 +4,8 @@ export interface IStackProps {
   className?: string
   spacing?: 'extraTight' | 'tight' | 'baseTight' | 'loose' | 'extraLoose' | 'none'
   alignment?: 'start' | 'center' | 'end'
-  vertical?: Boolean
-  wrap?: Boolean
+  vertical?: boolean
+  wrap?: boolean
   as?: ElementType
 }
 const SPACING = {

@@ -5,7 +5,6 @@ export type ShadowType = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4
 
 export type IconType =
   | ReactNode
-  | any
   | ForwardRefExoticComponent<
       Omit<SVGProps<SVGSVGElement>, 'ref'> & {
         title?: string | undefined

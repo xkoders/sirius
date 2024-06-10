@@ -20,7 +20,7 @@ export function EmptyState({ children, className, heading, ...props }: IEmptySta
       ) : (
         <div className="w-8 h-8 block">{props.thumb}</div>
       ),
-    [props.thumb],
+    [props.thumb, heading],
   )
   return (
     <div

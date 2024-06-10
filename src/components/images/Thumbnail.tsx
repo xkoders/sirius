@@ -1,6 +1,6 @@
 import { classNames } from '@/helpers'
 import { IconType } from '@/types'
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 interface IThumbnailProps {
   className?: string

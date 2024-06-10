@@ -1,7 +1,10 @@
 export function classNames(...classes: (string | undefined)[]) {
   return classes.filter(Boolean).join(' ')
 }
-export function stringify(obj: any) {
+export function stringify(
+  obj: object | [] | string | number | boolean | null | undefined | unknown,
+) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let cache: any = []
   const str = JSON.stringify(obj, function (key, value) {
     if (typeof value === 'object' && value !== null) {

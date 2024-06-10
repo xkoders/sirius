@@ -16,11 +16,12 @@ plugins:
   - 'react-hooks'
   - prettier
   - 'simple-import-sort'
-ignorePatterns: 
-  - "dist"
-rules: {}
-settings: {
-  'import/resolver' : {
-    typescript: {}
+ignorePatterns:
+  - 'dist'
+rules:
+  {
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'prettier/prettier': 'error',
   }
-}
+settings: { 'import/resolver': { typescript: {} } }

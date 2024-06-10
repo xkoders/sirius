@@ -1,8 +1,7 @@
 import { classNames } from '@/helpers'
 import { IconType } from '@/types'
-import React, { ReactNode, useCallback, useContext, useMemo } from 'react'
+import React, { ReactNode, useCallback, useContext } from 'react'
 import { AppContext } from '../provider/Provider'
-import { Transition } from '../feedbacks'
 
 interface INavigationProps {
   children: React.ReactNode
@@ -51,26 +50,23 @@ function Section({ items, title }: ISectionProps) {
   const ActiveDot = () => (
     <span className="absolute top-1/2 -left-2 w-1 h-6 -mt-3 rounded-full bg-orange-500"></span>
   )
-  const isSelectedPassed = useCallback(
-    (subItems: IItemProps[], index: number) => {
-      const findIndex = subItems.findIndex((item: IItemProps) => item.selected)
-      if (findIndex !== -1) {
-        return index < findIndex // 0 3
-      }
-      return false
-    },
-    [items],
-  )
-  const handleCollapsible = useCallback(
-    (subItems: IItemProps[], index: number) => {
-      const findIndex = subItems.findIndex((item: IItemProps) => item.selected)
-      if (findIndex !== -1) {
-        return index < findIndex // 0 3
-      }
-      return false
-    },
-    [items],
-  )
+  const isSelectedPassed = useCallback((subItems: IItemProps[], index: number) => {
+    const findIndex = subItems.findIndex((item: IItemProps) => item.selected)
+    if (findIndex !== -1) {
+      return index < findIndex // 0 3
+    }
+    return false
+  }, [])
+  // const handleCollapsible = useCallback(
+  //   (subItems: IItemProps[], index: number) => {
+  //     const findIndex = subItems.findIndex((item: IItemProps) => item.selected)
+  //     if (findIndex !== -1) {
+  //       return index < findIndex // 0 3
+  //     }
+  //     return false
+  //   },
+  //   [items],
+  // )
   return (
     <ul className="py-3 w-full text-[15px] text-gray-950 last:flex-1 last-of-type:flex-1">
       <li className="text-xs font-medium px-5 py-1 text-gray-500">{title}</li>

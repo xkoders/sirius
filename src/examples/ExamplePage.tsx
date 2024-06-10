@@ -31,7 +31,7 @@ import { useToast } from '@/hooks'
 import { IAction } from '@/types'
 
 const toastData = {
-  id: 1,
+  id: 0,
   content: 'This is a toast content',
   duration: 1000000,
   action: {
@@ -278,13 +278,14 @@ const FILTERS = [
   },
 ]
 export default function ExamplePage() {
-  const toast = useToast()
+  const toast = useToast(10000)
   const [showModal, setShowModal] = useState(false)
   const primaryAction: IAction = {
     label: 'Save',
     // disabled: false,
     onAction: () => {
-      console.log('Save action')
+      toastData.id += 1
+      toastData.content = 'This is a toast content : ' + toastData.id
       toast.show(toastData)
     },
   }

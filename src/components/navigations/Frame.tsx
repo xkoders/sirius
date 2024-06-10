@@ -10,7 +10,7 @@ interface IFrameProps {
 
 export function Frame({ children, sidebar, header, className }: IFrameProps) {
   return (
-    <div className={classNames('w-full h-screen bg-gray-100', className)}>
+    <div className={classNames('w-full min-h-screen bg-gray-100', className)}>
       {header}
       <div className="flex w-full">
         {sidebar}

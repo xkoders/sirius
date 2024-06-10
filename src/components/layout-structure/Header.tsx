@@ -1,14 +1,14 @@
-import React, { ReactNode, useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { classNames } from '@/helpers'
 import { Popover } from '../forms-selections'
 import { AppContext } from '../provider/Provider'
 
-interface Props {
-  children?: ReactNode
-  sidebar?: ReactNode
-  header?: ReactNode
-  className?: string
-}
+// interface Props {
+//   children?: ReactNode
+//   sidebar?: ReactNode
+//   header?: ReactNode
+//   className?: string
+// }
 const Logo = () => (
   <svg width="167" height="48" viewBox="0 0 167 48" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -83,9 +83,9 @@ export function Header() {
   const { setIsFramePresent } = useContext(AppContext)
   useEffect(() => {
     setIsFramePresent(true)
-  }, [])
+  }, [setIsFramePresent])
   return (
-    <header className="flex h-14 w-full sticky top-0 z-50 bg-white border-b shadow-sm">
+    <header className="flex h-14 w-full sticky top-0 z-[900] bg-white border-b shadow-sm">
       <div className="w-60 flex items-center px-5 ">
         <Logo />
       </div>

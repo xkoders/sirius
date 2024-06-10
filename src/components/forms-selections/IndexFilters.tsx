@@ -1,5 +1,5 @@
 import { classNames } from '@/helpers'
-import React, { useCallback,  useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Tabs } from './Tabs'
 import { Button } from '../actions'
 import { Popover } from './Popover'
@@ -18,18 +18,15 @@ interface IIndexFiltersProps {
   filters?: IFilters[]
   onChange?: (value: boolean, e?: React.ChangeEvent<HTMLInputElement>) => void
 }
-export const IndexFilters = ({ onChange, className, sortOptions, filters }: IIndexFiltersProps) => {
+export const IndexFilters = ({ className, sortOptions, filters }: IIndexFiltersProps) => {
   const [selectedTab, setSelectedTab] = useState(0)
   const [showSearch, setShowSearch] = useState(false)
   const [activeFilters, setActiveFilters] = useState<IFilters[]>([])
   const [initialFilters, setInitialFilters] = useState<IFilters[]>(filters || [])
   const [search, setSearch] = useState('')
-  const handleChange = useCallback(
-    (idx: number) => {
-      setSelectedTab(idx)
-    },
-    [onChange],
-  )
+  const handleChange = useCallback((idx: number) => {
+    setSelectedTab(idx)
+  }, [])
   const handleAddFilter = useCallback((item: IFilters) => {
     setActiveFilters((v: IFilters[]) => [...v, item])
     setInitialFilters((value: IFilters[]) => value.filter(({ key }) => key !== item.key))
@@ -38,7 +35,7 @@ export const IndexFilters = ({ onChange, className, sortOptions, filters }: IInd
   const handleClearAll = useCallback(() => {
     setActiveFilters([])
     filters && setInitialFilters(filters)
-  }, [])
+  }, [filters])
 
   const tabs = [
     { label: 'My Account' },
@@ -46,7 +43,6 @@ export const IndexFilters = ({ onChange, className, sortOptions, filters }: IInd
     { label: 'Team Members' },
     { label: 'Billing' },
   ]
-
 
   return (
     <section className={classNames('flex flex-col', className)}>

@@ -1,5 +1,5 @@
-import { classNames, stringify } from '@/helpers'
-import React, { useCallback, useMemo } from 'react'
+import { classNames } from '@/helpers'
+import React, { useMemo } from 'react'
 
 export type TabsProps = {
   label?: string | React.ReactNode
@@ -10,23 +10,15 @@ export type TabsProps = {
 export type ITabsProps = {
   children?: React.ReactNode
   className?: string
-  onChange?: (index: number, val: any) => void
+  onChange?: (index: number, val: TabsProps) => void
   tabs: TabsProps[]
-  selected?: TabsProps | any
+  selected?: string | number | readonly string[] | undefined
   filled?: boolean
   canCreateTab?: boolean
 }
 
-export function Tabs({
-  tabs,
-  className,
-  children,
-  canCreateTab,
-  filled,
-  selected,
-  onChange,
-}: ITabsProps) {
-  const selectedIndex = useMemo(() => selected || 0, [selected, tabs])
+export function Tabs({ tabs, className, canCreateTab, filled, selected, onChange }: ITabsProps) {
+  const selectedIndex = useMemo(() => selected || 0, [selected])
   return (
     <div className={classNames(className, 'flex-1')}>
       <div className="sm:hidden text-sm flex w-full">

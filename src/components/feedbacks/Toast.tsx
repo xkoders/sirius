@@ -2,11 +2,14 @@ import React, { ReactNode, useEffect, useState } from 'react'
 import { IAction } from '@/types'
 import { classNames } from '@/helpers'
 import { Button } from '../actions'
+import { Transition } from './Transition'
 
 export interface IToastProps {
   content: string | ReactNode
   className?: string
+  classOverride?: string
   id?: string | number
+  key?: string | number
   type?: 'success' | 'error' | 'info' | 'warning' | 'default'
   duration?: number
   onDismiss?: () => void
@@ -24,6 +27,7 @@ const TYPE = {
 export function Toast({
   content,
   className,
+  classOverride,
   type = 'default',
   duration = 4500,
   onDismiss = () => {},
@@ -40,16 +44,20 @@ export function Toast({
     return null
   }
   return (
-    <div
+    <Transition
+      duration={300}
+      type="slide-up"
       className={classNames(
         className,
         dismissed ? 'bottom-0' : 'bottom-10',
-        'shadow-xl rounded-md p-2 py-3 absolute transition-all z-30 left-1/2 -translate-x-1/2 w-fit flex gap-2 items-center md:min-w-[20rem]',
+        classOverride ||
+          'shadow-xl rounded-md px-2 min-h-12 absolute transition-all z-30 left-1/2 -translate-x-1/2 w-fit flex gap-2 items-center md:min-w-[20rem]',
         TYPE[type],
       )}
-      onClick={onDismiss}
     >
-      <div className="flex-1">{content}</div>
+      <div className="flex-1 h-full min-h-12 flex items-center " onClick={onDismiss}>
+        {content}
+      </div>
       {action && (
         <Button
           link
@@ -76,6 +84,6 @@ export function Toast({
           <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
         </svg>
       </button>
-    </div>
+    </Transition>
   )
 }

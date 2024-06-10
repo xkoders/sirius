@@ -10,7 +10,7 @@ interface IBoxProps {
   sectionned?: boolean | string
   disabled?: boolean
   className?: string
-  [x: string]: any
+  [x: string]: ReactNode | string | boolean | undefined | object | unknown
 }
 const _shadow = Object.assign(SHADOW, { colored: 'colored' })
 

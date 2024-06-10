@@ -17,7 +17,7 @@ export function Modal({ show, children, className, title, onClose = () => null }
       e.stopPropagation()
       onClose()
     },
-    [show],
+    [onClose],
   )
   return (
     <Portal>

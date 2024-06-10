@@ -1,5 +1,5 @@
+import React, { ElementType, ReactNode, useEffect, useRef, useState } from 'react'
 import { classNames } from '@/helpers'
-import React, { ElementType, ReactNode, useEffect, useRef, useState, useTransition } from 'react'
 import { Transition } from '../feedbacks'
 interface IPopoverProps {
   children?: ReactNode
@@ -22,8 +22,8 @@ export function Popover({
 
   useEffect(() => {
     // Function to check if the click is outside the dropdown
-    const handleClickOutside = (event: any) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false)
       }
     }

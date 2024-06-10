@@ -1,5 +1,6 @@
-import { classNames, stringify } from '@/helpers'
 import React from 'react'
+
+import { classNames, stringify } from '@/helpers'
 
 interface IChoiceListItem {
   id?: string
@@ -14,7 +15,7 @@ interface IChoiceListProps {
   items: IChoiceListItem[]
   defaultChecked?: IChoiceListItem
   horizontal?: boolean
-  onChange?: (val: any) => void
+  onChange?: (val: IChoiceListItem) => void
 }
 
 export function ChoiceList({
@@ -35,6 +36,7 @@ export function ChoiceList({
           'flex gap-y-5 gap-x-6',
         )}
       >
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         {items.map((item: IChoiceListItem | any, idx: number) => (
           <div key={idx} className="relative flex items-start">
             <div className="flex h-6 items-center">

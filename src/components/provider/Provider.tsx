@@ -1,7 +1,14 @@
 import { stringify } from '@/helpers'
-import React, { Dispatch, createContext, useCallback, useReducer, useState } from 'react'
+import React, {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useCallback,
+  useReducer,
+  useState,
+} from 'react'
 import { IToastProps, Toast } from '../feedbacks'
-const initialData = {
+const initialData: IDataReducer = {
   selectedItems: [],
   select: true,
   isFramePresent: false,
@@ -13,17 +20,9 @@ const initialData = {
 }
 
 interface IDataReducer {
-  selectedItems: any[]
+  selectedItems: unknown[]
   select: boolean
-  isSticky: {
-    first: boolean
-    second: boolean
-    last: boolean
-  }
-}
-interface IDataReducer {
-  selectedItems: any[]
-  select: boolean
+  isFramePresent: boolean
   isSticky: {
     first: boolean
     second: boolean
@@ -32,11 +31,11 @@ interface IDataReducer {
 }
 type CreateContextType = {
   tableResources: IDataReducer
-  dispatch: Dispatch<{ type: ActionType; payload: any }>
+  dispatch: Dispatch<{ type: ActionType; payload: unknown }>
   toasts: IToastProps[]
-  setToasts: any
+  setToasts: Dispatch<SetStateAction<IToastProps[]>>
   isFramePresent: boolean
-  setIsFramePresent: any
+  setIsFramePresent: Dispatch<SetStateAction<boolean>>
 }
 export const AppContext = createContext<CreateContextType>({
   tableResources: initialData,
@@ -48,7 +47,7 @@ export const AppContext = createContext<CreateContextType>({
 })
 type ActionType = 'ADD_SELECTED_ITEM' | 'REMOVE_SELECTED_ITEM' | 'SELECT_ALL'
 
-function tableReducer(data: IDataReducer, action: { type: ActionType; payload: any }) {
+function tableReducer<T>(data: IDataReducer, action: { type: ActionType; payload: T }) {
   switch (action.type) {
     case 'ADD_SELECTED_ITEM':
       return {
@@ -58,7 +57,9 @@ function tableReducer(data: IDataReducer, action: { type: ActionType; payload: a
     case 'REMOVE_SELECTED_ITEM':
       return {
         ...data,
-        selectedItems: data.selectedItems.filter((item) => stringify(item) !== stringify(action.payload)),
+        selectedItems: data.selectedItems.filter(
+          (item) => stringify(item) !== stringify(action.payload),
+        ),
       }
     case 'SELECT_ALL':
       return {
@@ -76,26 +77,27 @@ export function ProviderSirius({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<IToastProps[]>([])
   const [isFramePresent, setIsFramePresent] = useState<boolean>(false)
   const removeToast = useCallback(
-    (item: IToastProps) =>
-      setToasts(toasts.filter((t) => t.id !== item.id || stringify(t) !== stringify(item))),
-    [toasts],
+    (item: IToastProps) => setToasts((v) => v.filter((t) => t.key !== item.key)),
+    [],
   )
   return (
     <AppContext.Provider
       value={{ tableResources, dispatch, toasts, setToasts, isFramePresent, setIsFramePresent }}
     >
-      {/* <Transition type="slide-up"> */}
-      {toasts.map((item, idx) => (
-        <Toast
-          content={item.content}
-          type={'default'}
-          onDismiss={() => removeToast(item)}
-          duration={item.duration}
-          action={{ label: 'Undo', onAction: () => {} }}
-          key={idx}
-        />
-      ))}{' '}
-      {/* </Transition> */}
+      <div className="fixed flex flex-col gap-1 z-[9001] left-1/2 bottom-5 -translate-x-1/2 w-fit md:min-w-[20rem] max-h-[90dvh] overflow-y-auto">
+        {toasts.map((item, idx) => (
+          <Toast
+            content={item.content}
+            type={'default'}
+            classOverride="shadow-xl rounded-md px-2 min-h-12 flex gap-2 items-center w-full"
+            onDismiss={() => removeToast(item)}
+            duration={item.duration}
+            action={{ label: 'Undo', onAction: () => {} }}
+            key={idx}
+          />
+        ))}
+      </div>
+
       {children}
     </AppContext.Provider>
   )

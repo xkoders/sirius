@@ -22,7 +22,7 @@ interface IBoxProps {
     | 'bodySm'
     | 'bodyMd'
     | 'bodyLg'
-  [x: string]: any
+  [x: string]: unknown
 }
 const SHADOW = {
   base: 'drop-shadow',

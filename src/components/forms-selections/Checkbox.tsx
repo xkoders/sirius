@@ -1,5 +1,5 @@
 import { classNames } from '@/helpers'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 interface ICheckbox {
   className?: string
