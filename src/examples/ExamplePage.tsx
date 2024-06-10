@@ -574,6 +574,7 @@ const Buttons = () => (
       <Button variant="subdued">subdued</Button>
       <Button variant="success">success</Button>
       <Button variant="warning">warning</Button>
+
       <Button variant="info" loading>
         info
       </Button>
@@ -581,6 +582,41 @@ const Buttons = () => (
       <Button icon={TagIcon} variant="info" rounded="full">
         info
       </Button>
+      <Button icon={TagIcon} rounded="full" />
+      <br />
+      {/* diasbled */}
+      <Button disabled variant="ghost">
+        ghost
+      </Button>
+      <Button disabled variant="danger">
+        danger
+      </Button>
+      <Button disabled variant="dark">
+        dark
+      </Button>
+      <Button disabled variant="primary">
+        primary
+      </Button>
+      <Button disabled variant="subdued">
+        subdued
+      </Button>
+      <Button disabled variant="success">
+        success
+      </Button>
+      <Button disabled variant="warning">
+        warning
+      </Button>
+
+      <Button disabled variant="info" loading>
+        info
+      </Button>
+      <Button disabled icon={TagIcon}>
+        info
+      </Button>
+      <Button disabled icon={TagIcon} variant="info" rounded="full">
+        info
+      </Button>
+      <Button disabled icon={TagIcon} rounded="full" />
     </Box>
   </>
 )

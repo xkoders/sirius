@@ -51,7 +51,7 @@ export function Toast({
         className,
         dismissed ? 'bottom-0' : 'bottom-10',
         classOverride ||
-          'shadow-xl rounded-md px-2 min-h-12 absolute transition-all z-30 left-1/2 -translate-x-1/2 w-fit flex gap-2 items-center md:min-w-[20rem]',
+          'shadow-xl rounded-xl px-2 min-h-12 absolute transition-all z-30 left-1/2 -translate-x-1/2 w-fit flex gap-2 items-center md:min-w-[20rem]',
         TYPE[type],
       )}
     >

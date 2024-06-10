@@ -8,7 +8,7 @@ import React, {
   useState,
 } from 'react'
 import { IToastProps, Toast } from '../feedbacks'
-const initialData: IDataReducer = {
+const initialData: IDataReducer<object> = {
   selectedItems: [],
   select: true,
   isFramePresent: false,
@@ -19,8 +19,8 @@ const initialData: IDataReducer = {
   },
 }
 
-interface IDataReducer {
-  selectedItems: unknown[]
+interface IDataReducer<T> {
+  selectedItems: T[]
   select: boolean
   isFramePresent: boolean
   isSticky: {
@@ -30,7 +30,7 @@ interface IDataReducer {
   }
 }
 type CreateContextType = {
-  tableResources: IDataReducer
+  tableResources: IDataReducer<object>
   dispatch: Dispatch<{ type: ActionType; payload: unknown }>
   toasts: IToastProps[]
   setToasts: Dispatch<SetStateAction<IToastProps[]>>
@@ -47,7 +47,10 @@ export const AppContext = createContext<CreateContextType>({
 })
 type ActionType = 'ADD_SELECTED_ITEM' | 'REMOVE_SELECTED_ITEM' | 'SELECT_ALL'
 
-function tableReducer<T>(data: IDataReducer, action: { type: ActionType; payload: T }) {
+function tableReducer<T>(
+  data: IDataReducer<T>,
+  action: { type: ActionType; payload: T },
+): IDataReducer<T> {
   switch (action.type) {
     case 'ADD_SELECTED_ITEM':
       return {
@@ -64,7 +67,7 @@ function tableReducer<T>(data: IDataReducer, action: { type: ActionType; payload
     case 'SELECT_ALL':
       return {
         ...data,
-        selectedItems: action.payload,
+        selectedItems: action.payload as T[],
       }
     default: {
       throw Error('Unknown action: ' + action.type)
@@ -73,7 +76,10 @@ function tableReducer<T>(data: IDataReducer, action: { type: ActionType; payload
 }
 
 export function ProviderSirius({ children }: { children: React.ReactNode }) {
-  const [tableResources, dispatch] = useReducer(tableReducer, initialData)
+  const [tableResources, dispatch] = useReducer<
+    IDataReducer<object>,
+    React.Dispatch<{ type: ActionType; payload: unknown }>
+  >(tableReducer, initialData)
   const [toasts, setToasts] = useState<IToastProps[]>([])
   const [isFramePresent, setIsFramePresent] = useState<boolean>(false)
   const removeToast = useCallback(
@@ -89,7 +95,7 @@ export function ProviderSirius({ children }: { children: React.ReactNode }) {
           <Toast
             content={item.content}
             type={'default'}
-            classOverride="shadow-xl rounded-md px-2 min-h-12 flex gap-2 items-center w-full"
+            classOverride="shadow-xl rounded-xl px-2 min-h-12 flex gap-2 items-center w-full"
             onDismiss={() => removeToast(item)}
             duration={item.duration}
             action={{ label: 'Undo', onAction: () => {} }}

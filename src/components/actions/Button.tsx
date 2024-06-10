@@ -32,7 +32,7 @@ const ALIGNMENT = {
 
 const SIZE = {
   large: 'text-lg px-6 py-2',
-  medium: 'text-sm px-4 py-1.5 !h-9',
+  medium: 'text-sm px-4 py-1.5 !h-8',
   small: 'text-[14px] px-2 py-1',
   slim: 'text-xs px-2 py-px !h-6',
   none: '',
@@ -44,6 +44,13 @@ const SIZE_ICON = {
   small: 'h-4 w-4 -ml-1.5 mr-1.5',
   slim: 'h-3 w-3 -ml-1 mr-1',
   none: 'h-full w-full',
+}
+const SIZE_ICON_ONLY = {
+  large: { ibg: 'h-6 w-6 p-px', bg: '!h-[45px] !w-[45px]' },
+  medium: { ibg: 'h-5 w-5 p-px', bg: '!h-[32px] !w-[32px]' },
+  small: { ibg: 'h-4 w-4', bg: '!h-8 !w-8' },
+  slim: { ibg: 'h-3 w-3 ', bg: '!h-6 !w-6' },
+  none: { ibg: 'h-full', bg: '' },
 }
 const VARIANT = {
   default:
@@ -82,27 +89,31 @@ export const Button = ({
   target,
   url,
   rel,
-  rounded = 'md',
+  rounded = 'xl',
   alignment = 'center',
   fullwidth,
   variant = 'default',
   size = 'medium',
+  // icon: IconComp,
   ...props
 }: IButtonProps) => {
   const handleClick = useCallback(() => {
     onClick?.()
   }, [onClick])
   const Component = url ? 'a' : 'button'
+  const IconComp = props.icon as React.ElementType
   return (
     <Component
       className={classNames(
-        'h-fit flex items-center  transition-colors active:opacity-70',
+        'h-fit flex items-center transition-all active:scale-95 active:opacity-70',
         fullwidth ? 'w-full' : '',
-        disabled ? '!opacity-50 cursor-not-allowed pointer-events-none select-none' : '',
-        SIZE[size],
+        disabled
+          ? 'text-[#666] cursor-not-allowed pointer-events-none select-none bg-[#eaeaea] ring-1 ring-[#e0e0e0]'
+          : '',
+        !children && props.icon ? SIZE_ICON_ONLY[size].bg : SIZE[size],
         ALIGNMENT[alignment],
         ROUNDED[rounded],
-        outline || link ? COLOR[variant] : VARIANT[variant],
+        outline || link ? COLOR[variant] : disabled ? '' : VARIANT[variant],
         outline && !link ? ' border border-current' : '',
         outline && variant === 'default' ? '!border-gray-400' : '',
         link ? '!bg-transparent  hover:underline' : '',
@@ -118,8 +129,17 @@ export const Button = ({
       {loading ? (
         <Spinner className={classNames(SIZE_ICON[size], 'fill-current')} size="none" />
       ) : (
-        props.icon && (
-          <div>{<props.icon className={classNames(SIZE_ICON[size], 'fill-current')} />}</div>
+        IconComp && (
+          <div>
+            {
+              <IconComp
+                className={classNames(
+                  !children && props.icon ? SIZE_ICON_ONLY[size].ibg : SIZE_ICON[size],
+                  'fill-current',
+                )}
+              />
+            }
+          </div>
         )
       )}
 
