@@ -17,7 +17,7 @@ const _shadow = Object.assign(SHADOW, { colored: 'colored' })
 export function Box({
   as = 'div',
   children,
-  rounded = 'md',
+  rounded = '2xl',
   shadow = 'none',
   className = '',
   sectionned = false,

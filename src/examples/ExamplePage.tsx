@@ -458,6 +458,9 @@ export default function ExamplePage() {
         <Banner title="Title banner " status="critical" className="mb-5">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
         </Banner>
+        <Banner className="mb-5" status="critical" onDismiss={() => {}}>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+        </Banner>
         <Box sectionned shadow="colored" as="section" className="mb-6 gap-2">
           <Text variant="heading2xl" fontWeight="medium">
             Text comp: heading2xl - medium

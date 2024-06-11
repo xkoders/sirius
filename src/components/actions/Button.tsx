@@ -108,7 +108,7 @@ export const Button = ({
         'h-fit flex items-center transition-all active:scale-95 active:opacity-70',
         fullwidth ? 'w-full' : '',
         disabled
-          ? 'text-[#666] cursor-not-allowed pointer-events-none select-none bg-[#eaeaea] ring-1 ring-[#e0e0e0]'
+          ? 'text-[#666] cursor-not-allowed pointer-events-none select-none bg-[#eaeaea] ring-1 ring-[#e0e0e0] opacity-70'
           : '',
         !children && props.icon ? SIZE_ICON_ONLY[size].bg : SIZE[size],
         ALIGNMENT[alignment],

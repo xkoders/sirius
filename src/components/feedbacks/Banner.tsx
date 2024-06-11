@@ -8,6 +8,7 @@ interface IBannerProps {
   icon?: IconType
   className?: string
   status?: 'default' | 'info' | 'warning' | 'critical' | 'success' | 'pending'
+  appearance?: 'default' | 'card'
   title?: string
   onDismiss?: () => void
 }
@@ -72,47 +73,112 @@ const STATUS = {
 export function Banner({
   children,
   as: Component = 'div',
+  appearance = 'default',
   className,
   onDismiss,
   title,
   status = 'default',
 }: IBannerProps) {
-  return (
-    <Component
-      className={classNames(
-        className || '',
-        STATUS[status].className,
-        'w-full flex gap-3 p-3 rounded-md  relative',
-      )}
-    >
-      {STATUS[status].icon && (
+  if (appearance === 'card') {
+    return (
+      <Component
+        className={classNames(
+          className || '',
+          STATUS[status].className,
+          'w-full flex gap-3 p-3 rounded-md  relative',
+        )}
+      >
+        {STATUS[status].icon && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="w-4 h-4"
+          >
+            {STATUS[status].icon}
+          </svg>
+        )}
+
+        <div>
+          {title && (
+            <Text as="h5" variant="bodySm" fontWeight="semibold" className="-mt-0.5 mb-0.5">
+              {title}
+            </Text>
+          )}
+          <div className="text-xs opacity-75">{children}</div>
+        </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="w-4 h-4"
+          onClick={onDismiss}
+          className="w-6 h-6 p-1 absolute right-1 top-1 hover:bg-black/10 rounded-full cursor-pointer transition-all active:scale-95"
         >
-          {STATUS[status].icon}
+          <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
         </svg>
-      )}
+      </Component>
+    )
+  }
+  return (
+    <Component
+      className={classNames(className || '', 'w-full bg-white rounded-xl relative shadow-sm')}
+    >
+      {title && (
+        <div
+          className={classNames(
+            'flex gap-x-1 items-center p-2 rounded-t-xl !bg-current !border-none relative',
+            STATUS[status].className,
+          )}
+        >
+          {STATUS[status].icon && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="w-4 h-4 text-white"
+            >
+              {STATUS[status].icon}
+            </svg>
+          )}
 
-      <div>
-        {title && (
-          <Text as="h5" variant="bodySm" fontWeight="semibold" className="-mt-0.5 mb-0.5">
+          <Text as="h5" variant="bodySm" fontWeight="medium" className="text-white flex-1 px-1">
             {title}
           </Text>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            onClick={onDismiss}
+            className="w-6 h-6 p-1   hover:bg-black/10 text-white rounded-lg cursor-pointer transition-all active:scale-95"
+          >
+            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </div>
+      )}
+      <div className="text-xs p-2 flex items-center gap-x-1">
+        {STATUS[status].icon && !title ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className={classNames(STATUS[status].className, 'w-6 h-6 p-0.5 rounded-lg')}
+          >
+            {STATUS[status].icon}
+          </svg>
+        ) : null}
+        <div className="flex-1 px-1">{children}</div>
+        {onDismiss && !title && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            onClick={onDismiss}
+            className="w-6 h-6 p-1  hover:bg-gray-100 text-gray-600 rounded-lg cursor-pointer transition-all active:scale-95"
+          >
+            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
         )}
-        <div className="text-xs opacity-75">{children}</div>
       </div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        onClick={onDismiss}
-        className="w-6 h-6 p-1 absolute right-1 top-1 hover:bg-black/10 rounded-full cursor-pointer transition-all active:scale-95"
-      >
-        <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-      </svg>
     </Component>
   )
 }
