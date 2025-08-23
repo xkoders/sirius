@@ -11,7 +11,7 @@ export default defineConfig({
     tsConfigPaths(),
     dts({
       // insertTypesEntry: true,
-      include: ['src/component/'],
+      include: ['src/components/'],
     }),
   ],
   resolve: {
@@ -22,10 +22,10 @@ export default defineConfig({
 
   build: {
     lib: {
-      entry: resolve('src', 'src/main.ts'),
-      name: 'alioth',
+      entry: resolve('src', 'main.ts'),
+      name: 'sirius',
       formats: ['es', 'cjs'],
-      fileName: (format) => `alioth.${format === 'cjs' ? 'cjs' : 'es.js'}`,
+      fileName: (format) => `sirius.${format === 'cjs' ? 'cjs' : 'es.js'}`,
     },
 
     // optimizeDeps: {

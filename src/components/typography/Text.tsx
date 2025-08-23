@@ -1,6 +1,6 @@
 import { classNames } from '@/helpers'
 import React, { ElementType, ReactNode, memo } from 'react'
-interface IBoxProps {
+interface ITextProps {
   as?: ElementType
   children?: ReactNode
   shadow?: 'base' | 'sm' | 'md' | 'lg' | 'xl'
@@ -42,7 +42,7 @@ const VARIANTS = {
   heading7xl: 'text-7xl',
   bodyXS: 'text-xs',
   bodySm: 'text-sm',
-  bodyMd: 'text-md',
+  bodyMd: 'text-base',
   bodyLg: 'text-lg',
 }
 const LINECLAMP = {
@@ -77,7 +77,7 @@ export const Text = memo(({
   color,
   disabled,
   lineClamp,
-}: IBoxProps) => {
+}: ITextProps) => {
   return (
     <Component
       className={classNames(

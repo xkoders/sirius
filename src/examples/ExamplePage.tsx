@@ -11,6 +11,9 @@ import {
   Table,
   Badge,
   Text,
+  Heading,
+  Title,
+  Subtitle,
   Banner,
   Button,
   EmptyState,
@@ -470,6 +473,34 @@ export default function ExamplePage() {
           <Text variant="bodySm" fontWeight="regular" color="subdued">
             Text comp: bodySm - regular - subdued
           </Text>
+          <br />
+          
+          {/* New Typography Components */}
+          <div className="space-y-4">
+            <Title size="lg">Title Component - Large</Title>
+            <Subtitle size="md">Subtitle Component - Medium</Subtitle>
+            
+            <div className="space-y-2">
+              <Heading as="h1" variant="heading3xl">Heading H1 - 3xl</Heading>
+              <Heading as="h2" variant="heading2xl">Heading H2 - 2xl</Heading>
+              <Heading as="h3" variant="headingXl">Heading H3 - xl</Heading>
+            </div>
+            
+            <div className="space-y-2">
+              <Title size="sm">Small Title</Title>
+              <Title size="md">Medium Title</Title>
+              <Title size="lg">Large Title</Title>
+              <Title size="xl">Extra Large Title</Title>
+            </div>
+            
+            <div className="space-y-2">
+              <Subtitle size="xs">Extra Small Subtitle</Subtitle>
+              <Subtitle size="sm">Small Subtitle</Subtitle>
+              <Subtitle size="md">Medium Subtitle</Subtitle>
+              <Subtitle size="lg">Large Subtitle</Subtitle>
+            </div>
+          </div>
+          
           <br />
           <Stack alignment="center" spacing="baseTight" vertical={true}>
             <Banner status="default">
