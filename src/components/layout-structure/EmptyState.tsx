@@ -18,7 +18,7 @@ export function EmptyState({ children, className, heading, ...props }: IEmptySta
       typeof props.thumb === 'string' ? (
         <img src={props.thumb} alt={heading || ''} className="w-20 object-contain" />
       ) : (
-        <div className="w-8 h-8 block">{props.thumb}</div>
+        <div className="w-8 h-8 block">{props.thumb as React.ReactElement}</div>
       ),
     [props.thumb, heading],
   )

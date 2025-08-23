@@ -1,6 +1,6 @@
 import { classNames } from '@/helpers'
 import { IconType } from '@/types'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, memo } from 'react'
 
 interface IBadgeProps {
   children?: React.ReactNode
@@ -42,7 +42,7 @@ const TYPE: Record<string, ReactNode> = {
     />
   ),
 }
-export function Badge({ children, status = 'default', type, className, ...props }: IBadgeProps) {
+export const Badge = memo(({ children, status = 'default', type, className, ...props }: IBadgeProps) => {
   return (
     <div
       className={classNames(
@@ -65,4 +65,4 @@ export function Badge({ children, status = 'default', type, className, ...props 
       {children}
     </div>
   )
-}
+})

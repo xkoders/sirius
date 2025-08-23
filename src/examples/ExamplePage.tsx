@@ -25,6 +25,7 @@ import {
   ExceptionList,
   Header,
   TextField,
+  // ErrorTestComponent,
 } from '@/components'
 import { HomeIcon, InboxIcon, TagIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
 import { useToast } from '@/hooks'
@@ -303,6 +304,7 @@ export default function ExamplePage() {
 
   return (
     <Frame sidebar={sidebar} header={<Header />}>
+      {/* <ErrorTestComponent shouldThrow={true} /> */}
       <Page
         backAction={{ label: 'Products', url: '#' }}
         title="3/4 inch Leather pet collar"
@@ -311,22 +313,22 @@ export default function ExamplePage() {
         secondaryActions={secondaryActions}
         actionGroups={actionGroups}
       >
-        <Modal show={showModal} onClose={() => setShowModal(false)}>
-          <Stack alignment="center" spacing="baseTight" vertical={true}>
-            <Banner status="default">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
-            </Banner>
-            <Banner status="info">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
-            </Banner>
-            <Banner status="pending">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
-            </Banner>
-            <Banner status="success">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
-            </Banner>
-          </Stack>
-        </Modal>
+          <Modal show={showModal} onClose={() => setShowModal(false)}>
+            <Stack alignment="center" spacing="baseTight" vertical={true}>
+              <Banner status="default">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+              </Banner>
+              <Banner status="info">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+              </Banner>
+              <Banner status="pending">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+              </Banner>
+              <Banner status="success">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+              </Banner>
+            </Stack>
+          </Modal>
         <Box className="mb-5 flex flex-col gap-2">
           <TextField
             type="ra"

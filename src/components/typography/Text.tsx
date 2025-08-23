@@ -1,5 +1,5 @@
 import { classNames } from '@/helpers'
-import React, { ElementType, ReactNode } from 'react'
+import React, { ElementType, ReactNode, memo } from 'react'
 interface IBoxProps {
   as?: ElementType
   children?: ReactNode
@@ -67,7 +67,7 @@ const COLORS = {
   'text-inverse': 'invert',
 }
 
-export function Text({
+export const Text = memo(({
   as: Component = 'p',
   children,
   className,
@@ -77,7 +77,7 @@ export function Text({
   color,
   disabled,
   lineClamp,
-}: IBoxProps) {
+}: IBoxProps) => {
   return (
     <Component
       className={classNames(
@@ -94,4 +94,4 @@ export function Text({
       {children}
     </Component>
   )
-}
+})

@@ -1,6 +1,6 @@
 import { classNames } from '@/helpers'
 import { IconType } from '@/types'
-import React, { HTMLInputTypeAttribute, ReactNode, useMemo, useState } from 'react'
+import React, { HTMLInputTypeAttribute, ReactNode, useMemo, useState, memo } from 'react'
 import { InlineError } from './InlineError'
 import { ExceptionList, IExceptionListItem } from '../feedbacks'
 
@@ -9,8 +9,8 @@ type InputAttributeType = {
   size?: 'sm' | 'md' | 'lg'
   value?: string
   onChange?: (value: string) => void
-  onClick?: (value: unknown) => void
-  onBlur?: (value: unknown) => void
+  onClick?: (value?: unknown) => void
+  onBlur?: (value?: unknown) => void
   className?: string
   inputClassName?: string
   name?: string
@@ -27,6 +27,15 @@ type InputAttributeType = {
   helpText?: IExceptionListItem | string
   error?: string
   type?: HTMLInputTypeAttribute
+  // Accessibility props
+  'aria-describedby'?: string
+  'aria-invalid'?: boolean
+  'aria-required'?: boolean
+  'aria-readonly'?: boolean
+  'aria-placeholder'?: string
+  required?: boolean
+  readOnly?: boolean
+  autoComplete?: string
 }
 
 type ITextFieldProps = InputAttributeType & Omit<InputType, keyof InputAttributeType>
@@ -37,7 +46,7 @@ const SIZE = {
   lg: 'text-md min-h-[2rem] py-1.5',
 }
 
-export function TextField({
+export const TextField = memo(({
   value,
   placeholder = '',
   onChange,
@@ -55,50 +64,74 @@ export function TextField({
   fieldID,
   labelAction,
   size = 'md',
+  'aria-describedby': ariaDescribedby,
+  'aria-invalid': ariaInvalid,
+  'aria-required': ariaRequired,
+  'aria-readonly': ariaReadonly,
+  'aria-placeholder': ariaPlaceholder,
+  required,
+  readOnly,
+  autoComplete,
   ...props
-}: ITextFieldProps) {
+}: ITextFieldProps) => {
   const [textFieldId] = useState(fieldID || (props.name || 'sirius-') + performance.now())
   const Component = multiline ? 'textarea' : 'input'
+  
+  // Generate help text ID for aria-describedby
+  const helpTextId = helpText ? `${textFieldId}-help` : undefined
+  const errorId = error ? `${textFieldId}-error` : undefined
+  
+  // Combine aria-describedby with help text and error IDs
+  const describedBy = [
+    ariaDescribedby,
+    helpTextId,
+    errorId
+  ].filter(Boolean).join(' ')
+  
   const _prefix = useMemo(() => {
     if (typeof prefix === 'string') {
-      return <span className=" text-sm flex justify-center items-center">{prefix}</span>
+      return <span className=" text-sm flex justify-center items-center" aria-hidden="true">{prefix}</span>
     } else if (prefix) {
       return prefix
     }
   }, [prefix])
   const _suffix = useMemo(() => {
     if (typeof suffix === 'string') {
-      return <span className=" text-sm flex justify-center items-center">{suffix}</span>
+      return <span className=" text-sm flex justify-center items-center" aria-hidden="true">{suffix}</span>
     } else if (suffix) {
       return suffix
     }
   }, [suffix])
+  
   return (
     <div className={classNames(className)}>
       <div className="flex justify-between">
         {label && (
           <label className="text-gray-900 font-normal text-sm" htmlFor={textFieldId}>
             {label}
+            {required && <span className="text-red-500 ml-1" aria-label="required">*</span>}
           </label>
         )}
         {labelAction && (
           <button
+            type="button"
             className="text-blue-500 hover:text-blue-600 hover:underline font-normal text-sm"
             onClick={labelAction.onClick}
+            aria-label={labelAction.content}
           >
-            {labelAction.icon && labelAction.icon}
+            {labelAction.icon && <span aria-hidden="true">{labelAction.icon}</span>}
             {labelAction.content}
           </button>
         )}
       </div>
       <div className="relative">
         {prefix && (
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-8 p-[7px] text-gray-500">
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-8 p-[7px] text-gray-500" aria-hidden="true">
             {_prefix}
           </div>
         )}
         {suffix && (
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 h-8 w-8 p-[7px] text-gray-500">
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 h-8 w-8 p-[7px] text-gray-500" aria-hidden="true">
             {_suffix}
           </div>
         )}
@@ -120,23 +153,39 @@ export function TextField({
           onBlur={onBlur}
           onChange={(event) => onChange?.(event.target.value)}
           id={textFieldId}
+          // Accessibility attributes
+          aria-describedby={describedBy || undefined}
+          aria-invalid={ariaInvalid ?? !!error}
+          aria-required={ariaRequired ?? required}
+          aria-readonly={ariaReadonly ?? readOnly}
+          aria-placeholder={ariaPlaceholder || placeholder}
+          required={required}
+          readOnly={readOnly}
+          autoComplete={autoComplete}
         />
       </div>
 
       {helpText && (
-        <ExceptionList
-          className="text-gray-600 mt-1"
-          gap={2}
-          items={[
-            typeof helpText === 'string'
-              ? {
-                  description: helpText,
-                }
-              : helpText,
-          ]}
-        />
+        <div id={helpTextId} className="sr-only">
+          <ExceptionList
+            className="text-gray-600 mt-1"
+            gap={2}
+            items={[
+              typeof helpText === 'string'
+                ? {
+                    description: helpText,
+                  }
+                : helpText,
+            ]}
+          />
+        </div>
+      )}
+      {error && (
+        <div id={errorId} className="sr-only">
+          <InlineError message={error} />
+        </div>
       )}
       <InlineError message={error} />
     </div>
   )
-}
+})

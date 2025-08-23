@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState, useRef, memo } from 'react'
 import { IAction } from '@/types'
 import { classNames } from '@/helpers'
 import { Button } from '../actions'
@@ -24,7 +24,7 @@ const TYPE = {
   default: 'bg-gray-900 text-white',
 }
 
-export function Toast({
+export const Toast = memo(({
   content,
   className,
   classOverride,
@@ -32,17 +32,34 @@ export function Toast({
   duration = 4500,
   onDismiss = () => {},
   action,
-}: IToastProps) {
+}: IToastProps) => {
   const [dismissed, setDismissed] = useState(false)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
-    setTimeout(() => {
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+    
+    // Set new timeout
+    timeoutRef.current = setTimeout(() => {
       setDismissed(true)
     }, duration)
-  })
+
+    // Cleanup function to clear timeout when component unmounts or dependencies change
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = null
+      }
+    }
+  }, [duration]) // Only re-run when duration changes
+
   if (dismissed) {
     return null
   }
+  
   return (
     <Transition
       duration={300}
@@ -86,4 +103,4 @@ export function Toast({
       </button>
     </Transition>
   )
-}
+})

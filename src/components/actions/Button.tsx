@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, memo } from 'react'
 import { ROUNDED } from '@/constants'
 import { classNames } from '@/helpers'
 import { VariantType, IconType, RoundedType } from '@/types'
@@ -22,6 +22,14 @@ interface IButtonProps {
   target?: '_blank' | '_self' | '_parent' | undefined
   rel?: 'noreferrer' | undefined
   onClick?: () => void
+  // Accessibility props
+  'aria-label'?: string
+  'aria-describedby'?: string
+  'aria-expanded'?: boolean
+  'aria-pressed'?: boolean
+  'aria-haspopup'?: boolean
+  role?: string
+  title?: string
 }
 
 const ALIGNMENT = {
@@ -77,7 +85,7 @@ const COLOR = {
   subdued: 'hover:bg-gray-200 !border-gray-300',
   none: '',
 }
-export const Button = ({
+export const Button = memo(({
   children,
   onClick,
   className,
@@ -94,14 +102,29 @@ export const Button = ({
   fullwidth,
   variant = 'default',
   size = 'medium',
+  'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedby,
+  'aria-expanded': ariaExpanded,
+  'aria-pressed': ariaPressed,
+  'aria-haspopup': ariaHasPopup,
+  role,
+  title,
   // icon: IconComp,
   ...props
 }: IButtonProps) => {
   const handleClick = useCallback(() => {
     onClick?.()
   }, [onClick])
+  
   const Component = url ? 'a' : 'button'
   const IconComp = props.icon as React.ElementType
+  
+  // Generate accessible label for icon-only buttons
+  const accessibleLabel = ariaLabel || (props.icon && !children ? 'Button' : undefined)
+  
+  // Determine button role based on props
+  const buttonRole = role || (props.icon && !children ? 'button' : undefined)
+  
   return (
     <Component
       className={classNames(
@@ -125,12 +148,28 @@ export const Button = ({
       rel={rel}
       disabled={disabled}
       onClick={handleClick}
+      // Accessibility attributes
+      aria-label={accessibleLabel}
+      aria-describedby={ariaDescribedby}
+      aria-expanded={ariaExpanded}
+      aria-pressed={ariaPressed}
+      aria-haspopup={ariaHasPopup}
+      role={buttonRole}
+      title={title}
+      // Add aria-live for loading state
+      aria-live={loading ? 'polite' : undefined}
+      // Add aria-busy for loading state
+      aria-busy={loading}
     >
       {loading ? (
-        <Spinner className={classNames(SIZE_ICON[size], 'fill-current')} size="none" />
+        <Spinner 
+          className={classNames(SIZE_ICON[size], 'fill-current')} 
+          size="none"
+          aria-hidden="true"
+        />
       ) : (
         IconComp && (
-          <div>
+          <div aria-hidden="true">
             {
               <IconComp
                 className={classNames(
@@ -146,4 +185,4 @@ export const Button = ({
       {children}
     </Component>
   )
-}
+})
