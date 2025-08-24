@@ -14,16 +14,15 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "declaration": true,
+    "declarationMap": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "declarationMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "react-vite-library": ["src/component/index.ts"]
-    },
-    "typeRoots": ["node_modules/@types", "src/component/index.d.ts"]
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src", "vite.config.ts", "package.json"],
+  "include": ["src"],
+  "exclude": ["src/examples", "dist", "node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

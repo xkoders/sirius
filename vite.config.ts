@@ -4,80 +4,66 @@ import { resolve } from 'node:path'
 import dts from 'vite-plugin-dts'
 import tsConfigPaths from 'vite-tsconfig-paths'
 import * as packageJson from './package.json'
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    react(),
-    tsConfigPaths(),
-    dts({
-      // insertTypesEntry: true,
-      include: ['src/components/'],
-    }),
-  ],
-  resolve: {
-    alias: {
-      '@': '/src',
-    },
-  },
 
-  build: {
-    lib: {
-      entry: resolve('src', 'main.ts'),
-      name: 'sirius',
-      formats: ['es', 'cjs'],
-      fileName: (format) => `sirius.${format === 'cjs' ? 'cjs' : 'es.js'}`,
-    },
-
-    // optimizeDeps: {
-    //   exclude: Object.keys(packageJson.peerDependencies),
-    // },
-    // esbuild: {
-    //   minify: true,
-    // },
-    cssMinify: true,
-    rollupOptions: {
-      external: [...Object.keys(packageJson.peerDependencies)],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
+export default defineConfig(({ command }) => {
+  if (command === 'serve') {
+    // Development mode - use React entry point for hot reload
+    return {
+      plugins: [react(), tsConfigPaths()],
+      resolve: {
+        alias: {
+          '@': resolve(__dirname, 'src'),
         },
       },
+      server: {
+        port: 4000,
+        open: true,
+        watch: {
+          usePolling: true,
+        },
+      },
+    }
+  }
+
+  // Build mode - library configuration
+  return {
+    plugins: [
+      react(),
+      tsConfigPaths(),
+      dts({
+        insertTypesEntry: true,
+        include: ['src/**/*'],
+        exclude: ['src/examples/**/*', 'src/App.tsx', 'src/**/*.test.*', 'src/**/*.stories.*'],
+        outDir: 'dist',
+        entryRoot: 'src',
+        rollupTypes: true,
+      }),
+    ],
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src'),
+      },
     },
-  },
+    build: {
+      lib: {
+        entry: resolve('src', 'main.ts'),
+        name: 'sirius',
+        formats: ['es', 'cjs'],
+        fileName: (format) => `sirius.${format === 'cjs' ? 'cjs' : 'es.js'}`,
+      },
+      cssMinify: true,
+      rollupOptions: {
+        external: [...Object.keys(packageJson.peerDependencies)],
+        output: {
+          globals: {
+            react: 'React',
+            'react-dom': 'ReactDOM',
+          },
+        },
+      },
+      // Exclude public assets from build
+      assetsInlineLimit: 0,
+      copyPublicDir: false,
+    },
+  }
 })
-
-// import { resolve } from 'node:path'
-
-// import react from '@vitejs/plugin-react'
-// import { defineConfig } from 'vite'
-// import dts from 'vite-plugin-dts'
-// import EsLint from 'vite-plugin-linter'
-// import tsConfigPaths from 'vite-tsconfig-paths'
-// const { EsLinter, linterPlugin } = EsLint
-// import * as packageJson from './package.json'
-// // https://vitejs.dev/config/
-// export default defineConfig((configEnv) => ({
-//   plugins: [
-//     react(),
-//     tsConfigPaths(),
-//     linterPlugin({
-//       include: ['./src}/**/*.{ts,tsx}'],
-//       linters: [new EsLinter({ configEnv })],
-//     }),
-//     dts({
-//       include: ['src/component/'],
-//     }),
-//   ],
-//   build: {
-//     lib: {
-//       entry: resolve('src', 'component/index.ts'),
-//       name: 'ReactViteLibrary',
-//       formats: ['es', 'umd'],
-//       fileName: (format) => `react-vite-library.${format}.js`,
-//     },
-//     rollupOptions: {
-//       external: [...Object.keys(packageJson.peerDependencies)],
-//     },
-//   },
-// }))

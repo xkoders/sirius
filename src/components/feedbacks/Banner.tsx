@@ -2,15 +2,51 @@ import { classNames } from '@/helpers'
 import React, { ElementType } from 'react'
 import { Text } from '../typography'
 import { IconType } from '@/types'
+
+const BACKGROUND_COLORS = {
+  default: 'bg-gray-50',
+  muted: 'bg-gray-100',
+  subdued: 'bg-gray-200',
+  dark: 'bg-gray-800',
+  light: 'bg-gray-300',
+  white: 'bg-white',
+  black: 'bg-black',
+  primary: 'bg-blue-50',
+  secondary: 'bg-gray-100',
+  success: 'bg-green-50',
+  warning: 'bg-orange-50',
+  critical: 'bg-red-50',
+  info: 'bg-blue-50',
+} as const
+
+const TEXT_COLORS = {
+  default: 'text-gray-900',
+  muted: 'text-gray-700',
+  subdued: 'text-gray-800',
+  dark: 'text-white',
+  light: 'text-gray-800',
+  white: 'text-gray-900',
+  black: 'text-white',
+  primary: 'text-blue-900',
+  secondary: 'text-gray-800',
+  success: 'text-green-900',
+  warning: 'text-orange-900',
+  critical: 'text-red-900',
+  info: 'text-blue-900',
+} as const
+
+type BackgroundColor = keyof typeof BACKGROUND_COLORS
+
 interface IBannerProps {
   children?: React.ReactNode
   as?: ElementType
-  icon?: IconType
+  icon?: IconType | React.ReactNode
   className?: string
   status?: 'default' | 'info' | 'warning' | 'critical' | 'success' | 'pending'
   appearance?: 'default' | 'card'
   title?: string
   onDismiss?: () => void
+  background?: BackgroundColor
 }
 
 const STATUS = {
@@ -78,6 +114,8 @@ export function Banner({
   onDismiss,
   title,
   status = 'default',
+  background,
+  icon,
 }: IBannerProps) {
   if (appearance === 'card') {
     return (
@@ -85,34 +123,41 @@ export function Banner({
         className={classNames(
           className || '',
           STATUS[status].className,
+          background ? BACKGROUND_COLORS[background] : '',
           'w-full flex gap-3 p-3 rounded-md  relative',
         )}
       >
-        {STATUS[status].icon && (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className="w-4 h-4"
-          >
-            {STATUS[status].icon}
-          </svg>
-        )}
+        {
+          icon ? icon : (STATUS[status].icon && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="w-4 h-4 text-white"
+            >
+              { STATUS[status].icon}
+            </svg>
+          ))
+        }
 
         <div>
           {title && (
-            <Text as="h5" variant="bodySm" fontWeight="semibold" className="-mt-0.5 mb-0.5">
+            <Text as="h5" variant="bodySm" fontWeight="semibold" className={classNames("-mt-0.5 mb-0.5", background ? TEXT_COLORS[background] : "")}>
               {title}
             </Text>
           )}
-          <div className="text-xs opacity-75">{children}</div>
+          <div className={classNames("text-xs opacity-75", background ? TEXT_COLORS[background] : "")}>{children}</div>
         </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
           onClick={onDismiss}
-          className="w-6 h-6 p-1 absolute right-1 top-1 hover:bg-black/10 rounded-full cursor-pointer transition-all active:scale-95"
+          className={classNames(
+            "w-6 h-6 p-1 absolute right-1 top-1 rounded-md cursor-pointer transition-all active:scale-95",
+            background ? TEXT_COLORS[background] : "text-gray-600",
+            background === 'dark' || background === 'black' ? "hover:bg-white/10" : "hover:bg-gray-700/10"
+          )}
         >
           <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
         </svg>
@@ -121,27 +166,33 @@ export function Banner({
   }
   return (
     <Component
-      className={classNames(className || '', 'w-full bg-white rounded-xl relative shadow-sm')}
+      className={classNames(
+        className || '', 
+        background ? BACKGROUND_COLORS[background] : 'bg-white',
+        'w-full rounded-[10px] relative shadow-sm'
+      )}
     >
       {title && (
         <div
           className={classNames(
-            'flex gap-x-1 items-center p-2 rounded-t-xl !bg-current !border-none relative',
+            'flex gap-x-1 items-center p-2 rounded-t-[10px] !bg-current !border-none relative',
             STATUS[status].className,
           )}
         >
-          {STATUS[status].icon && (
+ {
+          icon ? icon : (STATUS[status].icon && (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
               className="w-4 h-4 text-white"
             >
-              {STATUS[status].icon}
+              { STATUS[status].icon}
             </svg>
-          )}
+          ))
+        }
 
-          <Text as="h5" variant="bodySm" fontWeight="medium" className="text-white flex-1 px-1">
+          <Text as="h5" variant="bodySm" fontWeight="medium" className="flex-1 px-1 text-white">
             {title}
           </Text>
           <svg
@@ -149,31 +200,39 @@ export function Banner({
             viewBox="0 0 20 20"
             fill="currentColor"
             onClick={onDismiss}
-            className="w-6 h-6 p-1   hover:bg-black/10 text-white rounded-lg cursor-pointer transition-all active:scale-95"
+            className={classNames(
+              "w-6 h-6 p-1 hover:bg-gray-700/10 rounded-lg cursor-pointer transition-all active:scale-95",
+              background ? TEXT_COLORS[background] : "text-white"
+            )}
           >
             <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
           </svg>
         </div>
       )}
       <div className="text-xs p-2 flex items-center gap-x-1">
-        {STATUS[status].icon && !title ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className={classNames(STATUS[status].className, 'w-6 h-6 p-0.5 rounded-lg')}
-          >
-            {STATUS[status].icon}
-          </svg>
-        ) : null}
-        <div className="flex-1 px-1">{children}</div>
+      {
+          !title && ( icon  ? icon : (STATUS[status].icon  &&(
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className={classNames(STATUS[status].className, 'w-6 h-6 p-0.5 rounded-lg')}
+            >
+              {icon || STATUS[status].icon}
+            </svg>
+          )))
+        }
+        <div className={classNames("flex-1 px-1", background ? TEXT_COLORS[background] : "")}>{children}</div>
         {onDismiss && !title && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
             onClick={onDismiss}
-            className="w-6 h-6 p-1  hover:bg-gray-100 text-gray-600 rounded-lg cursor-pointer transition-all active:scale-95"
+            className={classNames(
+              "w-6 h-6 p-1 hover:bg-gray-100 rounded-md cursor-pointer transition-all active:scale-95",
+              background ? TEXT_COLORS[background] : "text-gray-600"
+            )}
           >
             <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
           </svg>

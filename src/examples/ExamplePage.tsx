@@ -33,7 +33,6 @@ import {
 import { HomeIcon, InboxIcon, TagIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
 import { useToast } from '@/hooks'
 import { IAction } from '@/types'
-
 const toastData = {
   id: 0,
   content: 'This is a toast content',
@@ -316,20 +315,32 @@ export default function ExamplePage() {
         secondaryActions={secondaryActions}
         actionGroups={actionGroups}
       >
+           <Box sectionned shadow="colored" as="section" className="mb-6 gap-2">
+        
+          <Stack alignment="center" spacing="baseTight" vertical={true}>
+            <Banner background='black'  icon={<span className="text-sm/5 w-4 h-4">⭐</span>} >
+               black background
+            </Banner>
+            <Banner background='critical' icon={<span className=" w-4 h-4">⭐</span>} > critical background</Banner>
+            <Banner background='muted' icon={<span className=" w-4 h-4">⭐</span>} > muted background</Banner>
+            <Banner background='light' icon={<span className=" w-4 h-4">⭐</span>} > light background</Banner>
+            <Banner background='primary' icon={<span className=" w-4 h-4">⭐</span>} > primary background</Banner>
+            <Banner background='default' icon={<span className=" w-4 h-4">⭐</span>} > default background</Banner>
+            <Banner background='white' icon={<span className=" w-4 h-4">⭐</span>} > white background</Banner>
+            <Banner background='dark' icon={<span className=" w-4 h-4">⭐</span>} > dark background</Banner>
+            <Banner background='subdued' icon={<span className=" w-4 h-4">⭐</span>} > subdued background</Banner>
+            <Banner background='info' icon={<span className=" w-4 h-4">⭐</span>} > info background</Banner>
+            <Banner background='success' icon={<span className=" w-4 h-4">⭐</span>} > success background</Banner>
+            <Banner background='warning' icon={<span className=" w-4 h-4">⭐</span>} > warning background</Banner>
+
+          </Stack>
+        </Box>
           <Modal show={showModal} onClose={() => setShowModal(false)}>
             <Stack alignment="center" spacing="baseTight" vertical={true}>
-              <Banner status="default">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
+                          <Banner status="default" background="primary">
+                souf Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
               </Banner>
-              <Banner status="info">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
-              </Banner>
-              <Banner status="pending">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
-              </Banner>
-              <Banner status="success">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
-              </Banner>
+          
             </Stack>
           </Modal>
         <Box className="mb-5 flex flex-col gap-2">

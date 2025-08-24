@@ -1,0 +1,31 @@
+# Development files
+src/
+examples/
+public/
+*.config.*
+.eslintrc*
+.prettierrc*
+.husky/
+.github/
+.vscode/
+
+# Build artifacts that shouldn't be published
+dist/vite.svg
+dist/*.svg
+dist/*.map
+
+# Development dependencies
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+*.log
+
+# Test files
+coverage/
+*.test.*
+*.spec.*
