@@ -1,7 +1,6 @@
 export { default as Spinner } from './Spinner.vue'
 export { default as Badge } from './Badge.vue'
 export { default as Toast } from './Toast.vue'
-export { default as ToastContainer } from './ToastContainer.vue'
 export { default as Banner } from './Banner.vue'
 export { default as ExceptionList } from './ExceptionList.vue'
 export { default as SkeletonBodyText } from './SkeletonBodyText.vue'

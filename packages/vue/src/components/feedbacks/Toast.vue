@@ -14,17 +14,17 @@
       aria-atomic="true"
     >
       <div class="flex">
-        <div class="flex-shrink-0">
+        <div v-if="icon" class="flex-shrink-0">
           <component :is="icon" :class="iconClasses" />
         </div>
         
         <div class="ml-3 w-0 flex-1">
           <p :class="messageClasses">
-            {{ message }}
+            {{ content }}
           </p>
         </div>
         
-        <div v-if="dismissible" class="ml-4 flex flex-shrink-0">
+        <div v-if="onDismiss" class="ml-4 flex flex-shrink-0">
           <button
             type="button"
             :class="closeButtonClasses"
@@ -42,19 +42,14 @@
 </template>
 
 <script setup lang="ts">
+import { IAction, IToastProps } from '../../types'
 import { computed, h } from 'vue'
-import { classNames } from '../../helpers'
 
-interface Props {
-  message: string
-  type: 'success' | 'error' | 'warning' | 'info'
-  dismissible?: boolean
-  className?: string
-}
 
-const props = withDefaults(defineProps<Props>(), {
-  dismissible: true,
-  className: ''
+
+const props = withDefaults(defineProps<IToastProps>(), {
+  type: 'default',
+  duration: 4500,
 })
 
 const emit = defineEmits<{
@@ -77,7 +72,7 @@ const icon = computed(() => {
     ])
   }
   
-  return icons[props.type]
+  return props.type && props.type !== 'default'  ? icons[props.type] : null
 })
 
 const toastClasses = computed(() => {
@@ -87,14 +82,11 @@ const toastClasses = computed(() => {
     success: 'ring-green-500',
     error: 'ring-red-500',
     warning: 'ring-yellow-500',
-    info: 'ring-blue-500'
+    info: 'ring-blue-500',
+    default: 'ring-gray-500'
   }
   
-  return classNames(
-    baseClasses,
-    typeClasses[props.type],
-    props.className
-  )
+  return [baseClasses, typeClasses[props.type] ?? '']
 })
 
 const iconClasses = computed(() => 'h-5 w-5')

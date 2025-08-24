@@ -1,60 +1,61 @@
 <template>
-  <div class="space-y-1">
-    <h3 v-if="title" class="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-      {{ title }}
-    </h3>
-    
-    <div class="space-y-1">
-      <a
-        v-for="item in items"
-        :key="item.label"
-        :href="item.url"
-        :class="itemClasses(item)"
-        :aria-disabled="item.disabled"
-      >
-        <component v-if="item.icon" :is="item.icon" class="mr-3 h-6 w-6" />
-        <span class="truncate">{{ item.label }}</span>
-        <span v-if="item.badge" class="ml-auto">
-          {{ item.badge }}
-        </span>
-      </a>
-    </div>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { classNames } from '../../helpers'
-import type { IconType } from '../../types/common'
-
-interface NavigationItem {
-  url: string
-  label: string
-  disabled?: boolean
-  selected?: boolean
-  icon?: IconType
-  badge?: string
-  subNavigationItems?: NavigationItem[]
-}
-
-interface Props {
-  items: NavigationItem[]
-  title?: string
-  className?: string
-}
-
-defineProps<Props>()
-
-const itemClasses = (item: NavigationItem) => {
-  const baseClasses = 'group flex items-center px-3 py-2 text-sm font-medium rounded-md'
+    <ul class="py-3 w-full text-[15px] text-gray-950 last:flex-1 last-of-type:flex-1">
+      <li v-if="title" class="text-xs font-medium px-5 py-1 text-gray-500">{{ title }}</li>
+      <li v-for="(item, index) in items" :key="index" class="px-3 flex flex-col gap-1">
+        <a
+          :href="item.url || '#'"
+          :class="itemClasses(item)"
+        >
+          <span v-if="item.selected && !item.subNavigationItems?.length" class="absolute top-1/2 -left-2 w-1 h-6 -mt-3 rounded-full bg-orange-500"></span>
+          <span v-if="item.badge" class="text-xs rounded-full bg-green-200 px-3 absolute top-1/2 right-2 w-fit h-fit -translate-y-1/2">
+            {{ item.badge }}
+          </span>
+          <span v-if="item.icon">
+              <component :is="item.icon"  v-if="item.icon" :class="['w-[18px] h-7 md:h-5', item.selected ? 'text-orange-500' : '']" />
+          </span>
+          <span>{{ item.label }}</span>
+        </a>
   
-  if (item.disabled) {
-    return classNames(baseClasses, 'text-gray-400 cursor-not-allowed')
+        <ul v-if="item.subNavigationItems" class="text-slate-500 relative flex flex-col gap-px">
+          <NavigationSubItems
+            v-for="(subItem, subIndex) in item.subNavigationItems"
+            :key="subIndex"
+            :sub-item="subItem"
+            :is-selected-passed="isSelectedPassed(item.subNavigationItems, subIndex)"
+          />
+        </ul>
+      </li>
+    </ul>
+  </template>
+  
+  <script setup lang="ts">
+  import NavigationSubItems from './NavigationSubItems.vue'
+  
+  interface Item {
+    url: string
+    label: string
+    icon?: any
+    badge?: string
+    className?: string
+    disabled?: boolean
+    selected?: boolean
+    subNavigationItems?: Item[]
   }
   
-  if (item.selected) {
-    return classNames(baseClasses, 'bg-gray-900 text-white')
+  const props = defineProps<{
+    items: Item[]
+    title?: string
+  }>()
+  
+  const isSelectedPassed = (subItems: Item[], index: number) => {
+    const findIndex = subItems.findIndex(item => item.selected)
+    return findIndex !== -1 ? index < findIndex : false
   }
   
-  return classNames(baseClasses, 'text-gray-300 hover:bg-gray-700 hover:text-white')
-}
-</script>
+  const itemClasses = (item: Item) => [
+    'py-1 flex items-center flex-1 gap-3 relative hover:bg-gray-200/50 hover:text-orange-500 px-1 rounded-md',
+    item.disabled ? 'pointer-events-none opacity-50' : '',
+    item.className || '',
+  ].filter(Boolean).join(' ')
+  </script>
+  

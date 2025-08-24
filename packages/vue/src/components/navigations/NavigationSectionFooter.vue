@@ -1,13 +1,9 @@
 <template>
-  <div class="border-t border-gray-200 p-4">
+  <div class="flex gap-3 p-2" role="contentinfo" aria-label="Navigation footer">
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-interface Props {
-  className?: string
-}
-
-defineProps<Props>()
+// No props needed for this component
 </script>

@@ -1,82 +1,81 @@
 <template>
   <component
-    :is="tag"
-    :class="boxClasses"
+    :is="componentAs"
+    :class="[
+      roundedClasses,
+      shadowClasses,
+      sectionedClasses,
+      'w-full relative',
+      props.className,
+    ]"
+    v-bind="restProps"
   >
+    <span
+      v-if="props.shadow === 'colored'"
+      class="bg-gradient-to-r from-blue-500 via-violet-500 to-orange-500 absolute z-[-1] inset-0 blur-[6px] opacity-90 m-1 mt-2"
+    ></span>
     <slot />
   </component>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { classNames } from '../../helpers'
-import { ROUNDED, SHADOW } from '../../constants'
-
-interface Props {
+import { computed, useAttrs } from 'vue'
+import { ROUNDED, SHADOW } from '../../constants/common'
+interface IBoxProps {
   as?: string
-  padding?: 'none' | 'small' | 'medium' | 'large'
-  margin?: 'none' | 'small' | 'medium' | 'large'
-  background?: 'default' | 'subdued' | 'success' | 'warning' | 'critical' | 'info'
-  border?: 'none' | 'thin' | 'thick'
-  rounded?: 'none' | 'small' | 'medium' | 'large'
-  shadow?: 'none' | 'small' | 'medium' | 'large'
-  sectionned?: boolean
+  children?: any
+  rounded?: keyof typeof ROUNDED | 'none'
+  shadow?: keyof typeof SHADOW | 'colored'
+  sectionned?: boolean | string
+  disabled?: boolean
   className?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<IBoxProps>(), {
   as: 'div',
-  padding: 'none',
-  margin: 'none',
-  background: 'default',
-  border: 'none',
-  rounded: 'none',
+  rounded: '2xl',
   shadow: 'none',
+  className: '',
   sectionned: false,
-  className: ''
 })
 
-const tag = computed(() => props.as)
+// Use useAttrs to get all other attributes passed to the component
+const attrs = useAttrs()
 
-const PADDING = {
-  none: '',
-  small: 'p-2',
-  medium: 'p-4',
-  large: 'p-6'
-}
+// Filter out props to get the rest of the attributes
+const restProps = computed(() => {
+  const {
+    as,
+    children,
+    rounded,
+    shadow,
+    sectionned,
+    disabled,
+    className,
+    ...rest
+  } = props
+  return { ...rest, ...attrs }
+})
 
-const MARGIN = {
-  none: '',
-  small: 'm-2',
-  medium: 'm-4',
-  large: 'm-6'
-}
 
-const BACKGROUND = {
-  default: 'bg-white',
-  subdued: 'bg-gray-50',
-  success: 'bg-green-50',
-  warning: 'bg-yellow-50',
-  critical: 'bg-red-50',
-  info: 'bg-blue-50'
-}
+// The `as` prop is used to determine the rendered element
+const componentAs = computed(() => props.as || 'div')
 
-const BORDER = {
-  none: '',
-  thin: 'border border-gray-200',
-  thick: 'border-2 border-gray-300'
-}
+// Get the correct rounded class from the constants
+const roundedClasses = computed(() => ROUNDED[props.rounded])
 
-const boxClasses = computed(() => 
-  classNames(
-    PADDING[props.padding],
-    MARGIN[props.margin],
-    BACKGROUND[props.background],
-    BORDER[props.border],
-    ROUNDED[props.rounded],
-    SHADOW[props.shadow],
-    props.sectionned ? 'border-t border-gray-200 pt-6' : '',
-    props.className
-  )
-)
+// Compute the shadow class based on the `shadow` and `sectionned` props
+const shadowClasses = computed(() => {
+  if (props.sectionned && props.shadow === 'none') {
+    return SHADOW.md
+  }
+  return SHADOW[props.shadow]
+})
+
+// Compute the sectioned classes
+const sectionedClasses = computed(() => {
+  return props.sectionned
+    ? 'px-2 py-3 md:px-3 md:py-4 lg:px-4 lg:py-5 bg-white'
+    : ''
+})
 </script>

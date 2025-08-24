@@ -1,100 +1,48 @@
 <template>
   <component
     :is="componentType"
-    :class="buttonClasses"
-    :href="url"
-    :target="target"
-    :rel="rel"
-    :type="submit ? 'submit' : 'button'"
-    :disabled="disabled"
+    :class="[
+      'h-fit flex items-center transition-all active:scale-95 active:opacity-70',
+      props.fullwidth ? 'w-full' : '',
+      isDisabled ? 'text-[#666] cursor-not-allowed pointer-events-none select-none bg-[#eaeaea] ring-1 ring-[#e0e0e0] opacity-70' : '',
+      !hasChildrenAndIcon ? sizeClasses : sizeIconOnlyClasses,
+      ALIGNMENT[props.alignment],
+      ROUNDED[props.rounded],
+      variantClasses,
+      props.className,
+    ]"
+    :type="props.submit ? 'submit' : 'button'"
+    :href="props.url || '#'"
+    :target="props.target"
+    :disabled="isDisabled"
     @click="handleClick"
-    :aria-label="accessibleLabel"
-    :aria-describedby="props['aria-describedby']"
-    :aria-expanded="props['aria-expanded']"
-    :aria-pressed="props['aria-pressed']"
-    :aria-haspopup="props['aria-haspopup']"
     :role="buttonRole"
-    :title="title"
-    :aria-live="loading ? 'polite' : undefined"
-    :aria-busy="loading"
+    :title="props.title"
+    :aria-live="props.loading ? 'polite' : undefined"
+    :aria-busy="props.loading"
   >
-    <Spinner 
-      v-if="loading"
-      :class="spinnerClasses" 
-      size="none"
-      aria-hidden="true"
-    />
-    <div v-else-if="icon" aria-hidden="true">
+    <div v-if="props.loading" class="flex items-center justify-center">
+      <Spinner :class="[sizeIconClasses, 'fill-current']" size="none" aria-hidden="true" />
+    </div>
+    <div v-else-if="props.icon" aria-hidden="true">
       <component
-        :is="icon"
-        :class="iconClasses"
+        :is="props.icon"
+        :class="[
+          !hasChildrenAndIcon ? sizeIconOnlyClasses : sizeIconClasses,
+          'fill-current',
+        ]"
       />
     </div>
-    
+
     <slot />
   </component>
 </template>
 
 <script setup lang="ts">
-import { computed, useSlots } from 'vue'
-import { classNames } from '../../helpers'
-import { ROUNDED } from '../../constants'
-import type { VariantType, IconType, RoundedType } from '../../types/common'
+import { computed } from 'vue'
 import { Spinner } from '../feedbacks'
+import { ROUNDED , BUTTON_VARIANT} from '../../constants/common'
 
-interface Props {
-  size?: 'medium' | 'large' | 'small' | 'slim' | 'none'
-  variant?: VariantType | 'none'
-  submit?: boolean
-  alignment?: 'center' | 'start' | 'end'
-  rounded?: RoundedType
-  fullwidth?: boolean
-  outline?: boolean
-  loading?: boolean
-  disabled?: boolean
-  icon?: IconType
-  link?: boolean
-  url?: string
-  target?: '_blank' | '_self' | '_parent' | undefined
-  rel?: 'noreferrer' | undefined
-  onClick?: () => void
-  // Accessibility props
-  'aria-label'?: string
-  'aria-describedby'?: string
-  'aria-expanded'?: boolean
-  'aria-pressed'?: boolean
-  'aria-haspopup'?: boolean
-  role?: string
-  title?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  size: 'medium',
-  variant: 'default',
-  submit: false,
-  alignment: 'center',
-  rounded: 'xl',
-  fullwidth: false,
-  outline: false,
-  loading: false,
-  disabled: false,
-  link: false,
-  url: undefined,
-  target: undefined,
-  rel: undefined,
-  onClick: undefined,
-  'aria-label': undefined,
-  'aria-describedby': undefined,
-  'aria-expanded': undefined,
-  'aria-pressed': undefined,
-  'aria-haspopup': undefined,
-  role: undefined,
-  title: undefined
-})
-
-const emit = defineEmits<{
-  click: []
-}>()
 
 const ALIGNMENT = {
   center: 'justify-center',
@@ -117,27 +65,12 @@ const SIZE_ICON = {
   slim: 'h-3 w-3 -ml-1 mr-1',
   none: 'h-full w-full',
 }
-
 const SIZE_ICON_ONLY = {
   large: { ibg: 'h-6 w-6 p-px', bg: '!h-[45px] !w-[45px]' },
   medium: { ibg: 'h-5 w-5 p-px', bg: '!h-[32px] !w-[32px]' },
   small: { ibg: 'h-4 w-4', bg: '!h-8 !w-8' },
   slim: { ibg: 'h-3 w-3 ', bg: '!h-6 !w-6' },
   none: { ibg: 'h-full', bg: '' },
-}
-
-const VARIANT = {
-  default:
-    'bg-white border border-gray-400 disabled:bg-gray-100 text-gray-900 shadow-sm hover:bg-gray-100',
-  primary: 'bg-indigo-600 border-indigo-900 text-white hover:bg-indigo-700',
-  success: 'bg-green-600 border-green-800 text-white hover:bg-green-700',
-  warning: 'bg-orange-400 border-orange-600 text-white hover:bg-orange-500',
-  danger: 'bg-red-600 border-red-800 text-white hover:bg-red-700',
-  info: 'bg-blue-600 border-blue-800 text-white hover:bg-blue-700',
-  ghost: 'shadow-none text-slate-700 hover:bg-slate-100',
-  subdued: 'text-gray-600 hover:text-gray-700 bg-gray-200 hover:bg-gray-300',
-  dark: 'text-gray-100 hover:text-white bg-gray-950 hover:bg-gray-900',
-  none: '',
 }
 
 const COLOR = {
@@ -153,50 +86,91 @@ const COLOR = {
   none: '',
 }
 
-const componentType = computed(() => props.url ? 'a' : 'button')
+// Assuming a Spinner component exists
 
-const slots = useSlots()
+interface IButtonProps {
+  children?: any
+  className?: string
+  size?: 'medium' | 'large' | 'small' | 'slim' | 'none'
+  variant?: keyof typeof BUTTON_VARIANT | 'none'
+  submit?: boolean
+  alignment?: 'center' | 'start' | 'end'
+  rounded?: 'xl' | 'lg' | 'md' | 'sm' | 'none'
+  fullwidth?: boolean
+  outline?: boolean
+  loading?: boolean
+  disabled?: boolean
+  icon?: any
+  link?: boolean
+  url?: string
+  target?: '_blank' | '_self' | '_parent'
+  onClick?: () => void
+  role?: string
+  title?: string
+}
 
-const accessibleLabel = computed(() => 
-  props['aria-label'] || (props.icon && !slots.default ? 'Button' : undefined)
-)
+const props = withDefaults(defineProps<IButtonProps>(), {
+  size: 'medium',
+  variant: 'default',
+  alignment: 'center',
+  rounded: 'xl',
+})
 
-const buttonRole = computed(() => 
-  props.role || (props.icon && !slots.default ? 'button' : undefined)
-)
+// Determine the component type ('a' or 'button')
+const componentType = computed(() => (props.url ? 'a' : 'button'))
 
-const buttonClasses = computed(() => 
-  classNames(
-    'h-fit flex items-center transition-all active:scale-95 active:opacity-70',
-    props.fullwidth ? 'w-full' : '',
-    props.disabled
-      ? 'text-[#666] cursor-not-allowed pointer-events-none select-none bg-[#eaeaea] ring-1 ring-[#e0e0e0] opacity-70'
-      : '',
-    !slots.default && props.icon ? SIZE_ICON_ONLY[props.size].bg : SIZE[props.size],
-    ALIGNMENT[props.alignment],
-    ROUNDED[props.rounded],
-    props.outline || props.link ? COLOR[props.variant] : props.disabled ? '' : VARIANT[props.variant],
-    props.outline && !props.link ? ' border border-current' : '',
-    props.outline && props.variant === 'default' ? '!border-gray-400' : '',
-    props.link ? '!bg-transparent  hover:underline' : ''
-  )
-)
+// Check if the button is disabled
+const isDisabled = computed(() => props.disabled || props.loading)
 
-const spinnerClasses = computed(() => 
-  classNames(SIZE_ICON[props.size], 'fill-current')
-)
+// Check if there are both children and an icon
+const hasChildrenAndIcon = computed(() => {
+  return props.children && props.icon
+})
 
-const iconClasses = computed(() => 
-  classNames(
-    !slots.default && props.icon ? SIZE_ICON_ONLY[props.size].ibg : SIZE_ICON[props.size],
-    'fill-current'
-  )
-)
+// Determine size classes for the button
+const sizeClasses = computed(() => {
+  return SIZE[props.size]
+})
 
-const handleClick = () => {
-  if (!props.disabled && !props.loading) {
+// Determine size classes for the icon within the button
+const sizeIconClasses = computed(() => {
+  return SIZE_ICON[props.size]
+})
+
+// Determine size classes for an icon-only button
+const sizeIconOnlyClasses = computed(() => {
+  return SIZE_ICON_ONLY[props.size].bg
+})
+
+// Determine variant classes
+const variantClasses = computed(() => {
+  if (props.outline || props.link) {
+    let classes = [COLOR[props.variant]]
+    if (props.outline) {
+      classes.push('border border-current')
+    }
+    if (props.outline && props.variant === 'default') {
+      classes.push('!border-gray-400')
+    }
+    if (props.link) {
+      classes.push('!bg-transparent hover:underline')
+    }
+    return classes
+  }
+  return props.disabled ? '' : BUTTON_VARIANT[props.variant] ?? ''
+})
+
+
+// Determine button role based on props
+const buttonRole = computed(() => {
+  return props.role || (props.icon && !props.children ? 'button' : undefined)
+})
+
+const handleClick = (e: Event) => {
+  if (isDisabled.value) {
+    e.preventDefault()
+  } else {
     props.onClick?.()
-    emit('click')
   }
 }
 </script>

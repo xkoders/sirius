@@ -1,104 +1,120 @@
 <template>
-  <div :class="cardClasses">
-    <div class="flex">
-      <div v-if="url" class="flex-shrink-0">
-        <img
-          :src="url"
-          :alt="title"
-          class="h-20 w-20 rounded-lg object-cover"
-        />
-      </div>
-      
-      <div class="ml-4 flex-1">
-        <div class="flex items-start justify-between">
-          <div class="flex-1">
-            <h3 v-if="title" :class="titleClasses">
-              {{ title }}
-            </h3>
-            <div class="mt-2">
-              <slot />
-            </div>
-          </div>
-          
-          <div v-if="primaryAction || promotedAction" class="ml-4 flex flex-shrink-0 space-x-2">
-            <Button
-              v-if="promotedAction"
-              :variant="promotedAction.variant || 'primary'"
-              @click="promotedAction.onAction"
-            >
-              {{ promotedAction.label }}
-            </Button>
-            
-            <Button
-              v-if="primaryAction"
-              :variant="primaryAction.variant || 'default'"
-              @click="primaryAction.onAction"
-            >
-              {{ primaryAction.label }}
-            </Button>
-          </div>
-        </div>
-        
-        <div v-if="popoverActions && popoverActions.length > 0" class="mt-4">
+  <Box
+    :class="[
+      props.className,
+      'bg-white flex flex-col lg:flex-row overflow-hidden',
+    ]"
+    rounded="md"
+    shadow="md"
+    as="section"
+  >
+    <div class="relative aspect-[16/9]">
+      <img
+        :src="props.url"
+        alt=""
+        class="aspect-video object-cover flex h-full w-full"
+      />
+    </div>
+    <div class="flex-1 px-5 py-2.5">
+      <div class="flex mb-2">
+        <h3 class="text-lg font-medium flex-1">{{ props.title }}</h3>
+        <div class="flex gap-1 items-center -mt-1.5">
           <Button
-            variant="ghost"
+            v-if="props.promotedAction"
+            link
+            :disabled="props.promotedAction.disabled"
+            :loading="props.promotedAction.loading"
+            :icon="props.promotedAction.icon"
+            @click="props.promotedAction.onAction"
+            variant="info"
             size="small"
-            @click="showPopover = !showPopover"
+            class="-mt-0.5"
           >
-            Actions
+            {{ props.promotedAction.label }}
           </Button>
-          
-          <div v-if="showPopover" class="mt-2 rounded-md border border-gray-200 bg-white p-2 shadow-lg">
-            <div class="space-y-1">
-              <button
-                v-for="action in popoverActions"
-                :key="action.label"
-                :class="popoverActionClasses"
+
+          <Popover v-if="props.popoverActions?.length">
+            <template #activator>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6 hover:text-gray-950 text-gray-600 cursor-pointer"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                />
+              </svg>
+            </template>
+            <div class="p-3 flex flex-col gap-1">
+              <Button
+                v-for="(action, idx) in props.popoverActions"
+                :key="idx"
+                :disabled="action.disabled"
                 @click="action.onAction"
+                :url="action.url"
+                :target="action.target"
+                :rel="action.rel"
+                :variant="action.variant || 'ghost'"
+                fullwidth
+                alignment="start"
               >
                 {{ action.label }}
-              </button>
+              </Button>
             </div>
-          </div>
+          </Popover>
         </div>
       </div>
+      <div class="text-sm text-gray-600">
+        <slot />
+      </div>
+      <div v-if="props.primaryAction?.length" class="flex gap-2 mt-4">
+        <Button
+          v-for="(action, idx) in props.primaryAction"
+          :key="idx"
+          :disabled="action.disabled"
+          @click="action.onAction"
+          :url="action.url"
+          :target="action.target"
+          :rel="action.rel"
+          :variant="action.variant || 'default'"
+        >
+          {{ action.label }}
+        </Button>
+      </div>
     </div>
-  </div>
+  </Box>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { classNames } from '../../helpers'
-import { Button } from '../actions'
-import type { IAction } from '../../types'
+import {Box,Button,Popover } from '../../components'
+import { BUTTON_VARIANT } from '../../constants/common'
 
-interface Props {
+interface IAction {
+  label: string
+  onAction?: () => void
+  target?: '_blank' | '_self' | '_parent'
   url?: string
-  title?: string
-  primaryAction?: IAction
-  promotedAction?: IAction
-  popoverActions?: IAction[]
+  disabled?: boolean
+  loading?: boolean
+  icon?: any
+  variant?: keyof typeof BUTTON_VARIANT | 'none'
+  rel?: 'noreferrer'
+}
+interface IMediaCardProps {
+  children?: any
   className?: string
+  title?: string
+  url?: string
+  promotedAction?: IAction
+  primaryAction?: IAction[]
+  secondaryActions?: IAction[]
+  popoverActions?: IAction[]
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  className: ''
-})
-
-const showPopover = ref(false)
-
-const cardClasses = computed(() => 
-  classNames(
-    'bg-white rounded-lg border border-gray-200 p-4 shadow-sm',
-    props.className
-  )
-)
-
-const titleClasses = computed(() => 
-  'text-lg font-medium text-gray-900'
-)
-
-const popoverActionClasses = computed(() => 
-  'block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md'
-)
+const props = defineProps<IMediaCardProps>()
 </script>

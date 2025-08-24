@@ -21,7 +21,7 @@ export function Tabs({ tabs, className, canCreateTab, filled, selected, onChange
   const selectedIndex = useMemo(() => selected || 0, [selected])
   return (
     <div className={classNames(className, 'flex-1')}>
-      <div className="sm:hidden text-sm flex w-full">
+      <div className="sm:!hidden text-sm flex w-full">
         <label htmlFor="tabs" className="sr-only">
           Select a tab
         </label>
@@ -29,7 +29,7 @@ export function Tabs({ tabs, className, canCreateTab, filled, selected, onChange
         <select
           id="tabs"
           name="tabs"
-          className="block w-full rounded-md border-gray-300 focus:outline-none focus:ring-indigo-500 border p-2 shadow-sm"
+          className="block w-full rounded-md border-gray-300 focus:outline-none focus:ring-indigo-500 border px-2 shadow-sm"
           defaultValue={selected}
         >
           {tabs.map((tab, idx) => (

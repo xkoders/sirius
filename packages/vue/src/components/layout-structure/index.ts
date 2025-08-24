@@ -7,3 +7,5 @@ export { default as LayoutSection } from './LayoutSection.vue'
 export { default as LayoutAnnotatedSection } from './LayoutAnnotatedSection.vue'
 export { default as Page } from './Page.vue'
 export { default as Header } from './Header.vue'
+export { default as Popover } from './Popover.vue'
+

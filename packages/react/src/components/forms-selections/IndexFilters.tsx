@@ -60,7 +60,6 @@ export const IndexFilters = ({ className, sortOptions, filters }: IIndexFiltersP
               tabs={tabs}
               onChange={handleChange}
               selected={selectedTab}
-              className="flex-1"
               canCreateTab
             />
           )}

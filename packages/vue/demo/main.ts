@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
-import ExamplePage from '../src/ExamplePage.vue'
+import App from './App.vue'
 import '../src/index.scss'
 import './style.css'
 
-const app = createApp(ExamplePage)
+const app = createApp(App)
 app.mount('#app')
