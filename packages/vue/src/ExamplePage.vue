@@ -389,7 +389,7 @@
               </div>
             </template>
             
-            <template #sortOptions>
+            <template #sort>
               <div class="p-3 min-w-fit whitespace-nowrap">
                 <ChoiceList :choices="plans" name="plans" :default-checked="plans[1]" />
                 <InlineError message="Store name is required" />
@@ -438,7 +438,7 @@
           title="Lorem ipsum"
           class="mb-5"
           :promoted-action="primaryAction"
-          :primary-action="primaryAction"
+          :primary-actions="[primaryAction]"
           :popover-actions="secondaryActions"
         >
           <div class="flex gap-3">

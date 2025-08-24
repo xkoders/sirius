@@ -3,7 +3,6 @@ import { ref, onMounted, onBeforeUnmount, type PropType } from 'vue'
 
 interface IPopoverProps {
   children?: any
-  className?: string
   disabled?: boolean
   items?: string
   as?: string | object
@@ -40,7 +39,7 @@ onBeforeUnmount(() => {
   <component
     :is="props.as"
     ref="dropdownRef"
-    :class="[props.className, 'relative inline-block text-left']"
+    :class="[ 'relative inline-block text-left']"
   >
     <div
       :class="[

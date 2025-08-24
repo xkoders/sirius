@@ -72,9 +72,9 @@
       <div class="text-sm text-gray-600">
         <slot />
       </div>
-      <div v-if="props.primaryAction?.length" class="flex gap-2 mt-4">
+      <div v-if="primaryActions?.length" class="flex gap-2 mt-4">
         <Button
-          v-for="(action, idx) in props.primaryAction"
+          v-for="(action, idx) in primaryActions"
           :key="idx"
           :disabled="action.disabled"
           @click="action.onAction"
@@ -111,7 +111,7 @@ interface IMediaCardProps {
   title?: string
   url?: string
   promotedAction?: IAction
-  primaryAction?: IAction[]
+  primaryActions?: IAction[]
   secondaryActions?: IAction[]
   popoverActions?: IAction[]
 }
