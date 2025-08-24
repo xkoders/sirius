@@ -1,140 +1,172 @@
 <template>
-  <div class="w-full">
-    <label v-if="label" :for="id" :class="labelClasses">
-      {{ label }}
-      <span v-if="required" class="text-red-500 ml-1">*</span>
-    </label>
-    
-    <div class="relative">
-      <input
-        :id="id"
-        :type="type"
-        :value="modelValue"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        :readonly="readonly"
-        :class="inputClasses"
-        @input="handleInput"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @keydown="handleKeydown"
-      />
-      
-      <div v-if="icon" class="absolute inset-y-0 right-0 flex items-center pr-3">
-        <component :is="icon" class="h-5 w-5 text-gray-400" />
-      </div>
+  <div :class="className">
+    <div class="flex justify-between">
+      <label v-if="label" :class="labelClasses" :for="textFieldId">
+        {{ label }}
+        <span v-if="required" class="text-red-500 ml-1" aria-label="required">*</span>
+      </label>
+      <button
+        v-if="labelAction"
+        type="button"
+        :class="labelActionClasses"
+        @click="labelAction.onClick"
+        :aria-label="labelAction.content"
+      >
+        <span v-if="labelAction.icon" aria-hidden="true">
+          <component :is="labelAction.icon" />
+        </span>
+        {{ labelAction.content }}
+      </button>
     </div>
     
-    <p v-if="error" :class="errorClasses">
-      {{ error }}
-    </p>
+    <div class="relative">
+      <div v-if="prefix" class="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-8 p-[7px] text-gray-500" aria-hidden="true">
+        <span v-if="typeof prefix === 'string'" class="text-sm flex justify-center items-center">{{ prefix }}</span>
+        <component v-else :is="prefix" />
+      </div>
+      
+      <div v-if="suffix" class="absolute right-0 top-1/2 -translate-y-1/2 h-8 w-8 p-[7px] text-gray-500" aria-hidden="true">
+        <span v-if="typeof suffix === 'string'" class="text-sm flex justify-center items-center">{{ suffix }}</span>
+        <component v-else :is="suffix" />
+      </div>
+      
+      <component
+        :is="componentType"
+        :class="inputClasses"
+        :type="type"
+        :placeholder="placeholder"
+        :value="value"
+        :rows="multiline"
+        @click="onClick"
+        @blur="onBlur"
+        @input="handleInput"
+        :id="textFieldId"
+        :aria-describedby="describedBy || undefined"
+        :aria-invalid="props['aria-invalid'] ?? !!error"
+        :aria-required="props['aria-required'] ?? required"
+        :aria-readonly="props['aria-readonly'] ?? readOnly"
+        :aria-placeholder="props['aria-placeholder'] || placeholder"
+        :required="required"
+        :readonly="readOnly"
+        :autocomplete="autoComplete"
+        v-bind="$attrs"
+      />
+    </div>
     
-    <p v-else-if="helpText" :class="helpTextClasses">
-      {{ helpText }}
-    </p>
+    <div v-if="helpText" :id="helpTextId" class="sr-only">
+      <ExceptionList
+        class="text-gray-600 mt-1"
+        :gap="2"
+        :items="[
+          typeof helpText === 'string'
+            ? { description: helpText }
+            : helpText
+        ]"
+      />
+    </div>
+    
+    <div v-if="error" :id="errorId" class="sr-only">
+      <InlineError :message="error" />
+    </div>
+    
+    <InlineError v-if="error" :message="error" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { classNames } from '../../helpers'
-import type { IconType } from '../../types'
+import type { IconType } from '../../types/common'
+import { ExceptionList } from '../feedbacks'
+import InlineError from './InlineError.vue'
+
+interface ExceptionListItem {
+  icon?: IconType
+  title?: string
+  description?: string
+}
 
 interface Props {
-  modelValue?: string
-  label?: string
+  value?: string
   placeholder?: string
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
-  id?: string
-  required?: boolean
-  disabled?: boolean
-  readonly?: boolean
-  error?: string
-  helpText?: string
-  icon?: IconType
-  size?: 'small' | 'medium' | 'large'
-  variant?: 'default' | 'error' | 'success'
+  onChange?: (value: string) => void
+  onClick?: (value?: unknown) => void
+  onBlur?: (value?: unknown) => void
   className?: string
+  inputClassName?: string
+  name?: string
+  label?: string
+  fieldID?: string
+  labelAction?: {
+    icon?: IconType
+    onClick?: (value?: unknown) => void
+    content?: string
+  }
+  prefix?: string | IconType
+  suffix?: string | IconType
+  multiline?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+  helpText?: ExceptionListItem | string
+  error?: string
+  type?: string
+  // Accessibility props
+  'aria-describedby'?: string
+  'aria-invalid'?: boolean
+  'aria-required'?: boolean
+  'aria-readonly'?: boolean
+  'aria-placeholder'?: string
+  required?: boolean
+  readOnly?: boolean
+  autoComplete?: string
+  size?: 'sm' | 'md' | 'lg'
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  modelValue: '',
+  placeholder: '',
   type: 'text',
-  required: false,
-  disabled: false,
-  readonly: false,
-  size: 'medium',
-  variant: 'default',
+  size: 'md',
   className: ''
 })
 
-const emit = defineEmits<{
-  'update:modelValue': [value: string]
-  focus: [event: FocusEvent]
-  blur: [event: FocusEvent]
-  keydown: [event: KeyboardEvent]
-}>()
+const textFieldId = ref(props.fieldID || (props.name || 'sirius-') + performance.now())
 
-const id = computed(() => props.id || `textfield-${Math.random().toString(36).substr(2, 9)}`)
+const componentType = computed(() => props.multiline ? 'textarea' : 'input')
+
+const helpTextId = computed(() => props.helpText ? `${textFieldId.value}-help` : undefined)
+const errorId = computed(() => props.error ? `${textFieldId.value}-error` : undefined)
+
+const describedBy = computed(() => [
+  props['aria-describedby'],
+  helpTextId.value,
+  errorId.value
+].filter(Boolean).join(' '))
+
+const SIZE = {
+  sm: 'text-xs min-h-[1.8rem] py-1',
+  md: 'text-sm min-h-[2rem] py-1',
+  lg: 'text-md min-h-[2rem] py-1.5',
+}
 
 const labelClasses = computed(() => 
+  'text-gray-900 font-normal text-sm'
+)
+
+const labelActionClasses = computed(() => 
+  'text-blue-500 hover:text-blue-600 hover:underline font-normal text-sm'
+)
+
+const inputClasses = computed(() => 
   classNames(
-    'block text-sm font-medium text-gray-700 mb-1',
-    props.disabled ? 'text-gray-400' : ''
+    props.inputClassName,
+    'rounded-md w-full border text-gray-950 placeholder-gray-600 focus:ring-2 focus:ring-offset-1 focus:ring-orange-500 focus:outline-none',
+    SIZE[props.size],
+    props.prefix ? 'pl-7' : 'pl-2',
+    props.suffix ? 'pr-7' : 'pr-2',
+    props.error ? 'border-red-500 bg-red-400/10' : 'border-gray-400 bg-transparent'
   )
-)
-
-const inputClasses = computed(() => {
-  const baseClasses = 'block w-full border rounded-md shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2'
-  
-  const sizeClasses = {
-    small: 'px-3 py-1.5 text-sm',
-    medium: 'px-3 py-2 text-sm',
-    large: 'px-4 py-3 text-base'
-  }
-  
-  const variantClasses = {
-    default: 'border-gray-300 focus:ring-blue-500 focus:border-blue-500',
-    error: 'border-red-300 focus:ring-red-500 focus:border-red-500',
-    success: 'border-green-300 focus:ring-green-500 focus:border-green-500'
-  }
-  
-  const stateClasses = props.disabled 
-    ? 'bg-gray-50 text-gray-500 cursor-not-allowed' 
-    : 'bg-white text-gray-900'
-  
-  return classNames(
-    baseClasses,
-    sizeClasses[props.size],
-    variantClasses[props.variant],
-    stateClasses,
-    props.icon ? 'pr-10' : '',
-    props.className
-  )
-})
-
-const errorClasses = computed(() => 
-  'mt-1 text-sm text-red-600'
-)
-
-const helpTextClasses = computed(() => 
-  'mt-1 text-sm text-gray-500'
 )
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement
-  emit('update:modelValue', target.value)
-}
-
-const handleFocus = (event: FocusEvent) => {
-  emit('focus', event)
-}
-
-const handleBlur = (event: FocusEvent) => {
-  emit('blur', event)
-}
-
-const handleKeydown = (event: KeyboardEvent) => {
-  emit('keydown', event)
+  props.onChange?.(target.value)
 }
 </script>

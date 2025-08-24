@@ -2,9 +2,13 @@
   <Frame :sidebar="true">
     <template #sidebar>
       <Navigation minimized>
-        <Navigation.Section :items="NAVIGATION_SECTION_ITEM" />
-        <Navigation.Section :items="NAVIGATION_SECTION_ITEM_2" title="These icons should have" />
-        <Navigation.SectionFooter>this is footer</Navigation.SectionFooter>
+        <template #sections>
+          <NavigationSection :items="NAVIGATION_SECTION_ITEM" />
+          <NavigationSection :items="NAVIGATION_SECTION_ITEM_2" title="These icons should have" />
+        </template>
+        <template #footer>
+          <NavigationSectionFooter>this is footer</NavigationSectionFooter>
+        </template>
       </Navigation>
     </template>
     
@@ -21,7 +25,7 @@
       :action-groups="actionGroups"
     >
       <Box sectionned shadow="large" as="section" class="mb-6 gap-2">
-        <Stack alignment="center" spacing="small" vertical>
+        <Stack alignment="center" spacing="medium" direction="vertical">
           <Banner background="black" :icon="StarIcon">
             black background
           </Banner>
@@ -78,9 +82,9 @@
           label="Username"
           :label-action="{ content: 'Look up codes' }"
         />
-        <TextField :prefix="TagIcon" size="small" suffix="$" />
-        <TextField :prefix="InboxIcon" type="number" :min="1" size="medium" suffix="$" />
-        <TextField :prefix="HomeIcon" size="large" suffix="$" />
+        <TextField :prefix="TagIcon" size="sm" suffix="$" />
+        <TextField :prefix="InboxIcon" type="number" :min="1" size="md" suffix="$" />
+        <TextField :prefix="HomeIcon" size="lg" suffix="$" />
         <TextField :multiline="3" placeholder="text area" label="text area" />
       </Box>
       
@@ -155,7 +159,7 @@
           
           <template #sortOptions>
             <div class="p-3 min-w-fit whitespace-nowrap">
-              <ChoiceList :items="plans" name="plans" :default-checked="plans[1]" />
+              <ChoiceList :choices="plans" name="plans" :default-checked="plans[1]" />
               <InlineError message="Store name is required" />
             </div>
           </template>
@@ -175,25 +179,25 @@
           :bulk-actions="bulkActions"
           :promoted-bulk-actions="promotedBulkActions"
         >
-          <Table.Row
+          <TableRow
             v-for="(order, index) in orders"
             :key="index"
             :item="order"
           >
-            <Table.Cell>
+            <TableCell>
               <Thumbnail :src="order.src" :alt="order.order" size="sm" />
-            </Table.Cell>
-            <Table.Cell>
+            </TableCell>
+            <TableCell>
               <Text color="info" variant="bodyMd" font-weight="semibold">
                 {{ order.order }}
               </Text>
-            </Table.Cell>
-            <Table.Cell>{{ order.date }}</Table.Cell>
-            <Table.Cell>{{ order.customer }}</Table.Cell>
-            <Table.Cell>{{ order.total }}</Table.Cell>
-            <Table.Cell>{{ order.paymentStatus }}</Table.Cell>
-            <Table.Cell>{{ order.fulfillmentStatus }}</Table.Cell>
-          </Table.Row>
+            </TableCell>
+            <TableCell>{{ order.date }}</TableCell>
+            <TableCell>{{ order.customer }}</TableCell>
+            <TableCell>{{ order.total }}</TableCell>
+            <TableCell>{{ order.paymentStatus }}</TableCell>
+            <TableCell>{{ order.fulfillmentStatus }}</TableCell>
+          </TableRow>
         </Table>
       </Box>
       
@@ -202,7 +206,7 @@
         title="Lorem ipsum"
         class="mb-5"
         :promoted-action="primaryAction"
-        :primary-action="secondaryActions"
+        :primary-action="primaryAction"
         :popover-actions="secondaryActions"
       >
         <div class="flex gap-3">
@@ -228,7 +232,7 @@
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
       </Banner>
       
-      <Box sectionned shadow="colored" as="section" class="mb-6 gap-2">
+      <Box sectionned shadow="large" as="section" class="mb-6 gap-2">
         <Text variant="heading2xl" font-weight="medium">
           Text comp: heading2xl - medium
         </Text>
@@ -264,14 +268,14 @@
         </div>
         
         <br />
-        <Stack alignment="center" spacing="baseTight" vertical>
+        <Stack alignment="center" spacing="small" direction="vertical">
           <Banner status="default">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
           </Banner>
           <Banner status="info">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
           </Banner>
-          <Banner status="pending">
+          <Banner status="warning">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
           </Banner>
           <Banner status="success">
@@ -305,7 +309,7 @@
       </EmptyState>
       
       <Box sectionned as="section" class="mb-6 gap-2">
-        <Stack alignment="center" spacing="baseTight" vertical>
+        <Stack alignment="center" spacing="small" direction="vertical">
           <Banner status="warning">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, numquam.
           </Banner>
@@ -336,7 +340,7 @@
           title="3/4 inch Leather pet collar"
           description="Perfect for any pet"
         >
-          <Box sectionned shadow="md">
+          <Box sectionned shadow="medium">
             <SkeletonBodyText :lines="5" />
           </Box>
         </LayoutAnnotatedSection>
@@ -344,7 +348,7 @@
           title="3/4 inch Leather pet collar"
           description="Perfect for any pet"
         >
-          <Box sectionned shadow="md">
+          <Box sectionned shadow="medium">
             <SkeletonBodyText :lines="5" />
           </Box>
         </LayoutAnnotatedSection>
@@ -354,7 +358,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import {
   Box,
   Page,
@@ -365,15 +369,17 @@ import {
   SkeletonBodyText,
   SkeletonDisplayText,
   Navigation,
+  NavigationSection,
+  NavigationSectionFooter,
   Frame,
   Table,
-  Badge,
+  TableRow,
+  TableCell,
   Text,
   Heading,
   Title,
   Subtitle,
   Banner,
-  Button,
   EmptyState,
   ChoiceList,
   InlineError,
@@ -499,9 +505,9 @@ const orders = [
 ]
 
 const plans = [
-  { id: 'small', label: 'Small', description: '4 GB RAM / 2 CPUS / 80 GB SSD Storage' },
-  { id: 'medium', label: 'Medium', description: '8 GB RAM / 4 CPUS / 160 GB SSD Storage' },
-  { id: 'large', label: 'Large', description: '16 GB RAM / 8 CPUS / 320 GB SSD Storage' }
+  { value: 'small', label: 'Small', description: '4 GB RAM / 2 CPUS / 80 GB SSD Storage' },
+  { value: 'medium', label: 'Medium', description: '8 GB RAM / 4 CPUS / 160 GB SSD Storage' },
+  { value: 'large', label: 'Large', description: '16 GB RAM / 8 CPUS / 320 GB SSD Storage' }
 ]
 
 const NAVIGATION_SECTION_ITEM = [
@@ -575,8 +581,8 @@ const NAVIGATION_SECTION_ITEM_2 = [
   }
 ]
 
-const handleAccountStatusChange = (selected: string[]) => {
-  accountStatus.value = selected
+const handleAccountStatusChange = (selected: string | string[]) => {
+  accountStatus.value = Array.isArray(selected) ? selected : [selected]
 }
 
 const setShowModal = (value: boolean) => {

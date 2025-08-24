@@ -24,22 +24,22 @@
       size="none"
       aria-hidden="true"
     />
-    <component
-      v-else-if="icon"
-      :is="icon"
-      :class="iconClasses"
-      aria-hidden="true"
-    />
+    <div v-else-if="icon" aria-hidden="true">
+      <component
+        :is="icon"
+        :class="iconClasses"
+      />
+    </div>
     
     <slot />
   </component>
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineEmits, useSlots } from 'vue'
+import { computed, useSlots } from 'vue'
 import { classNames } from '../../helpers'
 import { ROUNDED } from '../../constants'
-import type { VariantType, IconType, RoundedType } from '../../types'
+import type { VariantType, IconType, RoundedType } from '../../types/common'
 import { Spinner } from '../feedbacks'
 
 interface Props {
@@ -57,6 +57,7 @@ interface Props {
   url?: string
   target?: '_blank' | '_self' | '_parent' | undefined
   rel?: 'noreferrer' | undefined
+  onClick?: () => void
   // Accessibility props
   'aria-label'?: string
   'aria-describedby'?: string
@@ -81,6 +82,7 @@ const props = withDefaults(defineProps<Props>(), {
   url: undefined,
   target: undefined,
   rel: undefined,
+  onClick: undefined,
   'aria-label': undefined,
   'aria-describedby': undefined,
   'aria-expanded': undefined,
@@ -153,12 +155,14 @@ const COLOR = {
 
 const componentType = computed(() => props.url ? 'a' : 'button')
 
+const slots = useSlots()
+
 const accessibleLabel = computed(() => 
-  props['aria-label'] || (props.icon && !useSlots().default ? 'Button' : undefined)
+  props['aria-label'] || (props.icon && !slots.default ? 'Button' : undefined)
 )
 
 const buttonRole = computed(() => 
-  props.role || (props.icon && !useSlots().default ? 'button' : undefined)
+  props.role || (props.icon && !slots.default ? 'button' : undefined)
 )
 
 const buttonClasses = computed(() => 
@@ -168,7 +172,7 @@ const buttonClasses = computed(() =>
     props.disabled
       ? 'text-[#666] cursor-not-allowed pointer-events-none select-none bg-[#eaeaea] ring-1 ring-[#e0e0e0] opacity-70'
       : '',
-    !useSlots().default && props.icon ? SIZE_ICON_ONLY[props.size].bg : SIZE[props.size],
+    !slots.default && props.icon ? SIZE_ICON_ONLY[props.size].bg : SIZE[props.size],
     ALIGNMENT[props.alignment],
     ROUNDED[props.rounded],
     props.outline || props.link ? COLOR[props.variant] : props.disabled ? '' : VARIANT[props.variant],
@@ -184,13 +188,14 @@ const spinnerClasses = computed(() =>
 
 const iconClasses = computed(() => 
   classNames(
-    !useSlots().default && props.icon ? SIZE_ICON_ONLY[props.size].ibg : SIZE_ICON[props.size],
+    !slots.default && props.icon ? SIZE_ICON_ONLY[props.size].ibg : SIZE_ICON[props.size],
     'fill-current'
   )
 )
 
 const handleClick = () => {
   if (!props.disabled && !props.loading) {
+    props.onClick?.()
     emit('click')
   }
 }

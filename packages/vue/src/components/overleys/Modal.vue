@@ -14,23 +14,19 @@
         @click="handleBackdropClick"
       >
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-          
           <div
             class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
             @click.stop
           >
-            <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div class="sm:flex sm:items-start">
                 <div v-if="icon" class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
                   <component :is="icon" class="h-6 w-6 text-red-600" />
                 </div>
-                
                 <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                   <h3 v-if="title" class="text-lg font-medium leading-6 text-gray-900">
                     {{ title }}
                   </h3>
-                  
                   <div class="mt-2">
                     <slot />
                   </div>
@@ -50,17 +46,19 @@
 
 <script setup lang="ts">
 import { Teleport, Transition } from 'vue'
-import type { IconType } from '../../types'
+import type { IconType } from '../../types/common'
 
 interface Props {
   isOpen: boolean
   title?: string
   icon?: IconType
   closeOnBackdropClick?: boolean
+  className?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  closeOnBackdropClick: true
+  closeOnBackdropClick: true,
+  className: ''
 })
 
 const emit = defineEmits<{

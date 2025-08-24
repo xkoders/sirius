@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="as"
+    :is="tag"
     :class="stackClasses"
   >
     <slot />
@@ -11,12 +11,13 @@
 import { computed } from 'vue'
 import { classNames } from '../../helpers'
 
+
 interface Props {
-  as?: 'div' | 'section' | 'article' | 'aside' | 'header' | 'footer' | 'main'
+  as?: string
   spacing?: 'none' | 'small' | 'medium' | 'large'
   alignment?: 'start' | 'center' | 'end' | 'stretch'
-  distribution?: 'start' | 'center' | 'end' | 'space-between' | 'space-around' | 'space-evenly'
-  direction?: 'vertical' | 'horizontal'
+  distribution?: 'start' | 'center' | 'end' | 'spaceBetween' | 'spaceAround' | 'spaceEvenly'
+  direction?: 'horizontal' | 'vertical'
   wrap?: boolean
   className?: string
 }
@@ -31,47 +32,45 @@ const props = withDefaults(defineProps<Props>(), {
   className: ''
 })
 
-const stackClasses = computed(() => {
-  const baseClasses = 'flex'
-  
-  const directionClasses = {
-    vertical: 'flex-col',
-    horizontal: 'flex-row'
-  }
-  
-  const spacingClasses = {
-    none: '',
-    small: 'gap-2',
-    medium: 'gap-4',
-    large: 'gap-6'
-  }
-  
-  const alignmentClasses = {
-    start: 'items-start',
-    center: 'items-center',
-    end: 'items-end',
-    stretch: 'items-stretch'
-  }
-  
-  const distributionClasses = {
-    start: 'justify-start',
-    center: 'justify-center',
-    end: 'justify-end',
-    'space-between': 'justify-between',
-    'space-around': 'justify-around',
-    'space-evenly': 'justify-evenly'
-  }
-  
-  const wrapClasses = props.wrap ? 'flex-wrap' : 'flex-nowrap'
-  
-  return classNames(
-    baseClasses,
-    directionClasses[props.direction],
-    spacingClasses[props.spacing],
-    alignmentClasses[props.alignment],
-    distributionClasses[props.distribution],
-    wrapClasses,
+const tag = computed(() => props.as)
+
+const SPACING = {
+  none: 'gap-0',
+  small: 'gap-2',
+  medium: 'gap-4',
+  large: 'gap-6'
+}
+
+const ALIGNMENT = {
+  start: 'items-start',
+  center: 'items-center',
+  end: 'items-end',
+  stretch: 'items-stretch'
+}
+
+const DISTRIBUTION = {
+  start: 'justify-start',
+  center: 'justify-center',
+  end: 'justify-end',
+  spaceBetween: 'justify-between',
+  spaceAround: 'justify-around',
+  spaceEvenly: 'justify-evenly'
+}
+
+const DIRECTION = {
+  horizontal: 'flex-row',
+  vertical: 'flex-col'
+}
+
+const stackClasses = computed(() => 
+  classNames(
+    'flex',
+    SPACING[props.spacing],
+    ALIGNMENT[props.alignment],
+    DISTRIBUTION[props.distribution],
+    DIRECTION[props.direction],
+    props.wrap ? 'flex-wrap' : 'flex-nowrap',
     props.className
   )
-})
+)
 </script>
