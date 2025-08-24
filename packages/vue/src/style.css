@@ -3,3 +3,18 @@
 @tailwind utilities;
 
 /* Vue-specific styles will go here */
+
+.cbx svg.indeterminate {
+    stroke-dashoffset: 0 !important;
+  }
+  
+  .inp-cbx:checked + .cbx span:first-child {
+    background-color: #f97316; /* bg-orange-500 */
+    border-color: #f97316;     /* border-orange-500 */
+    animation: check 0.6s ease;
+  }
+  
+  .inp-cbx:checked + .cbx span:first-child svg {
+    stroke-dashoffset: 0;
+  }
+  

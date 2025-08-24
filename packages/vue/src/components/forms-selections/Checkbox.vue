@@ -1,125 +1,96 @@
+<!-- src/components/Checkbox.vue -->
+<script setup lang="ts">
+import { ref, watch, onMounted } from 'vue'
+
+// ------------------ Types ------------------
+interface ICheckbox {
+  label?: string
+  checked?: boolean
+  indeterminate?: boolean
+  disabled?: boolean
+  name?: string
+  value?: string
+  onChange?: (value: boolean, e?: Event) => void
+}
+
+const props = defineProps<ICheckbox>()
+const emit = defineEmits(['update:checked'])
+
+// ------------------ State ------------------
+const cRef = ref<HTMLInputElement | null>(null)
+const checkboxId = ref((props.name || 'sirius') + Math.random().toString(36).substring(2, 7))
+
+// ------------------ Functions ------------------
+const handleChange = (e: Event) => {
+  const isChecked = (e.target as HTMLInputElement).checked
+  emit('update:checked', isChecked)
+  if (props.onChange) {
+    props.onChange(isChecked, e)
+  }
+}
+
+// ------------------ Watchers & Lifecycle Hooks ------------------
+watch(() => props.indeterminate, (newVal) => {
+  if (cRef.value) {
+    cRef.value.indeterminate = newVal
+  }
+})
+
+onMounted(() => {
+  if (cRef.value) {
+    cRef.value.indeterminate = props.indeterminate
+  }
+})
+</script>
+
 <template>
-  <div class="flex items-start">
-    <div class="flex items-center h-5">
-      <input
-        :id="id"
-        :checked="modelValue"
-        :disabled="disabled"
-        :required="required"
-        :class="checkboxClasses"
-        type="checkbox"
-        @change="handleChange"
-        @focus="handleFocus"
-        @blur="handleBlur"
-      />
-    </div>
-    
-    <div class="ml-3 text-sm">
-      <label v-if="label" :for="id" :class="labelClasses">
-        {{ label }}
-        <span v-if="required" class="text-red-500 ml-1">*</span>
-      </label>
-      
-      <p v-if="helpText" :class="helpTextClasses">
-        {{ helpText }}
-      </p>
-      
-      <p v-if="error" :class="errorClasses">
-        {{ error }}
-      </p>
-    </div>
+  <div class="flex items-center justify-center">
+    <input
+      type="checkbox"
+      class="inp-cbx hidden"
+      :name="name"
+      :checked="checked"
+      @change="handleChange"
+      :disabled="disabled"
+      ref="cRef"
+      :id="checkboxId"
+    />
+    <label
+      :for="checkboxId"
+      :class="[
+        'cbx cursor-pointer select-none flex items-center text-sm gap-2',
+        'checkbox',
+        disabled ? 'disabled' : '',
+        indeterminate ? `checkbox-indeterminate` : '',
+  ]"
+    >
+      <span class="relative w-5 h-5 rounded align-middle scale-100 border hover:border-orange-500 transition-all border-gray-400">
+        <svg
+          :class="[
+            indeterminate ? 'indeterminate stroke-orange-500' : '',
+            'transition-all duration-300 delay-100 absolute inset-0 fill-none ',
+      ]"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="white"
+          stroke-dasharray="26"
+          stroke-dashoffset="26"
+        >
+          <path
+            v-if="indeterminate"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.5 12h-15"
+          />
+          <path
+            v-else
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4.5 12.75l6 6 9-13.5"
+          />
+        </svg>
+      </span>
+      <span v-if="label" class="flex-1">{{ label }}</span>
+    </label>
   </div>
 </template>
-
-<script setup lang="ts">
-import { computed } from 'vue'
-import { classNames } from '../../helpers'
-
-interface Props {
-  modelValue?: boolean
-  label?: string
-  helpText?: string
-  error?: string
-  id?: string
-  required?: boolean
-  disabled?: boolean
-  size?: 'small' | 'medium' | 'large'
-  variant?: 'default' | 'error' | 'success'
-  className?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  modelValue: false,
-  required: false,
-  disabled: false,
-  size: 'medium',
-  variant: 'default',
-  className: ''
-})
-
-const emit = defineEmits<{
-  'update:modelValue': [value: boolean]
-  change: [event: Event]
-  focus: [event: FocusEvent]
-  blur: [event: FocusEvent]
-}>()
-
-const id = computed(() => props.id || `checkbox-${Math.random().toString(36).substr(2, 9)}`)
-
-const checkboxClasses = computed(() => {
-  const baseClasses = 'h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
-  
-  const sizeClasses = {
-    small: 'h-3 w-3',
-    medium: 'h-4 w-4',
-    large: 'h-5 w-5'
-  }
-  
-  const variantClasses = {
-    default: 'border-gray-300 focus:ring-blue-500',
-    error: 'border-red-300 focus:ring-red-500',
-    success: 'border-green-300 focus:ring-green-500'
-  }
-  
-  const stateClasses = props.disabled 
-    ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-    : 'bg-white cursor-pointer'
-  
-  return classNames(
-    baseClasses,
-    sizeClasses[props.size],
-    variantClasses[props.variant],
-    stateClasses,
-    props.className
-  )
-})
-
-const labelClasses = computed(() => 
-  classNames(
-    'font-medium text-gray-700',
-    props.disabled ? 'text-gray-400 cursor-not-allowed' : 'cursor-pointer'
-  )
-)
-
-const helpTextClasses = computed(() => 
-  'text-gray-500'
-)
-
-const errorClasses = computed(() => 
-  'text-red-600'
-)
-
-const handleChange = (event: Event) => {
-  const target = event.target as HTMLInputElement
-  emit('update:modelValue', target.checked)
-  emit('change', event)
-}
-
-const handleFocus = (event: FocusEvent) => {
-  emit('focus', event)
-}
-
-const handleBlur = (event: FocusEvent) => {
-  emit('blur', event)
-}
-</script>

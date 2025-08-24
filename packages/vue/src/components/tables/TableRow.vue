@@ -50,7 +50,7 @@ const handleChangeSelect = (checked: boolean) => {
         v-if="isSelected"
         class="absolute inset-y-1 left-px flex items-center w-1 bg-orange-500 rounded-full"
       ></span>
-      <Checkbox :checked="isSelected" name="table-row-checkbox" @update:modelValue="handleChangeSelect" />
+      <Checkbox :checked="isSelected" name="table-row-checkbox" @update:checked="handleChangeSelect" />
     </td>
     <slot />
   </tr>

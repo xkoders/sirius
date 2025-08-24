@@ -86,7 +86,7 @@ const handleSelectAll = (value: boolean) => {
               <Checkbox
                 :checked="checkboxType === 'all'"
                 :indeterminate="checkboxType === 'intermediate'"
-                @update:modelValue="handleSelectAll"
+                @update:checked="handleSelectAll"
               />
             </th>
             <th
