@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Examples specific styles */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+button,
+a {
+  @apply focus:outline-none;
+}
+
+@keyframes check {
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.cbx svg.indeterminate {
+  stroke-dashoffset: 0 !important;
+}
+
+.inp-cbx {
+  &:checked + .cbx {
+    span {
+      &:first-child {
+        @apply bg-orange-500 border-orange-500;
+        animation: check 0.6s ease;
+        svg {
+          stroke-dashoffset: 0;
+        }
+      }
+    }
+  }
+}
+.animate {
+  & > * {
+    animation-duration: var(--x-duration);
+    animation-timing-function: var(--x-timing);
+  }
+  &.fade-in > * {
+    animation-name: fade-in;
+  }
+  &.slide-up > * {
+    animation-name: slide-up;
+  }
+  &.slide-down > * {
+    animation-name: slide-down;
+  }
+  &.collapsible > * {
+    animation-name: collapsible;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes collapsible {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    max-height: 8rem;
+  }
+}

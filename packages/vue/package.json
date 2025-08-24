@@ -1,0 +1,49 @@
+{
+  "name": "@adersolutions/sirius-ui-vue",
+  "version": "1.0.0",
+  "description": "Sirius UI Vue Components Library",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "vue": "^3.3.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.0",
+    "vite-plugin-dts": "^3.3.1",
+    "sass": "^1.64.0",
+    "tailwindcss": "^3.3.3",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.26"
+  },
+  "keywords": [
+    "vue",
+    "ui",
+    "components",
+    "design-system"
+  ],
+  "author": {
+    "name": "Soufiyan",
+    "email": "benallalsoufiane1@gmail.com"
+  },
+  "license": "MIT"
+}
