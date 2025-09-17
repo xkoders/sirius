@@ -29,10 +29,10 @@ import {
   Header,
   TextField,
   // ErrorTestComponent,
-} from '@adersolutions/sirius-ui-react'
+} from '@adersolutions/sirius-react'
 import { HomeIcon, InboxIcon, TagIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
-import { useToast, IAction } from '@adersolutions/sirius-ui-react'
-import '@adersolutions/sirius-ui-react/style.css'
+import { useToast, IAction } from '@adersolutions/sirius-react'
+import '@adersolutions/sirius-react/style.css'
 const toastData = {
   id: 0,
   content: 'This is a toast content',

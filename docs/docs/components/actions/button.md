@@ -15,7 +15,7 @@ The Button component is the primary interactive element in Sirius UI. It provide
 ## 🚀 Basic Usage
 
 ```tsx
-import { Button } from '@adersolutions/sirius-ui-react';
+import { Button } from '@adersolutions/sirius-react';
 
 function MyComponent() {
   return (
@@ -125,7 +125,7 @@ For destructive actions that require caution.
 ### With Icon
 
 ```tsx
-import { Icon } from '@adersolutions/sirius-ui-react';
+import { Icon } from '@adersolutions/sirius-react';
 
 <Button icon={<Icon name="plus" />}>
   Add Item
@@ -157,7 +157,7 @@ function ContactForm() {
 ### Button Group
 
 ```tsx
-import { Button, Stack } from '@adersolutions/sirius-ui-react';
+import { Button, Stack } from '@adersolutions/sirius-react';
 
 function ActionButtons() {
   return (
@@ -310,7 +310,7 @@ const StyledButton = styled(Button)`
 
 ```tsx
 import { render, screen, fireEvent } from '@testing-library/react';
-import { Button } from '@adersolutions/sirius-ui-react';
+import { Button } from '@adersolutions/sirius-react';
 
 test('renders button with correct text', () => {
   render(<Button>Click me</Button>);

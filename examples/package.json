@@ -1,5 +1,5 @@
 {
-  "name": "@adersolutions/sirius-ui-examples",
+  "name": "@adersolutions/sirius-examples",
   "version": "1.0.0",
   "description": "Sirius UI Examples and Showcase",
   "private": true,
@@ -10,7 +10,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
-    "@adersolutions/sirius-ui-react": "workspace:*",
+    "@adersolutions/sirius-react": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@heroicons/react": "^2.1.3"

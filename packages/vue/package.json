@@ -1,5 +1,5 @@
 {
-  "name": "@adersolutions/sirius-ui-vue",
+  "name": "@adersolutions/sirius-vue",
   "version": "1.0.0",
   "description": "Sirius UI Vue Components Library",
   "type": "module",
@@ -45,7 +45,9 @@
     "vue",
     "ui",
     "components",
-    "design-system"
+    "design-system",
+    "sirius",
+    "adersolutions"
   ],
   "author": {
     "name": "Soufiyan",

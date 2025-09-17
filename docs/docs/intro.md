@@ -25,10 +25,10 @@ Get started with Sirius UI in just a few steps:
 
 ```bash
 # Install the package
-pnpm add @adersolutions/sirius-ui-react
+pnpm add @adersolutions/sirius-react
 
 # Import and use components
-import { Button, Text, Box } from '@adersolutions/sirius-ui-react';
+import { Button, Text, Box } from '@adersolutions/sirius-react';
 ```
 
 ## 🎯 What's Included

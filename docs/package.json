@@ -1,5 +1,5 @@
 {
-  "name": "@adersolutions/sirius-ui-docs",
+  "name": "@adersolutions/sirius-docs",
   "version": "1.0.0",
   "description": "Sirius UI Documentation Website",
   "private": true,
@@ -16,7 +16,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@adersolutions/sirius-ui-react": "workspace:*",
+    "@adersolutions/sirius-react": "workspace:*",
     "@docusaurus/core": "3.8.1",
     "@docusaurus/preset-classic": "3.8.1",
     "@mdx-js/react": "^3.0.0",

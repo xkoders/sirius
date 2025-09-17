@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { IAction, IToastProps } from '../../types'
+import {  IToastProps } from '../../types'
 import { computed, h } from 'vue'
 
 

@@ -21,19 +21,19 @@ Before you begin, make sure you have:
 ### Using pnpm (Recommended)
 
 ```bash
-pnpm add @adersolutions/sirius-ui-react
+pnpm add @adersolutions/sirius-react
 ```
 
 ### Using npm
 
 ```bash
-npm install @adersolutions/sirius-ui-react
+npm install @adersolutions/sirius-react
 ```
 
 ### Using yarn
 
 ```bash
-yarn add @adersolutions/sirius-ui-react
+yarn add @adersolutions/sirius-react
 ```
 
 ## 🎯 Basic Setup
@@ -43,7 +43,7 @@ yarn add @adersolutions/sirius-ui-react
 You can import individual components to keep your bundle size minimal:
 
 ```tsx
-import { Button, Text, Box } from '@adersolutions/sirius-ui-react';
+import { Button, Text, Box } from '@adersolutions/sirius-react';
 ```
 
 ### 2. Use Components
@@ -52,7 +52,7 @@ Start using components in your React components:
 
 ```tsx
 import React from 'react';
-import { Button, Text, Box, Stack } from '@adersolutions/sirius-ui-react';
+import { Button, Text, Box, Stack } from '@adersolutions/sirius-react';
 
 function MyComponent() {
   return (
@@ -83,7 +83,7 @@ Import the base styles in your main application file:
 
 ```tsx
 // In your main.tsx or App.tsx
-import '@adersolutions/sirius-ui-react/index.scss';
+import '@adersolutions/sirius-react/index.scss';
 ```
 
 ### Tailwind CSS Integration
@@ -102,7 +102,7 @@ Update your `tailwind.config.js`:
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/@adersolutions/sirius-ui-react/**/*.{js,jsx,ts,tsx}"
+    "./node_modules/@adersolutions/sirius-react/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
     extend: {},
@@ -132,7 +132,7 @@ Sirius UI includes full TypeScript support. Make sure your `tsconfig.json` inclu
 For advanced features like theming and context, wrap your app with the Provider:
 
 ```tsx
-import { Provider } from '@adersolutions/sirius-ui-react';
+import { Provider } from '@adersolutions/sirius-react';
 
 function App() {
   return (
@@ -163,7 +163,7 @@ Test your components to ensure they work correctly:
 
 ```tsx
 import { render, screen } from '@testing-library/react';
-import { Button } from '@adersolutions/sirius-ui-react';
+import { Button } from '@adersolutions/sirius-react';
 
 test('renders button with correct text', () => {
   render(<Button>Click me</Button>);

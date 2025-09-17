@@ -17,7 +17,7 @@ The Badge component is used to display small pieces of information such as statu
 ### React
 
 ```tsx
-import { Badge } from '@adersolutions/sirius-ui-react';
+import { Badge } from '@adersolutions/sirius-react';
 
 function MyComponent() {
   return (
@@ -95,7 +95,7 @@ function MyComponent() {
 ### Status Indicators
 
 ```tsx
-import { Badge } from '@adersolutions/sirius-ui-react';
+import { Badge } from '@adersolutions/sirius-react';
 
 function StatusExample() {
   return (
@@ -112,7 +112,7 @@ function StatusExample() {
 ### With Icons
 
 ```tsx
-import { Badge } from '@adersolutions/sirius-ui-react';
+import { Badge } from '@adersolutions/sirius-react';
 import { CheckIcon, ExclamationIcon } from '@heroicons/react/20/solid';
 
 function IconBadgeExample() {
@@ -201,7 +201,7 @@ The Badge component includes several accessibility features:
 
 ```tsx
 import { render, screen } from '@testing-library/react';
-import { Badge } from '@adersolutions/sirius-ui-react';
+import { Badge } from '@adersolutions/sirius-react';
 
 test('renders badge with correct text', () => {
   render(<Badge>Test Badge</Badge>);

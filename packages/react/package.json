@@ -1,5 +1,5 @@
 {
-  "name": "@adersolutions/sirius-ui-react",
+  "name": "@adersolutions/sirius-react",
   "version": "1.0.0",
   "description": "Sirius UI React Components Library",
   "type": "module",
@@ -48,7 +48,9 @@
     "react",
     "ui",
     "components",
-    "design-system"
+    "design-system",
+    "sirius",
+    "adersolutions"
   ],
   "author": {
     "name": "Soufiyan",

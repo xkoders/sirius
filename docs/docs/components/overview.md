@@ -105,7 +105,7 @@ All components follow these design principles:
 ### Basic Usage
 
 ```tsx
-import { Button, Text, Box } from '@adersolutions/sirius-ui-react';
+import { Button, Text, Box } from '@adersolutions/sirius-react';
 
 function MyComponent() {
   return (

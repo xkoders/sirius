@@ -1,20 +1,23 @@
-# Sirius UI Vue Components
+# @adersolutions/sirius-vue
 
-A comprehensive Vue 3 component library built with TypeScript and Tailwind CSS.
-
-## Features
-
-- **Vue 3 Composition API**: Built with modern Vue 3 features
-- **TypeScript**: Full TypeScript support with proper type definitions
-- **Tailwind CSS**: Utility-first CSS framework for consistent styling
-- **Accessibility**: WCAG compliant components with proper ARIA attributes
-- **Responsive**: Mobile-first responsive design
-- **Customizable**: Easy to customize with CSS variables and Tailwind classes
+A comprehensive Vue 3 UI components library built with modern design principles and accessibility in mind.
 
 ## Installation
 
 ```bash
-pnpm add @adersolutions/sirius-ui-vue
+npm install @adersolutions/sirius-vue
+# or
+pnpm add @adersolutions/sirius-vue
+# or
+yarn add @adersolutions/sirius-vue
+```
+
+## Peer Dependencies
+
+This package requires Vue 3.3.0 or higher:
+
+```bash
+npm install vue@^3.3.0
 ```
 
 ## Usage
@@ -24,116 +27,153 @@ pnpm add @adersolutions/sirius-ui-vue
 ```vue
 <template>
   <div>
-    <Button variant="primary" @click="showToast">
-      Show Toast
-    </Button>
-    
-    <ToastContainer />
+    <SiriusButton variant="primary">Click me</SiriusButton>
+    <SiriusBadge color="blue">New</SiriusBadge>
+    <SiriusSpinner size="medium" />
   </div>
 </template>
 
-<script setup lang="ts">
-import { Button, ToastContainer, useToast } from '@adersolutions/sirius-ui-vue'
-
-const { success } = useToast()
-
-const showToast = () => {
-  success('This is a success message!')
-}
+<script setup>
+import { 
+  SiriusButton, 
+  SiriusBadge, 
+  SiriusSpinner 
+} from '@adersolutions/sirius-vue';
+import '@adersolutions/sirius-vue/style.css';
 </script>
 ```
 
-### Components
+### Global Registration (Optional)
+
+```javascript
+// main.js
+import { createApp } from 'vue';
+import Sirius from '@adersolutions/sirius-vue';
+import '@adersolutions/sirius-vue/style.css';
+
+const app = createApp(App);
+app.use(Sirius);
+app.mount('#app');
+```
+
+### Available Components
 
 #### Actions
-- **Button**: Versatile button component with multiple variants, sizes, and states
+- **SiriusButton** - Interactive buttons with multiple variants and states
 
 #### Feedback
-- **Spinner**: Loading spinner with customizable sizes
-- **Badge**: Status indicators with various types and colors
-- **Toast**: Notification system with multiple types
-- **ToastContainer**: Container for managing multiple toasts
-
-#### Typography
-- **Text**: Flexible text component with variants and styling options
-- **Heading**: Heading components with semantic HTML and styling
+- **SiriusBadge** - Status indicators and labels
+- **SiriusBanner** - Important announcements and alerts
+- **SiriusErrorBoundary** - Error catching and fallback UI
+- **SiriusExceptionList** - Display lists of errors or exceptions
+- **SiriusSkeletonBodyText** - Loading placeholder for text content
+- **SiriusSkeletonDisplayText** - Loading placeholder for headings
+- **SiriusSpinner** - Loading indicators
+- **SiriusToast** - Temporary notifications
+- **SiriusTransition** - Smooth animations and transitions
 
 #### Forms & Selections
-- **TextField**: Input field with validation states and icons
-- **Checkbox**: Checkbox input with proper labeling and states
+- **SiriusCheckbox** - Boolean input controls
+- **SiriusRadioButton** - Single selection from multiple options
+- **SiriusSelect** - Dropdown selection controls
+- **SiriusTextField** - Text input fields
+- **SiriusToggle** - On/off switches
+
+#### Images
+- **SiriusThumbnail** - Image previews and avatars
 
 #### Layout & Structure
-- **Box**: Container component with padding, margin, and styling options
-- **Stack**: Flexbox-based layout component for arranging elements
-
-#### Tables
-- **Table**: Data table with customizable styling and slots
-
-#### Overlays
-- **Modal**: Modal dialog with backdrop and transitions
+- **SiriusCard** - Content containers with consistent styling
+- **SiriusDivider** - Visual separators
+- **SiriusGrid** - Responsive grid system
+- **SiriusLayout** - Page layout components
+- **SiriusPage** - Full-page layout wrapper
+- **SiriusSection** - Content sections
+- **SiriusStack** - Vertical and horizontal stacking
+- **SiriusTabs** - Tabbed content organization
 
 #### Navigation
-- **Navigation**: Navigation bar with responsive mobile menu
+- **SiriusFrame** - Application frame with navigation
+- **SiriusNavigation** - Navigation components
 
-#### Provider
-- **Provider**: Context provider for theme and locale
+#### Overlays
+- **SiriusModal** - Overlay dialogs and forms
+- **SiriusPopover** - Contextual overlays
+- **SiriusTooltip** - Hover information
 
-### Composables
+#### Tables
+- **SiriusDataTable** - Structured data display
+- **SiriusTable** - Basic table components
 
-#### useToast
-```vue
-<script setup lang="ts">
-import { useToast } from '@adersolutions/sirius-ui-vue'
+#### Typography
+- **SiriusDisplayText** - Large display text
+- **SiriusHeading** - Section headings
+- **SiriusLink** - Interactive links
+- **SiriusText** - Body text and paragraphs
+- **SiriusTextStyle** - Text with semantic styling
 
-const { success, error, warning, info, removeToast, clearToasts } = useToast()
+## Composables
 
-// Show different types of toasts
-success('Operation completed successfully!')
-error('Something went wrong!')
-warning('Please check your input!')
-info('Here is some information!')
+The package also provides useful composables:
 
-// Remove specific toast
-removeToast('toast-id')
+```javascript
+import { useToast } from '@adersolutions/sirius-vue';
 
-// Clear all toasts
-clearToasts()
-</script>
+// In your component
+const { showToast, hideToast } = useToast();
 ```
 
 ## Styling
 
-The library uses Tailwind CSS for styling. You can customize the appearance by:
+The package includes a CSS file that you need to import. Make sure to include Tailwind CSS in your project for full styling support.
 
-1. Overriding Tailwind classes
-2. Using CSS custom properties
-3. Extending the component props
+```javascript
+import '@adersolutions/sirius-vue/style.css';
+```
 
-## Accessibility
+## TypeScript Support
 
-All components are built with accessibility in mind:
+This package is built with TypeScript and includes full type definitions. All components and composables are fully typed with proper interfaces and JSDoc comments.
 
-- Proper ARIA attributes
-- Keyboard navigation support
-- Screen reader compatibility
-- Focus management
-- Semantic HTML structure
+## Demo
 
-## Browser Support
+You can run the demo application to see all components in action:
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+```bash
+# Navigate to the Vue package directory
+cd packages/vue
 
-## Contributing
+# Install dependencies
+pnpm install
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+# Run demo
+pnpm demo
+
+# Build demo
+pnpm demo:build
+```
+
+## Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Build the package
+pnpm build
+
+# Watch mode for development
+pnpm dev
+```
 
 ## License
 
-MIT License - see LICENSE file for details
+MIT
+
+## Contributing
+
+Please refer to the main repository for contributing guidelines.
+
+## Support
+
+For issues and feature requests, please visit our [GitHub repository](https://github.com/adersolutions/sirius).

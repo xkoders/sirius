@@ -17,7 +17,7 @@ The Spinner component provides visual feedback during loading operations. It's c
 ### React
 
 ```tsx
-import { Spinner } from '@adersolutions/sirius-ui-react';
+import { Spinner } from '@adersolutions/sirius-react';
 
 function MyComponent() {
   return (
@@ -88,7 +88,7 @@ function MyComponent() {
 ### Button with Loading State
 
 ```tsx
-import { Button, Spinner } from '@adersolutions/sirius-ui-react';
+import { Button, Spinner } from '@adersolutions/sirius-react';
 
 function LoadingButton() {
   const [isLoading, setIsLoading] = useState(false);
@@ -245,7 +245,7 @@ The Spinner component includes several accessibility features:
 
 ```tsx
 import { render, screen } from '@testing-library/react';
-import { Spinner } from '@adersolutions/sirius-ui-react';
+import { Spinner } from '@adersolutions/sirius-react';
 
 test('renders spinner with correct size', () => {
   render(<Spinner size="large" />);

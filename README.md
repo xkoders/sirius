@@ -6,14 +6,14 @@ A modern, accessible, and customizable UI component library for React and Vue ap
 
 ### React
 ```bash
-npm install @adersolutions/sirius-ui-react
+npm install @adersolutions/sirius-react
 # or
-pnpm add @adersolutions/sirius-ui-react
+pnpm add @adersolutions/sirius-react
 ```
 
 ```tsx
-import { Button, Badge, Text } from '@adersolutions/sirius-ui-react'
-import '@adersolutions/sirius-ui-react/style.css'
+import { Button, Badge, Text } from '@adersolutions/sirius-react'
+import '@adersolutions/sirius-react/style.css'
 
 function App() {
   return (
@@ -28,9 +28,9 @@ function App() {
 
 ### Vue
 ```bash
-npm install @adersolutions/sirius-ui-vue
+npm install @adersolutions/sirius-vue
 # or
-pnpm add @adersolutions/sirius-ui-vue
+pnpm add @adersolutions/sirius-vue
 ```
 
 ```vue
@@ -42,9 +42,9 @@ pnpm add @adersolutions/sirius-ui-vue
   </div>
 </template>
 
-<script setup lang="import">
-import { SiriusText, SiriusButton, SiriusBadge } from '@adersolutions/sirius-ui-vue'
-import '@adersolutions/sirius-ui-vue/style.css'
+<script setup>
+import { SiriusText, SiriusButton, SiriusBadge } from '@adersolutions/sirius-vue'
+import '@adersolutions/sirius-vue/style.css'
 </script>
 ```
 
@@ -52,10 +52,10 @@ import '@adersolutions/sirius-ui-vue/style.css'
 
 This monorepo contains the following packages:
 
-- **`@adersolutions/sirius-ui-react`** - React component library
-- **`@adersolutions/sirius-ui-vue`** - Vue component library  
-- **`@adersolutions/sirius-ui-examples`** - Component examples and showcase
-- **`@adersolutions/sirius-ui-docs`** - Comprehensive documentation website
+- **`@adersolutions/sirius-react`** - React component library
+- **`@adersolutions/sirius-vue`** - Vue component library  
+- **`@adersolutions/sirius-examples`** - Component examples and showcase
+- **`@adersolutions/sirius-docs`** - Comprehensive documentation website
 
 ## 🛠️ Development
 
@@ -82,6 +82,15 @@ pnpm build:vue
 
 # Build all libraries
 pnpm build:all
+
+# Publish React package
+pnpm publish:react
+
+# Publish Vue package
+pnpm publish:vue
+
+# Publish all packages
+pnpm publish:all
 ```
 
 ### Scripts
@@ -90,6 +99,9 @@ pnpm build:all
 - `pnpm build:react` - Build React library
 - `pnpm build:vue` - Build Vue library
 - `pnpm build:all` - Build all libraries
+- `pnpm publish:react` - Publish React package to npm
+- `pnpm publish:vue` - Publish Vue package to npm
+- `pnpm publish:all` - Publish all packages to npm
 - `pnpm lint` - Run ESLint
 - `pnpm format` - Format code with Prettier
 

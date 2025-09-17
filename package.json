@@ -13,11 +13,14 @@
     "docs"
   ],
   "scripts": {
-    "dev:examples": "pnpm --filter @adersolutions/sirius-ui-examples dev",
-    "dev:docs": "pnpm --filter @adersolutions/sirius-ui-docs dev",
-    "build:react": "pnpm --filter @adersolutions/sirius-ui-react build",
-    "build:vue": "pnpm --filter @adersolutions/sirius-ui-vue build",
+    "dev:examples": "pnpm --filter @adersolutions/sirius-examples dev",
+    "dev:docs": "pnpm --filter @adersolutions/sirius-docs dev",
+    "build:react": "pnpm --filter @adersolutions/sirius-react build",
+    "build:vue": "pnpm --filter @adersolutions/sirius-vue build",
     "build:all": "pnpm build:react && pnpm build:vue",
+    "publish:react": "pnpm --filter @adersolutions/sirius-react publish",
+    "publish:vue": "pnpm --filter @adersolutions/sirius-vue publish",
+    "publish:all": "pnpm publish:react && pnpm publish:vue",
     "clean": "pnpm -r exec rm -rf node_modules && rm -rf node_modules",
     "install:all": "pnpm install",
     "prepare": "husky install"
