@@ -220,3 +220,4 @@ test('applies correct status classes', () => {
 - **[Button](/docs/components/actions/button)** - Interactive buttons with badges
 - **[Banner](/docs/components/feedbacks/banner)** - Status banners
 - **[Toast](/docs/components/feedbacks/toast)** - Notification toasts
+
