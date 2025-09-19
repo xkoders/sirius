@@ -59,58 +59,58 @@ app.mount('#app');
 ### Available Components
 
 #### Actions
-- **SiriusButton** - Interactive buttons with multiple variants and states
+- **Button** - Interactive buttons with multiple variants and states
 
 #### Feedback
-- **SiriusBadge** - Status indicators and labels
-- **SiriusBanner** - Important announcements and alerts
-- **SiriusErrorBoundary** - Error catching and fallback UI
-- **SiriusExceptionList** - Display lists of errors or exceptions
-- **SiriusSkeletonBodyText** - Loading placeholder for text content
-- **SiriusSkeletonDisplayText** - Loading placeholder for headings
-- **SiriusSpinner** - Loading indicators
-- **SiriusToast** - Temporary notifications
-- **SiriusTransition** - Smooth animations and transitions
+- **Badge** - Status indicators and labels
+- **Banner** - Important announcements and alerts
+- **ErrorBoundary** - Error catching and fallback UI
+- **ExceptionList** - Display lists of errors or exceptions
+- **SkeletonBodyText** - Loading placeholder for text content
+- **SkeletonDisplayText** - Loading placeholder for headings
+- **Spinner** - Loading indicators
+- **Toast** - Temporary notifications
+- **Transition** - Smooth animations and transitions
 
 #### Forms & Selections
-- **SiriusCheckbox** - Boolean input controls
-- **SiriusRadioButton** - Single selection from multiple options
-- **SiriusSelect** - Dropdown selection controls
-- **SiriusTextField** - Text input fields
-- **SiriusToggle** - On/off switches
+- **Checkbox** - Boolean input controls
+- **RadioButton** - Single selection from multiple options
+- **Select** - Dropdown selection controls
+- **TextField** - Text input fields
+- **Toggle** - On/off switches
 
 #### Images
-- **SiriusThumbnail** - Image previews and avatars
+- **Thumbnail** - Image previews and avatars
 
 #### Layout & Structure
-- **SiriusCard** - Content containers with consistent styling
-- **SiriusDivider** - Visual separators
-- **SiriusGrid** - Responsive grid system
-- **SiriusLayout** - Page layout components
-- **SiriusPage** - Full-page layout wrapper
-- **SiriusSection** - Content sections
-- **SiriusStack** - Vertical and horizontal stacking
-- **SiriusTabs** - Tabbed content organization
+- **Card** - Content containers with consistent styling
+- **Divider** - Visual separators
+- **Grid** - Responsive grid system
+- **Layout** - Page layout components
+- **Page** - Full-page layout wrapper
+- **Section** - Content sections
+- **Stack** - Vertical and horizontal stacking
+- **Tabs** - Tabbed content organization
 
 #### Navigation
-- **SiriusFrame** - Application frame with navigation
-- **SiriusNavigation** - Navigation components
+- **Frame** - Application frame with navigation
+- **Navigation** - Navigation components
 
 #### Overlays
-- **SiriusModal** - Overlay dialogs and forms
-- **SiriusPopover** - Contextual overlays
-- **SiriusTooltip** - Hover information
+- **Modal** - Overlay dialogs and forms
+- **Popover** - Contextual overlays
+- **Tooltip** - Hover information
 
 #### Tables
-- **SiriusDataTable** - Structured data display
-- **SiriusTable** - Basic table components
+- **DataTable** - Structured data display
+- **Table** - Basic table components
 
 #### Typography
-- **SiriusDisplayText** - Large display text
-- **SiriusHeading** - Section headings
-- **SiriusLink** - Interactive links
-- **SiriusText** - Body text and paragraphs
-- **SiriusTextStyle** - Text with semantic styling
+- **DisplayText** - Large display text
+- **Heading** - Section headings
+- **Link** - Interactive links
+- **Text** - Body text and paragraphs
+- **TextStyle** - Text with semantic styling
 
 ## Composables
 

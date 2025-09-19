@@ -1,6 +1,6 @@
 {
   "name": "@adersolutions/sirius-vue",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sirius UI Vue Components Library",
   "type": "module",
   "main": "./dist/index.js",
