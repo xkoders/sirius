@@ -5,7 +5,17 @@ import dts from 'vite-plugin-dts'
 
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      script: {
+        defineModel: true,
+        propsDestructure: true
+      },
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.includes('-')
+        }
+      }
+    }),
     dts({
       insertTypesEntry: true,
       include: ['src/**/*'],
@@ -13,6 +23,9 @@ export default defineConfig({
       outDir: 'dist',
       entryRoot: 'src',
       rollupTypes: true,
+      // skipDiagnostics: true, // Add this line
+      // logDiagnostics: true,  // Optionally log diagnostics for debugging
+      
     }),
   ],
   resolve: {

@@ -106,7 +106,8 @@ interface IButtonProps {
   target?: '_blank' | '_self' | '_parent'
   onClick?: () => void
   role?: string
-  title?: string
+  title?: string,
+  [key: string]: any
 }
 
 const props = withDefaults(defineProps<IButtonProps>(), {

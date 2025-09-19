@@ -43,7 +43,10 @@ const handleChange = (index: number, tab: TabsProps) => {
         name="tabs"
         class="block w-full rounded-md border-gray-300 focus:outline-none focus:ring-indigo-500 border px-2 shadow-sm"
         :value="selected"
-        @change="e => handleChange(Number(e.target?.value ?? 0), tabs[Number(e.target?.value ?? 0)])"
+        @change="(e: Event) => {
+          const target = e.target as HTMLSelectElement;
+          handleChange(Number(target.value ?? 0), tabs[Number(target.value ?? 0)])
+        }"
       >
         <option v-for="(tab, idx) in tabs" :key="idx" :value="idx">
           {{ tab.label }}

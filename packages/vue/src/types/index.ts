@@ -1,3 +1,5 @@
+import { IAction } from './common'
+
 export * from './common'
 
 export interface IToastProps {

@@ -121,7 +121,7 @@ const getTextColor = computed(() => {
         fill="currentColor"
         class="w-4 h-4 text-white"
       >
-        <path fill-rule="evenodd" :d="getIconPath" clip-rule="evenodd" />
+        <path fill-rule="evenodd" :d="getIconPath || ''" clip-rule="evenodd" />
       </svg>
       <component :is="props.icon" v-else />
     </div>
@@ -232,7 +232,7 @@ const getTextColor = computed(() => {
           fill="currentColor"
           :class="[STATUS[status].className, 'w-6 h-6 p-0.5 rounded-lg']"
         >
-          <path fill-rule="evenodd" :d="getIconPath" clip-rule="evenodd" />
+          <path fill-rule="evenodd" :d="getIconPath || ''" clip-rule="evenodd" />
         </svg>
         <component :is="icon" v-else />
       </div>
