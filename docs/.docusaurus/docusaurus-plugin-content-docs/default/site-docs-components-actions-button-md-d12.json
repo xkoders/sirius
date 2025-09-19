@@ -1,0 +1,24 @@
+{
+  "id": "components/actions/button",
+  "title": "Button",
+  "description": "A versatile button component that supports multiple variants, sizes, and states.",
+  "source": "@site/docs/components/actions/button.md",
+  "sourceDirName": "components/actions",
+  "slug": "/components/actions/button",
+  "permalink": "/docs/components/actions/button",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/adersolutions/sirius-ui/tree/main/docs/docs/components/actions/button.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "button",
+    "title": "Button",
+    "sidebar_label": "Button"
+  },
+  "sidebar": "componentsSidebar",
+  "previous": {
+    "title": "Overview",
+    "permalink": "/docs/components/components-overview"
+  }
+}

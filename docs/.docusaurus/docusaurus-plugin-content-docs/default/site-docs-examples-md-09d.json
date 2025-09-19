@@ -1,0 +1,20 @@
+{
+  "id": "examples",
+  "title": "examples",
+  "description": "",
+  "source": "@site/docs/examples.md",
+  "sourceDirName": ".",
+  "slug": "/examples",
+  "permalink": "/docs/examples",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/adersolutions/sirius-ui/tree/main/docs/docs/examples.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Getting Started",
+    "permalink": "/docs/getting-started"
+  }
+}
