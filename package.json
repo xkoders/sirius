@@ -1,43 +1,32 @@
 {
   "name": "@adersolutions/sirius-ui",
-  "private": false,
+  "private": true,
   "author": {
     "name": "Soufiyan",
     "email": "benallalsoufiane1@gmail.com"
   },
   "version": "1.0.7",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "lint2": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "eslint --fix 'src/**/*.{jsx,ts,tsx}'",
-    "format": "prettier --write src//**/*.{ts,tsx,css} --config ./.prettierrc",
-    "prepare": "husky install",
-    "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\""
-  },
-  "peerDependencies": {
-    "react": "^18.2.0 || >=17.x",
-    "react-dom": "^18.2.0 || >=17.x"
-  },
-  "files": [
-    "dist"
+  "workspaces": [
+    "packages/*",
+    "examples",
+    "docs"
   ],
-  "main": "./dist/sirius.cjs",
-  "module": "./dist/sirius.es.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/sirius.es.js",
-      "require": "./dist/sirius.cjs",
-      "types": "./dist/index.d.ts"
-    },
-    "./style.css": {
-      "require": "./dist/style.css",
-      "default": "./dist/style.css"
-    }
+  "scripts": {
+    "dev:examples": "pnpm --filter @adersolutions/sirius-examples dev",
+    "dev:docs": "pnpm --filter @adersolutions/sirius-docs dev",
+    "build:react": "pnpm --filter @adersolutions/sirius-react build",
+    "build:vue": "pnpm --filter @adersolutions/sirius-vue build",
+    "build:all": "pnpm build:react && pnpm build:vue",
+    "publish:react": "pnpm --filter @adersolutions/sirius-react publish",
+    "publish:vue": "pnpm --filter @adersolutions/sirius-vue publish",
+    "publish:all": "pnpm publish:react && pnpm publish:vue",
+    "clean": "pnpm -r exec rm -rf node_modules && rm -rf node_modules",
+    "install:all": "pnpm install",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3"
   },
   "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
 }
