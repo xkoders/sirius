@@ -1,53 +1,46 @@
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import LibrarySwitcher from './LibrarySwitcher'
+'use client'
 
-interface LayoutProps {
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
+import { Footer } from '@/components/Footer'
+import { Header } from '@/components/Header'
+import { Logo } from '@/components/Logo'
+import { Navigation } from '@/components/Navigation'
+import { SectionProvider, type Section } from '@/components/SectionProvider'
+
+export function Layout({
+  children,
+  allSections,
+}: {
   children: React.ReactNode
-}
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const location = useLocation()
-
-  const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/components', label: 'Components' },
-  ]
+  allSections: Record<string, Array<Section>>
+}) {
+  let pathname = usePathname()
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <nav className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link to="/" className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                Sirius UI
+    <SectionProvider sections={allSections[pathname] ?? []}>
+      <div className="h-full lg:ml-72 xl:ml-80">
+        <motion.header
+          layoutScroll
+          className="contents lg:pointer-events-none lg:fixed lg:inset-0 lg:z-40 lg:flex"
+        >
+          <div className="contents lg:pointer-events-auto lg:block lg:w-72 lg:overflow-y-auto lg:border-r lg:border-zinc-900/10 lg:px-6 lg:pt-4 lg:pb-8 xl:w-80 lg:dark:border-white/10">
+            <div className="hidden lg:flex">
+              <Link href="/" aria-label="Home">
+                <Logo className="h-6" />
               </Link>
             </div>
-            <div className="flex items-center space-x-8">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    location.pathname === item.path
-                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                      : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <LibrarySwitcher />
-            </div>
+            <Header />
+            <Navigation className="hidden lg:mt-10 lg:block" />
           </div>
+        </motion.header>
+        <div className="relative flex h-full flex-col px-4 pt-14 sm:px-6 lg:px-8">
+          <main className="flex-auto">{children}</main>
+          <Footer />
         </div>
-      </nav>
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        {children}
-      </main>
-    </div>
+      </div>
+    </SectionProvider>
   )
 }
-
-export default Layout

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_adersolutions_sirius_docs=self.webpackChunk_adersolutions_sirius_docs||[]).push([[9647],{6073:(s,e,r)=>{r.r(e),r.d(e,{default:()=>n});r(7378);var u=r(3372),a=r(2078),c=r(281),i=r(8041),o=r(2570),d=r(6106);function n(s){return(0,d.jsx)(c.e3,{className:(0,u.A)(a.G.wrapper.docsPages),children:(0,d.jsx)(o.A,{children:(0,i.v)(s.route.routes)})})}}}]);

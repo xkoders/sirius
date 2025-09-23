@@ -4,49 +4,55 @@
   "description": "Sirius UI Documentation Website",
   "private": true,
   "scripts": {
-    "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
+  "browserslist": "defaults, not ie <= 11",
   "dependencies": {
-    "@adersolutions/sirius-react": "workspace:*",
-    "@docusaurus/core": "3.8.1",
-    "@docusaurus/preset-classic": "3.8.1",
-    "@mdx-js/react": "^3.0.0",
+    "@algolia/autocomplete-core": "^1.19.2",
+    "@headlessui/react": "^2.2.6",
+    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
+    "@next/mdx": "^15",
+    "@sindresorhus/slugify": "^2.2.1",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/mdx": "^2.0.13",
+    "@types/react-highlight-words": "^0.20.0",
+    "acorn": "^8.15.0",
     "clsx": "^2.1.1",
-    "prism-react-renderer": "^2.3.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-live": "^3.1.2"
+    "fast-glob": "^3.3.3",
+    "flexsearch": "^0.8.205",
+    "framer-motion": "^12.23.11",
+    "mdast-util-to-string": "^4.0.0",
+    "mdx-annotations": "^0.1.4",
+    "next": "^15",
+    "next-themes": "^0.4.6",
+    "prettier-plugin-organize-imports": "^4.2.0",
+    "react": "^19",
+    "react-dom": "^19",
+    "react-highlight-words": "^0.21.0",
+    "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-mdx": "^3.1.0",
+    "shiki": "^0.14.7",
+    "simple-functional-loader": "^1.2.1",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3",
+    "unist-util-filter": "^5.0.1",
+    "unist-util-visit": "^5.0.0",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.8.1",
-    "@docusaurus/tsconfig": "3.8.1",
-    "@docusaurus/types": "3.8.1",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
-    "typescript": "~5.6.2"
-  },
-  "browserslist": {
-    "production": [
-      ">0.5%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 3 chrome version",
-      "last 3 firefox version",
-      "last 5 safari version"
-    ]
-  },
-  "engines": {
-    "node": ">=18.0"
+    "@types/node": "^24.1.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9.32.0",
+    "eslint-config-next": "^15",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "sharp": "0.34.3"
   }
 }
