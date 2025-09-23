@@ -58,16 +58,16 @@ sirius/
 
 ## Package Details
 
-### 1. React Package (`@adersolutions/sirius-ui-react`)
+### 1. React Package (`@adersolutions/sirius-react`)
 - **Purpose**: React component library
-- **Installation**: `npm install @adersolutions/sirius-ui-react`
-- **Usage**: `import { Button, Badge } from '@adersolutions/sirius-ui-react'`
+- **Installation**: `npm install @adersolutions/sirius-react`
+- **Usage**: `import { Button, Badge } from '@adersolutions/sirius-react'`
 - **Build**: `pnpm build:react`
 
-### 2. Vue Package (`@adersolutions/sirius-ui-vue`)
+### 2. Vue Package (`@adersolutions/sirius-vue`)
 - **Purpose**: Vue component library
-- **Installation**: `npm install @adersolutions/sirius-ui-vue`
-- **Usage**: `import { SiriusButton, SiriusBadge } from '@adersolutions/sirius-ui-vue'`
+- **Installation**: `npm install @adersolutions/sirius-vue`
+- **Usage**: `import { SiriusButton, SiriusBadge } from '@adersolutions/sirius-vue'`
 - **Build**: `pnpm build:vue`
 
 ### 3. Examples Package
@@ -86,21 +86,21 @@ sirius/
 
 ### For React Projects
 ```bash
-npm install @adersolutions/sirius-ui-react
+npm install @adersolutions/sirius-react
 # or
-pnpm add @adersolutions/sirius-ui-react
+pnpm add @adersolutions/sirius-react
 ```
 
 ```tsx
-import { Button, Badge, Text } from '@adersolutions/sirius-ui-react'
-import '@adersolutions/sirius-ui-react/style.css'
+import { Button, Badge, Text } from '@adersolutions/sirius-react'
+import '@adersolutions/sirius-react/style.css'
 ```
 
 ### For Vue Projects
 ```bash
-npm install @adersolutions/sirius-ui-vue
+npm install @adersolutions/sirius-vue
 # or
-pnpm add @adersolutions/sirius-ui-vue
+pnpm add @adersolutions/sirius-vue
 ```
 
 ```vue
@@ -109,8 +109,8 @@ pnpm add @adersolutions/sirius-ui-vue
 </template>
 
 <script setup>
-import { SiriusButton } from '@adersolutions/sirius-ui-vue'
-import '@adersolutions/sirius-ui-vue/style.css'
+import { SiriusButton } from '@adersolutions/sirius-vue'
+import '@adersolutions/sirius-vue/style.css'
 </script>
 ```
 

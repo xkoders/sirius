@@ -1,1 +1,179 @@
-"use strict";(self.webpackChunk_adersolutions_sirius_docs=self.webpackChunk_adersolutions_sirius_docs||[]).push([[9466],{6935:(e,s,t)=>{t.r(s),t.d(s,{default:()=>a});t(7378);var i=t(1634),l=t(6106);const a=()=>(0,l.jsxs)("div",{className:"px-4 sm:px-6 lg:px-8",children:[(0,l.jsxs)("div",{className:"text-center",children:[(0,l.jsx)("h1",{className:"text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl",children:"Sirius UI"}),(0,l.jsx)("p",{className:"mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl",children:"A modern, accessible, and customizable UI component library for React and Vue applications."}),(0,l.jsxs)("div",{className:"mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8",children:[(0,l.jsx)("div",{className:"rounded-md shadow",children:(0,l.jsx)(i.A,{to:"/docs/components/components-overview",className:"w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10",children:"View Components"})}),(0,l.jsx)("div",{className:"mt-3 rounded-md shadow sm:mt-0 sm:ml-3",children:(0,l.jsx)("a",{href:"https://github.com/adersolutions/sirius-ui",className:"w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10",children:"GitHub"})})]})]}),(0,l.jsx)("div",{className:"mt-16",children:(0,l.jsxs)("div",{className:"grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3",children:[(0,l.jsx)("div",{className:"pt-6",children:(0,l.jsx)("div",{className:"flow-root bg-white rounded-lg px-6 pb-8",children:(0,l.jsxs)("div",{className:"-mt-6",children:[(0,l.jsx)("div",{children:(0,l.jsx)("span",{className:"inline-flex items-center justify-center p-3 bg-blue-500 rounded-md shadow-lg",children:(0,l.jsx)("svg",{className:"h-6 w-6 text-white",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:(0,l.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M13 10V3L4 14h7v7l9-11h-7z"})})})}),(0,l.jsx)("h3",{className:"mt-8 text-lg font-medium text-gray-900 tracking-tight",children:"Fast & Lightweight"}),(0,l.jsx)("p",{className:"mt-5 text-base text-gray-500",children:"Built with modern web technologies for optimal performance and bundle size."})]})})}),(0,l.jsx)("div",{className:"pt-6",children:(0,l.jsx)("div",{className:"flow-root bg-white rounded-lg px-6 pb-8",children:(0,l.jsxs)("div",{className:"-mt-6",children:[(0,l.jsx)("div",{children:(0,l.jsx)("span",{className:"inline-flex items-center justify-center p-3 bg-green-500 rounded-md shadow-lg",children:(0,l.jsx)("svg",{className:"h-6 w-6 text-white",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:(0,l.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"})})})}),(0,l.jsx)("h3",{className:"mt-8 text-lg font-medium text-gray-900 tracking-tight",children:"Accessible"}),(0,l.jsx)("p",{className:"mt-5 text-base text-gray-500",children:"Built with accessibility in mind, following WCAG guidelines and best practices."})]})})}),(0,l.jsx)("div",{className:"pt-6",children:(0,l.jsx)("div",{className:"flow-root bg-white rounded-lg px-6 pb-8",children:(0,l.jsxs)("div",{className:"-mt-6",children:[(0,l.jsx)("div",{children:(0,l.jsx)("span",{className:"inline-flex items-center justify-center p-3 bg-purple-500 rounded-md shadow-lg",children:(0,l.jsx)("svg",{className:"h-6 w-6 text-white",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:(0,l.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"})})})}),(0,l.jsx)("h3",{className:"mt-8 text-lg font-medium text-gray-900 tracking-tight",children:"Customizable"}),(0,l.jsx)("p",{className:"mt-5 text-base text-gray-500",children:"Easy to customize with CSS variables and comprehensive theming support."})]})})})]})})]})}}]);
+'use strict'
+;(self.webpackChunk_adersolutions_sirius_docs =
+  self.webpackChunk_adersolutions_sirius_docs || []).push([
+  [9466],
+  {
+    6935: (e, s, t) => {
+      t.r(s), t.d(s, { default: () => a })
+      t(7378)
+      var i = t(1634),
+        l = t(6106)
+      const a = () =>
+        (0, l.jsxs)('div', {
+          className: 'px-4 sm:px-6 lg:px-8',
+          children: [
+            (0, l.jsxs)('div', {
+              className: 'text-center',
+              children: [
+                (0, l.jsx)('h1', {
+                  className: 'text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl',
+                  children: 'Sirius UI',
+                }),
+                (0, l.jsx)('p', {
+                  className:
+                    'mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl',
+                  children:
+                    'A modern, accessible, and customizable UI component library for React and Vue applications.',
+                }),
+                (0, l.jsxs)('div', {
+                  className: 'mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8',
+                  children: [
+                    (0, l.jsx)('div', {
+                      className: 'rounded-md shadow',
+                      children: (0, l.jsx)(i.A, {
+                        to: '/docs/components/components-overview',
+                        className:
+                          'w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10',
+                        children: 'View Components',
+                      }),
+                    }),
+                    (0, l.jsx)('div', {
+                      className: 'mt-3 rounded-md shadow sm:mt-0 sm:ml-3',
+                      children: (0, l.jsx)('a', {
+                        href: 'https://github.com/xkoders/sirius',
+                        className:
+                          'w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10',
+                        children: 'GitHub',
+                      }),
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            (0, l.jsx)('div', {
+              className: 'mt-16',
+              children: (0, l.jsxs)('div', {
+                className: 'grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3',
+                children: [
+                  (0, l.jsx)('div', {
+                    className: 'pt-6',
+                    children: (0, l.jsx)('div', {
+                      className: 'flow-root bg-white rounded-lg px-6 pb-8',
+                      children: (0, l.jsxs)('div', {
+                        className: '-mt-6',
+                        children: [
+                          (0, l.jsx)('div', {
+                            children: (0, l.jsx)('span', {
+                              className:
+                                'inline-flex items-center justify-center p-3 bg-blue-500 rounded-md shadow-lg',
+                              children: (0, l.jsx)('svg', {
+                                className: 'h-6 w-6 text-white',
+                                fill: 'none',
+                                viewBox: '0 0 24 24',
+                                stroke: 'currentColor',
+                                children: (0, l.jsx)('path', {
+                                  strokeLinecap: 'round',
+                                  strokeLinejoin: 'round',
+                                  strokeWidth: 2,
+                                  d: 'M13 10V3L4 14h7v7l9-11h-7z',
+                                }),
+                              }),
+                            }),
+                          }),
+                          (0, l.jsx)('h3', {
+                            className: 'mt-8 text-lg font-medium text-gray-900 tracking-tight',
+                            children: 'Fast & Lightweight',
+                          }),
+                          (0, l.jsx)('p', {
+                            className: 'mt-5 text-base text-gray-500',
+                            children:
+                              'Built with modern web technologies for optimal performance and bundle size.',
+                          }),
+                        ],
+                      }),
+                    }),
+                  }),
+                  (0, l.jsx)('div', {
+                    className: 'pt-6',
+                    children: (0, l.jsx)('div', {
+                      className: 'flow-root bg-white rounded-lg px-6 pb-8',
+                      children: (0, l.jsxs)('div', {
+                        className: '-mt-6',
+                        children: [
+                          (0, l.jsx)('div', {
+                            children: (0, l.jsx)('span', {
+                              className:
+                                'inline-flex items-center justify-center p-3 bg-green-500 rounded-md shadow-lg',
+                              children: (0, l.jsx)('svg', {
+                                className: 'h-6 w-6 text-white',
+                                fill: 'none',
+                                viewBox: '0 0 24 24',
+                                stroke: 'currentColor',
+                                children: (0, l.jsx)('path', {
+                                  strokeLinecap: 'round',
+                                  strokeLinejoin: 'round',
+                                  strokeWidth: 2,
+                                  d: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+                                }),
+                              }),
+                            }),
+                          }),
+                          (0, l.jsx)('h3', {
+                            className: 'mt-8 text-lg font-medium text-gray-900 tracking-tight',
+                            children: 'Accessible',
+                          }),
+                          (0, l.jsx)('p', {
+                            className: 'mt-5 text-base text-gray-500',
+                            children:
+                              'Built with accessibility in mind, following WCAG guidelines and best practices.',
+                          }),
+                        ],
+                      }),
+                    }),
+                  }),
+                  (0, l.jsx)('div', {
+                    className: 'pt-6',
+                    children: (0, l.jsx)('div', {
+                      className: 'flow-root bg-white rounded-lg px-6 pb-8',
+                      children: (0, l.jsxs)('div', {
+                        className: '-mt-6',
+                        children: [
+                          (0, l.jsx)('div', {
+                            children: (0, l.jsx)('span', {
+                              className:
+                                'inline-flex items-center justify-center p-3 bg-purple-500 rounded-md shadow-lg',
+                              children: (0, l.jsx)('svg', {
+                                className: 'h-6 w-6 text-white',
+                                fill: 'none',
+                                viewBox: '0 0 24 24',
+                                stroke: 'currentColor',
+                                children: (0, l.jsx)('path', {
+                                  strokeLinecap: 'round',
+                                  strokeLinejoin: 'round',
+                                  strokeWidth: 2,
+                                  d: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z',
+                                }),
+                              }),
+                            }),
+                          }),
+                          (0, l.jsx)('h3', {
+                            className: 'mt-8 text-lg font-medium text-gray-900 tracking-tight',
+                            children: 'Customizable',
+                          }),
+                          (0, l.jsx)('p', {
+                            className: 'mt-5 text-base text-gray-500',
+                            children:
+                              'Easy to customize with CSS variables and comprehensive theming support.',
+                          }),
+                        ],
+                      }),
+                    }),
+                  }),
+                ],
+              }),
+            }),
+          ],
+        })
+    },
+  },
+])

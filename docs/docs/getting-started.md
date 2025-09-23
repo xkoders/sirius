@@ -6,7 +6,7 @@ sidebar_label: Getting Started
 
 # Getting Started with Sirius UI
 
-This guide will help you get up and running with Sirius UI in your React project.
+This guide will help you get up and running with Sirius UI in your React or Vue project. Sirius UI supports both frameworks with identical APIs and consistent behavior.
 
 ## 📋 Prerequisites
 
@@ -14,31 +14,55 @@ Before you begin, make sure you have:
 
 - **Node.js** version 18.0 or higher
 - **pnpm** package manager (recommended) or npm/yarn
-- A React project (version 18.0 or higher)
+- A React project (version 18.0 or higher) or Vue project (version 3.3 or higher)
 
 ## 🚀 Installation
 
-### Using pnpm (Recommended)
+### React Package
+
+#### Using pnpm (Recommended)
 
 ```bash
 pnpm add @adersolutions/sirius-react
 ```
 
-### Using npm
+#### Using npm
 
 ```bash
 npm install @adersolutions/sirius-react
 ```
 
-### Using yarn
+#### Using yarn
 
 ```bash
 yarn add @adersolutions/sirius-react
 ```
 
+### Vue Package
+
+#### Using pnpm (Recommended)
+
+```bash
+pnpm add @adersolutions/sirius-vue
+```
+
+#### Using npm
+
+```bash
+npm install @adersolutions/sirius-vue
+```
+
+#### Using yarn
+
+```bash
+yarn add @adersolutions/sirius-vue
+```
+
 ## 🎯 Basic Setup
 
-### 1. Import Components
+### React Setup
+
+#### 1. Import Components
 
 You can import individual components to keep your bundle size minimal:
 
@@ -46,7 +70,7 @@ You can import individual components to keep your bundle size minimal:
 import { Button, Text, Box } from '@adersolutions/sirius-react';
 ```
 
-### 2. Use Components
+#### 2. Use Components
 
 Start using components in your React components:
 
@@ -73,6 +97,40 @@ function MyComponent() {
 }
 
 export default MyComponent;
+```
+
+### Vue Setup
+
+#### 1. Import Components
+
+```vue
+<script setup>
+import { Button, Text, Box, Stack } from '@adersolutions/sirius-vue';
+</script>
+```
+
+#### 2. Use Components
+
+```vue
+<template>
+  <Box padding="4">
+    <Stack gap="4">
+      <Text variant="heading" size="large">
+        Welcome to Sirius UI
+      </Text>
+      <Text>
+        This is a beautiful and accessible component library.
+      </Text>
+      <Button variant="primary" size="medium">
+        Get Started
+      </Button>
+    </Stack>
+  </Box>
+</template>
+
+<script setup>
+import { Button, Text, Box, Stack } from '@adersolutions/sirius-vue';
+</script>
 ```
 
 ## 🎨 Styling and Theming
@@ -185,7 +243,7 @@ If you run into any issues:
 
 1. Check the [Components Documentation](/docs/components/overview)
 2. Look at the [Examples](/docs/examples)
-3. Search existing [GitHub Issues](https://github.com/adersolutions/sirius-ui/issues)
+3. Search existing [GitHub Issues](https://github.com/xkoders/sirius/issues)
 4. Create a new issue if your problem isn't already documented
 
 ## 🎉 Congratulations!

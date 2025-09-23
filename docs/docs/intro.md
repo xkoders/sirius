@@ -67,7 +67,7 @@ Ready to dive in? Check out our [Getting Started](/docs/getting-started) guide t
 
 ## 🤝 Contributing
 
-We welcome contributions! Whether it's bug reports, feature requests, or code contributions, we'd love to hear from you. Check out our [GitHub repository](https://github.com/adersolutions/sirius-ui) to get started.
+We welcome contributions! Whether it's bug reports, feature requests, or code contributions, we'd love to hear from you. Check out our [GitHub repository](https://github.com/xkoders/sirius) to get started.
 
 ## 📄 License
 

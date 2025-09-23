@@ -1,6 +1,6 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
+import { themes as prismThemes } from 'prism-react-renderer'
+import type { Config } from '@docusaurus/types'
+import type * as Preset from '@docusaurus/preset-classic'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -44,8 +44,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/adersolutions/sirius-ui/tree/main/docs/',
+          editUrl: 'https://github.com/xkoders/sirius/tree/main/docs/',
         },
         blog: {
           showReadingTime: true,
@@ -55,8 +54,7 @@ const config: Config = {
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/adersolutions/sirius-ui/tree/main/docs/',
+          editUrl: 'https://github.com/xkoders/sirius/tree/main/docs/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -91,9 +89,9 @@ const config: Config = {
           position: 'left',
           label: 'Getting Started',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        { to: '/blog', label: 'Blog', position: 'left' },
         {
-          href: 'https://github.com/adersolutions/sirius-ui',
+          href: 'https://github.com/xkoders/sirius',
           label: 'GitHub',
           position: 'right',
         },
@@ -124,15 +122,15 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/adersolutions/sirius-ui',
+              href: 'https://github.com/xkoders/sirius',
             },
             {
               label: 'Issues',
-              href: 'https://github.com/adersolutions/sirius-ui/issues',
+              href: 'https://github.com/xkoders/sirius/issues',
             },
             {
               label: 'Discussions',
-              href: 'https://github.com/adersolutions/sirius-ui/discussions',
+              href: 'https://github.com/xkoders/sirius/discussions',
             },
           ],
         },
@@ -158,6 +156,6 @@ const config: Config = {
       additionalLanguages: ['typescript', 'tsx', 'scss'],
     },
   } satisfies Preset.ThemeConfig,
-};
+}
 
-export default config;
+export default config

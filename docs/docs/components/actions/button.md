@@ -6,13 +6,15 @@ sidebar_label: Button
 
 # Button
 
-A versatile button component that supports multiple variants, sizes, and states.
+A versatile button component that supports multiple variants, sizes, and states for both React and Vue applications.
 
 ## 📖 Overview
 
-The Button component is the primary interactive element in Sirius UI. It provides a consistent way to trigger actions, submit forms, and navigate between pages.
+The Button component is the primary interactive element in Sirius UI. It provides a consistent way to trigger actions, submit forms, and navigate between pages across both React and Vue frameworks.
 
 ## 🚀 Basic Usage
+
+### React
 
 ```tsx
 import { Button } from '@adersolutions/sirius-react';
@@ -26,11 +28,39 @@ function MyComponent() {
 }
 ```
 
+### Vue
+
+```vue
+<template>
+  <Button @click="handleClick">
+    Click Me
+  </Button>
+</template>
+
+<script setup>
+import { Button } from '@adersolutions/sirius-vue';
+
+const handleClick = () => {
+  console.log('Button clicked!');
+};
+</script>
+```
+
 ## 🎨 Variants
+
+### Default Button
+
+The standard button style for general actions.
+
+```tsx
+<Button variant="default">
+  Default Action
+</Button>
+```
 
 ### Primary Button
 
-The default button style for primary actions.
+The primary button style for main actions.
 
 ```tsx
 <Button variant="primary">
@@ -38,23 +68,43 @@ The default button style for primary actions.
 </Button>
 ```
 
-### Secondary Button
+### Success Button
 
-For secondary or less important actions.
+For positive actions like save or confirm.
 
 ```tsx
-<Button variant="secondary">
-  Secondary Action
+<Button variant="success">
+  Save Changes
 </Button>
 ```
 
-### Outline Button
+### Warning Button
 
-A button with an outlined appearance.
+For cautionary actions.
 
 ```tsx
-<Button variant="outline">
-  Outline Button
+<Button variant="warning">
+  Proceed with Caution
+</Button>
+```
+
+### Danger Button
+
+For destructive actions that require caution.
+
+```tsx
+<Button variant="danger">
+  Delete Item
+</Button>
+```
+
+### Info Button
+
+For informational actions.
+
+```tsx
+<Button variant="info">
+  Learn More
 </Button>
 ```
 
@@ -68,13 +118,23 @@ A minimal button with no background or border.
 </Button>
 ```
 
-### Danger Button
+### Subdued Button
 
-For destructive actions that require caution.
+A subtle button for secondary actions.
 
 ```tsx
-<Button variant="danger">
-  Delete Item
+<Button variant="subdued">
+  Subdued Action
+</Button>
+```
+
+### Dark Button
+
+A dark-themed button.
+
+```tsx
+<Button variant="dark">
+  Dark Button
 </Button>
 ```
 
@@ -104,6 +164,14 @@ For destructive actions that require caution.
 </Button>
 ```
 
+### Slim
+
+```tsx
+<Button size="slim">
+  Slim Button
+</Button>
+```
+
 ## 🔧 States
 
 ### Disabled
@@ -125,16 +193,66 @@ For destructive actions that require caution.
 ### With Icon
 
 ```tsx
-import { Icon } from '@adersolutions/sirius-react';
+import { PlusIcon } from '@heroicons/react/20/solid';
 
-<Button icon={<Icon name="plus" />}>
+<Button icon={PlusIcon}>
   Add Item
+</Button>
+```
+
+### Icon Only
+
+```tsx
+import { PlusIcon } from '@heroicons/react/20/solid';
+
+<Button icon={PlusIcon} aria-label="Add item" />
+```
+
+### Full Width
+
+```tsx
+<Button fullwidth>
+  Full Width Button
+</Button>
+```
+
+### Outline Style
+
+```tsx
+<Button variant="primary" outline>
+  Outline Button
+</Button>
+```
+
+### Link Style
+
+```tsx
+<Button variant="primary" link>
+  Link Button
+</Button>
+```
+
+### Submit Button
+
+```tsx
+<Button submit>
+  Submit Form
+</Button>
+```
+
+### External Link
+
+```tsx
+<Button url="https://example.com" target="_blank">
+  External Link
 </Button>
 ```
 
 ## 🎯 Examples
 
 ### Form Submission
+
+#### React
 
 ```tsx
 function ContactForm() {
@@ -146,7 +264,7 @@ function ContactForm() {
   return (
     <form onSubmit={handleSubmit}>
       {/* Form fields */}
-      <Button type="submit" variant="primary">
+      <Button submit variant="primary">
         Send Message
       </Button>
     </form>
@@ -154,7 +272,31 @@ function ContactForm() {
 }
 ```
 
+#### Vue
+
+```vue
+<template>
+  <form @submit="handleSubmit">
+    <!-- Form fields -->
+    <Button submit variant="primary">
+      Send Message
+    </Button>
+  </form>
+</template>
+
+<script setup>
+import { Button } from '@adersolutions/sirius-vue';
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  // Handle form submission
+};
+</script>
+```
+
 ### Button Group
+
+#### React
 
 ```tsx
 import { Button, Stack } from '@adersolutions/sirius-react';
@@ -176,7 +318,31 @@ function ActionButtons() {
 }
 ```
 
+#### Vue
+
+```vue
+<template>
+  <div class="flex gap-2">
+    <Button variant="primary">
+      Save
+    </Button>
+    <Button variant="outline">
+      Cancel
+    </Button>
+    <Button variant="danger">
+      Delete
+    </Button>
+  </div>
+</template>
+
+<script setup>
+import { Button } from '@adersolutions/sirius-vue';
+</script>
+```
+
 ### Loading State
+
+#### React
 
 ```tsx
 function SaveButton() {
@@ -203,65 +369,147 @@ function SaveButton() {
 }
 ```
 
+#### Vue
+
+```vue
+<template>
+  <Button 
+    variant="primary" 
+    :loading="isLoading"
+    @click="handleSave"
+  >
+    {{ isLoading ? 'Saving...' : 'Save' }}
+  </Button>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import { Button } from '@adersolutions/sirius-vue';
+
+const isLoading = ref(false);
+
+const handleSave = async () => {
+  isLoading.value = true;
+  try {
+    await saveData();
+  } finally {
+    isLoading.value = false;
+  }
+};
+</script>
+```
+
+### Icon Buttons
+
+#### React
+
+```tsx
+import { 
+  PlusIcon, 
+  TrashIcon, 
+  PencilIcon,
+  CheckIcon 
+} from '@heroicons/react/20/solid';
+
+function IconButtons() {
+  return (
+    <div className="flex gap-2">
+      <Button icon={PlusIcon} variant="primary" aria-label="Add item" />
+      <Button icon={PencilIcon} variant="info" aria-label="Edit item" />
+      <Button icon={CheckIcon} variant="success" aria-label="Complete task" />
+      <Button icon={TrashIcon} variant="danger" aria-label="Delete item" />
+    </div>
+  );
+}
+```
+
+#### Vue
+
+```vue
+<template>
+  <div class="flex gap-2">
+    <Button icon="PlusIcon" variant="primary" aria-label="Add item" />
+    <Button icon="PencilIcon" variant="info" aria-label="Edit item" />
+    <Button icon="CheckIcon" variant="success" aria-label="Complete task" />
+    <Button icon="TrashIcon" variant="danger" aria-label="Delete item" />
+  </div>
+</template>
+
+<script setup>
+import { Button } from '@adersolutions/sirius-vue';
+</script>
+```
+
 ## 📋 API Reference
 
 ### Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `'primary' \| 'secondary' \| 'outline' \| 'ghost' \| 'danger'` | `'primary'` | The visual style of the button |
-| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of the button |
+| `variant` | `'default' \| 'primary' \| 'success' \| 'warning' \| 'danger' \| 'info' \| 'ghost' \| 'subdued' \| 'dark' \| 'none'` | `'default'` | The visual style of the button |
+| `size` | `'small' \| 'medium' \| 'large' \| 'slim' \| 'none'` | `'medium'` | The size of the button |
 | `disabled` | `boolean` | `false` | Whether the button is disabled |
 | `loading` | `boolean` | `false` | Whether to show a loading state |
-| `icon` | `ReactNode` | `undefined` | Icon to display before the button text |
-| `iconPosition` | `'left' \| 'right'` | `'left'` | Position of the icon relative to text |
-| `fullWidth` | `boolean` | `false` | Whether the button should take full width |
-| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | The type of the button |
-| `onClick` | `(event: MouseEvent) => void` | `undefined` | Click event handler |
+| `icon` | `ReactElement \| Component` | `undefined` | Icon to display before the button text |
+| `alignment` | `'center' \| 'start' \| 'end'` | `'center'` | Text alignment within the button |
+| `rounded` | `'xl' \| 'lg' \| 'md' \| 'sm' \| 'none'` | `'xl'` | Border radius of the button |
+| `fullwidth` | `boolean` | `false` | Whether the button should take full width |
+| `outline` | `boolean` | `false` | Whether to show as outline style |
+| `link` | `boolean` | `false` | Whether to show as link style |
+| `submit` | `boolean` | `false` | Whether this is a submit button |
+| `url` | `string` | `undefined` | URL for link buttons |
+| `target` | `'_blank' \| '_self' \| '_parent'` | `undefined` | Target for link buttons |
+| `onClick` | `() => void` | `undefined` | Click event handler |
 | `children` | `ReactNode` | `undefined` | Button content |
 | `className` | `string` | `undefined` | Additional CSS classes |
-| `style` | `CSSProperties` | `undefined` | Inline styles |
+| `aria-label` | `string` | `undefined` | Accessible label for screen readers |
+| `aria-describedby` | `string` | `undefined` | ID of element that describes the button |
+| `aria-expanded` | `boolean` | `undefined` | Whether the button controls expanded content |
+| `aria-pressed` | `boolean` | `undefined` | Whether the button is pressed |
+| `aria-haspopup` | `boolean` | `undefined` | Whether the button opens a popup |
+| `role` | `string` | `undefined` | ARIA role for the button |
+| `title` | `string` | `undefined` | Tooltip text for the button |
 
 ### CSS Classes
 
 The Button component uses the following CSS classes:
 
-- `.sirius-button` - Base button class
-- `.sirius-button--{variant}` - Variant-specific styles
-- `.sirius-button--{size}` - Size-specific styles
-- `.sirius-button--disabled` - Disabled state styles
-- `.sirius-button--loading` - Loading state styles
-- `.sirius-button--full-width` - Full width styles
+- `.h-fit` - Height fits content
+- `.flex` - Flexbox layout
+- `.items-center` - Center items vertically
+- `.transition-all` - Smooth transitions
+- `.active:scale-95` - Scale down on click
+- `.active:opacity-70` - Reduce opacity on click
 
-### CSS Custom Properties
+### Variant-specific Classes
 
-You can customize the button appearance using CSS custom properties:
-
-```css
-:root {
-  --sirius-button-primary-bg: #007bff;
-  --sirius-button-primary-color: #ffffff;
-  --sirius-button-border-radius: 6px;
-  --sirius-button-padding-x: 16px;
-  --sirius-button-padding-y: 8px;
-}
-```
+- `.bg-white` - Default background
+- `.bg-indigo-600` - Primary background
+- `.bg-green-600` - Success background
+- `.bg-orange-400` - Warning background
+- `.bg-red-600` - Danger background
+- `.bg-blue-600` - Info background
 
 ## ♿ Accessibility
 
-The Button component includes several accessibility features:
+The Button component includes comprehensive accessibility features:
 
 - **Semantic HTML**: Uses the `<button>` element for proper semantics
 - **ARIA Support**: Includes appropriate ARIA attributes
 - **Keyboard Navigation**: Fully keyboard accessible
 - **Focus Management**: Proper focus handling and indicators
 - **Screen Reader Support**: Optimized for assistive technologies
+- **Loading States**: Properly announces loading states to screen readers
 
 ### ARIA Attributes
 
-- `role="button"` - Explicitly defines the button role
-- `aria-disabled` - Indicates when the button is disabled
+- `aria-label` - Provides accessible name for icon-only buttons
+- `aria-describedby` - References descriptive text
+- `aria-expanded` - Indicates expanded/collapsed state
+- `aria-pressed` - Indicates pressed state for toggle buttons
+- `aria-haspopup` - Indicates button opens a popup
 - `aria-busy` - Indicates when the button is in a loading state
+- `aria-live` - Announces loading state changes
 
 ## 🎨 Customization
 
@@ -283,12 +531,12 @@ import styles from './CustomButton.module.css';
 </Button>
 ```
 
-### Using Styled Components
+### Custom Variants
+
+You can create custom button variants by extending the component:
 
 ```tsx
-import styled from 'styled-components';
-
-const StyledButton = styled(Button)`
+const CustomButton = styled(Button)`
   background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
   border: none;
   border-radius: 25px;
@@ -300,8 +548,6 @@ const StyledButton = styled(Button)`
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 `;
-
-<StyledButton>Gradient Button</StyledButton>
 ```
 
 ## 🧪 Testing
@@ -338,13 +584,18 @@ test('shows loading state when loading prop is true', () => {
   render(<Button loading>Loading Button</Button>);
   expect(screen.getByRole('button')).toHaveAttribute('aria-busy', 'true');
 });
+
+test('renders icon-only button with proper accessibility', () => {
+  render(<Button icon={PlusIcon} aria-label="Add item" />);
+  expect(screen.getByRole('button', { name: 'Add item' })).toBeInTheDocument();
+});
 ```
 
 ## 🔗 Related Components
 
-- **[Button Group](/docs/components/actions/button-group)** - Group related buttons together
-- **[Icon](/docs/components/icons/icon)** - Icons for buttons
 - **[Stack](/docs/components/layout-structure/stack)** - Layout buttons in groups
+- **[Spinner](/docs/components/feedbacks/spinner)** - Loading indicator used in buttons
+- **[Icon Components](/docs/components/icons)** - Icons for buttons
 
 ## 📚 Additional Resources
 

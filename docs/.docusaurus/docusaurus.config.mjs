@@ -48,7 +48,7 @@ export default {
       {
         "docs": {
           "sidebarPath": "./sidebars.ts",
-          "editUrl": "https://github.com/adersolutions/sirius-ui/tree/main/docs/"
+          "editUrl": "https://github.com/xkoders/sirius/tree/main/docs/"
         },
         "blog": {
           "showReadingTime": true,
@@ -59,7 +59,7 @@ export default {
             ],
             "xslt": true
           },
-          "editUrl": "https://github.com/adersolutions/sirius-ui/tree/main/docs/",
+          "editUrl": "https://github.com/xkoders/sirius/tree/main/docs/",
           "onInlineTags": "warn",
           "onInlineAuthors": "warn",
           "onUntruncatedBlogPosts": "warn"

@@ -68,14 +68,14 @@ sirius/
 
 ## 🚀 What's Working
 
-### ✅ React Package (`@adersolutions/sirius-ui-react`)
+### ✅ React Package (`@adersolutions/sirius-react`)
 - **Status**: ✅ Fully functional
 - **Build**: ✅ Successfully builds
 - **Components**: ✅ All 40+ components preserved
 - **Dependencies**: ✅ Properly configured
 - **TypeScript**: ✅ Full support
 
-### ✅ Vue Package (`@adersolutions/sirius-ui-vue`)
+### ✅ Vue Package (`@adersolutions/sirius-vue`)
 - **Status**: ✅ Structure ready
 - **Build**: ✅ Successfully builds
 - **Components**: ⚠️ Placeholder (ready for implementation)
@@ -163,13 +163,13 @@ pnpm dev
 ## 🎯 Next Steps
 
 ### Immediate (Ready Now)
-1. **Publish React Package**: `@adersolutions/sirius-ui-react`
-2. **Test Installation**: `npm install @adersolutions/sirius-ui-react`
+1. **Publish React Package**: `@adersolutions/sirius-react`
+2. **Test Installation**: `npm install @adersolutions/sirius-react`
 3. **Use in Projects**: Import and use components
 
 ### Short Term (Next 1-2 weeks)
 1. **Implement Vue Components**: Create Vue equivalents of React components
-2. **Publish Vue Package**: `@adersolutions/sirius-ui-vue`
+2. **Publish Vue Package**: `@adersolutions/sirius-vue`
 3. **Enhance Documentation**: Add component APIs and examples
 
 ### Medium Term (Next 1-2 months)

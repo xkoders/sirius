@@ -6,34 +6,52 @@ sidebar_label: Overview
 
 # Components Overview
 
-Sirius UI provides a comprehensive set of React components organized into logical categories. Each component is designed to be accessible, customizable, and performant.
+Sirius UI provides a comprehensive set of React and Vue components organized into logical categories. Each component is designed to be accessible, customizable, and performant across both frameworks.
+
+## 🔄 Framework Support
+
+Sirius UI supports both **React** and **Vue** frameworks with identical APIs and consistent behavior. Use the library switcher in the navigation to toggle between React and Vue code examples throughout the documentation.
+
+### React Package
+```bash
+pnpm add @adersolutions/sirius-react
+```
+
+### Vue Package
+```bash
+pnpm add @adersolutions/sirius-vue
+```
 
 ## 🎯 Component Categories
 
 ### Actions
 Interactive elements that users can interact with to perform actions.
 
-- **[Button](/docs/components/actions/button)** - Primary interactive element with multiple variants
-- **[Button Group](/docs/components/actions/button-group)** - Group related buttons together
+- **[Button](/docs/components/actions/button)** - Primary interactive element with multiple variants, sizes, and states
 
 ### Feedback
 Components that provide visual feedback to users about the state of the application.
 
-- **[Badge](/docs/components/feedbacks/badge)** - Small status indicators and labels
+- **[Badge](/docs/components/feedbacks/badge)** - Small status indicators and labels with progress indicators
 - **[Banner](/docs/components/feedbacks/banner)** - Important messages and announcements
-- **[Spinner](/docs/components/feedbacks/spinner)** - Loading indicators
+- **[Spinner](/docs/components/feedbacks/spinner)** - Loading indicators for async operations
 - **[Toast](/docs/components/feedbacks/toast)** - Temporary notification messages
 - **[Skeleton](/docs/components/feedbacks/skeleton)** - Loading placeholders for content
+- **[Error Boundary](/docs/components/feedbacks/error-boundary)** - Error handling and fallback UI
+- **[Transition](/docs/components/feedbacks/transition)** - Smooth transitions and animations
+- **[Exception List](/docs/components/feedbacks/exception-list)** - Display lists of errors or issues
 
 ### Forms & Selections
 Components for collecting user input and making selections.
 
-- **[Button](/docs/components/forms-selections/button)** - Form submission and action buttons
 - **[Checkbox](/docs/components/forms-selections/checkbox)** - Binary selection input
 - **[Choice List](/docs/components/forms-selections/choice-list)** - Radio button and checkbox groups
 - **[Search Field](/docs/components/forms-selections/search-field)** - Text input for searching
-- **[Text Field](/docs/components/forms-selections/text-field)** - Single-line text input
+- **[Text Field](/docs/components/forms-selections/text-field)** - Single-line and multiline text input
 - **[Tabs](/docs/components/forms-selections/tabs)** - Content organization with tabbed interface
+- **[Index Filters](/docs/components/forms-selections/index-filters)** - Advanced filtering interface
+- **[Inline Error](/docs/components/forms-selections/inline-error)** - Inline error display
+- **[Popover](/docs/components/forms-selections/popover)** - Contextual information panels
 
 ### Layout & Structure
 Components for organizing and structuring the layout of your application.
@@ -44,6 +62,7 @@ Components for organizing and structuring the layout of your application.
 - **[Layout](/docs/components/layout-structure/layout)** - Application layout structure
 - **[Empty State](/docs/components/layout-structure/empty-state)** - Display when there's no content
 - **[Media Card](/docs/components/layout-structure/media-card)** - Card layout for media content
+- **[Header](/docs/components/layout-structure/header)** - Page and section headers
 
 ### Navigation
 Components for navigating between different parts of your application.
@@ -55,7 +74,6 @@ Components for navigating between different parts of your application.
 Components that appear above the main content.
 
 - **[Modal](/docs/components/overleys/modal)** - Dialog boxes and overlays
-- **[Popover](/docs/components/overleys/popover)** - Contextual information panels
 - **[Tooltip](/docs/components/overleys/tooltip)** - Hover information displays
 - **[Portal](/docs/components/overleys/portal)** - Render content in different DOM locations
 
@@ -207,5 +225,5 @@ If you have questions about components:
 1. Check the specific component documentation
 2. Look at the examples and code samples
 3. Review the [Getting Started](/docs/getting-started) guide
-4. Search existing [GitHub Issues](https://github.com/adersolutions/sirius-ui/issues)
+4. Search existing [GitHub Issues](https://github.com/xkoders/sirius/issues)
 5. Create a new issue for bugs or feature requests
