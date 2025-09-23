@@ -3,41 +3,6 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 
 export default [
   {
-    path: '/__docusaurus/debug',
-    component: ComponentCreator('/__docusaurus/debug', '5ff'),
-    exact: true
-  },
-  {
-    path: '/__docusaurus/debug/config',
-    component: ComponentCreator('/__docusaurus/debug/config', '5ba'),
-    exact: true
-  },
-  {
-    path: '/__docusaurus/debug/content',
-    component: ComponentCreator('/__docusaurus/debug/content', 'a2b'),
-    exact: true
-  },
-  {
-    path: '/__docusaurus/debug/globalData',
-    component: ComponentCreator('/__docusaurus/debug/globalData', 'c3c'),
-    exact: true
-  },
-  {
-    path: '/__docusaurus/debug/metadata',
-    component: ComponentCreator('/__docusaurus/debug/metadata', '156'),
-    exact: true
-  },
-  {
-    path: '/__docusaurus/debug/registry',
-    component: ComponentCreator('/__docusaurus/debug/registry', '88c'),
-    exact: true
-  },
-  {
-    path: '/__docusaurus/debug/routes',
-    component: ComponentCreator('/__docusaurus/debug/routes', '000'),
-    exact: true
-  },
-  {
     path: '/blog',
     component: ComponentCreator('/blog', 'b2f'),
     exact: true
@@ -124,15 +89,15 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '900'),
+    component: ComponentCreator('/docs', '787'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '597'),
+        component: ComponentCreator('/docs', '704'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', 'be8'),
+            component: ComponentCreator('/docs', 'ba9'),
             routes: [
               {
                 path: '/docs/',
@@ -142,15 +107,24 @@ export default [
               },
               {
                 path: '/docs/components/actions/button',
-                component: ComponentCreator('/docs/components/actions/button', '1d5'),
-                exact: true,
-                sidebar: "componentsSidebar"
+                component: ComponentCreator('/docs/components/actions/button', '42f'),
+                exact: true
               },
               {
                 path: '/docs/components/components-overview',
                 component: ComponentCreator('/docs/components/components-overview', 'f81'),
                 exact: true,
                 sidebar: "componentsSidebar"
+              },
+              {
+                path: '/docs/components/feedbacks/badge',
+                component: ComponentCreator('/docs/components/feedbacks/badge', '4c2'),
+                exact: true
+              },
+              {
+                path: '/docs/components/feedbacks/spinner',
+                component: ComponentCreator('/docs/components/feedbacks/spinner', 'bb6'),
+                exact: true
               },
               {
                 path: '/docs/examples',

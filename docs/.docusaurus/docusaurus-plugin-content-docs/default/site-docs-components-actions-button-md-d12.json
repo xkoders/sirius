@@ -15,10 +15,5 @@
     "id": "button",
     "title": "Button",
     "sidebar_label": "Button"
-  },
-  "sidebar": "componentsSidebar",
-  "previous": {
-    "title": "Overview",
-    "permalink": "/docs/components/components-overview"
   }
 }

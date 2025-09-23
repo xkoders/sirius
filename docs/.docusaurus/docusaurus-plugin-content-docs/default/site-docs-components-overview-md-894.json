@@ -16,9 +16,5 @@
     "title": "Components Overview",
     "sidebar_label": "Overview"
   },
-  "sidebar": "componentsSidebar",
-  "next": {
-    "title": "Button",
-    "permalink": "/docs/components/actions/button"
-  }
+  "sidebar": "componentsSidebar"
 }

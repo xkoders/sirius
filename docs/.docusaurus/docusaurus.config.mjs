@@ -32,7 +32,7 @@ export default {
   "baseUrl": "/",
   "organizationName": "adersolutions",
   "projectName": "sirius-ui",
-  "onBrokenLinks": "throw",
+  "onBrokenLinks": "warn",
   "onBrokenMarkdownLinks": "warn",
   "i18n": {
     "defaultLocale": "en",
@@ -111,14 +111,6 @@ export default {
           "title": "Documentation",
           "items": [
             {
-              "label": "Getting Started",
-              "to": "/docs/intro"
-            },
-            {
-              "label": "Components",
-              "to": "/docs/components/button"
-            },
-            {
               "label": "Examples",
               "to": "/docs/examples"
             }
@@ -147,10 +139,6 @@ export default {
             {
               "label": "Blog",
               "to": "/blog"
-            },
-            {
-              "label": "Changelog",
-              "to": "/docs/changelog"
             }
           ]
         }

@@ -198,10 +198,7 @@ Components are thoroughly tested:
 
 ## 📚 Next Steps
 
-- Explore individual component documentation
-- Check out the [Examples](/docs/examples) section
-- Learn about [Customization](/docs/customization) options
-- Review the [Changelog](/docs/changelog) for updates
+<!-- Removed broken link to Changelog -->
 
 ## 🆘 Need Help?
 

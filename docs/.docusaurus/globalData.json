@@ -12,13 +12,20 @@
           "docs": [
             {
               "id": "components/actions/button",
-              "path": "/docs/components/actions/button",
-              "sidebar": "componentsSidebar"
+              "path": "/docs/components/actions/button"
             },
             {
               "id": "components/components-overview",
               "path": "/docs/components/components-overview",
               "sidebar": "componentsSidebar"
+            },
+            {
+              "id": "components/feedbacks/badge",
+              "path": "/docs/components/feedbacks/badge"
+            },
+            {
+              "id": "components/feedbacks/spinner",
+              "path": "/docs/components/feedbacks/spinner"
             },
             {
               "id": "examples",
