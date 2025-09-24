@@ -234,6 +234,19 @@ function NavigationGroup({
 
 export const navigation: Array<NavGroup> = [
   {
+    title: 'Components',
+    links: [
+      { title: 'Overview', href: '/components' },
+      { title: 'Actions', href: '/components/actions' },
+      { title: 'Feedbacks', href: '/components/feedbacks' },
+      { title: 'Forms', href: '/components/forms' },
+      { title: 'Layout', href: '/components/layout' },
+      { title: 'Navigation', href: '/components/navigation' },
+      { title: 'Overlays', href: '/components/overlays' },
+      { title: 'Typography', href: '/components/typography' },
+    ],
+  },
+  {
     title: 'Guides',
     links: [
       { title: 'Introduction', href: '/' },

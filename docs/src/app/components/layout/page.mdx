@@ -1,0 +1,313 @@
+import { ComponentPreviewProvider } from '@/components/ComponentPreview'
+
+export const metadata = {
+  title: 'Layout',
+  description: 'Layout components for structuring and organizing content',
+}
+
+export const sections = [
+  { title: 'Box', id: 'box' },
+  { title: 'Stack', id: 'stack' },
+  { title: 'MediaCard', id: 'mediacard' },
+  { title: 'EmptyState', id: 'emptystate' },
+]
+
+<ComponentPreviewProvider defaultFramework="react">
+
+# Layout
+
+Layout components provide structure and organization for your application content.
+
+## Box {{ anchor: false }}
+
+Box is a flexible container component that provides consistent spacing, shadows, and rounded corners.
+
+<EnhancedCodeGroup 
+  component="Box" 
+  componentProps={{ children: 'Box content', shadow: 'md', rounded: 'lg' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Box } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="space-y-4">
+      <Box shadow="none" rounded="none" className="p-4 border">
+        Basic box with border
+      </Box>
+      <Box shadow="sm" rounded="md" className="p-4">
+        Small shadow and medium rounded corners
+      </Box>
+      <Box shadow="md" rounded="lg" className="p-4">
+        Medium shadow and large rounded corners
+      </Box>
+      <Box shadow="lg" rounded="xl" className="p-4">
+        Large shadow and extra large rounded corners
+      </Box>
+      <Box shadow="colored" rounded="2xl" className="p-4">
+        Colored shadow effect
+      </Box>
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="space-y-4">
+    <Box shadow="none" rounded="none" class="p-4 border">
+      Basic box with border
+    </Box>
+    <Box shadow="sm" rounded="md" class="p-4">
+      Small shadow and medium rounded corners
+    </Box>
+    <Box shadow="md" rounded="lg" class="p-4">
+      Medium shadow and large rounded corners
+    </Box>
+    <Box shadow="lg" rounded="xl" class="p-4">
+      Large shadow and extra large rounded corners
+    </Box>
+    <Box shadow="colored" rounded="2xl" class="p-4">
+      Colored shadow effect
+    </Box>
+  </div>
+</template>
+
+<script setup>
+import { Box } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Box Props
+
+<Properties>
+  <Property name="as" type="ElementType">
+    The HTML element to render (default: 'div')
+  </Property>
+  <Property name="shadow" type="'none' | 'sm' | 'md' | 'lg' | 'colored'">
+    The shadow style of the box
+  </Property>
+  <Property name="rounded" type="'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'">
+    The border radius of the box
+  </Property>
+  <Property name="sectionned" type="boolean | string">
+    Whether to apply section styling with padding
+  </Property>
+  <Property name="className" type="string">
+    Additional CSS classes
+  </Property>
+</Properties>
+
+## Stack {{ anchor: false }}
+
+Stack provides flexible layout with consistent spacing between elements.
+
+<EnhancedCodeGroup 
+  component="Stack" 
+  componentProps={{ children: 'Stack content', vertical: false, spacing: 'baseTight' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Stack } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="space-y-4">
+      <Stack spacing="tight">
+        <div className="p-2 bg-blue-100">Item 1</div>
+        <div className="p-2 bg-blue-100">Item 2</div>
+        <div className="p-2 bg-blue-100">Item 3</div>
+      </Stack>
+      
+      <Stack vertical spacing="loose">
+        <div className="p-2 bg-green-100">Vertical Item 1</div>
+        <div className="p-2 bg-green-100">Vertical Item 2</div>
+        <div className="p-2 bg-green-100">Vertical Item 3</div>
+      </Stack>
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="space-y-4">
+    <Stack spacing="tight">
+      <div class="p-2 bg-blue-100">Item 1</div>
+      <div class="p-2 bg-blue-100">Item 2</div>
+      <div class="p-2 bg-blue-100">Item 3</div>
+    </Stack>
+    
+    <Stack vertical spacing="loose">
+      <div class="p-2 bg-green-100">Vertical Item 1</div>
+      <div class="p-2 bg-green-100">Vertical Item 2</div>
+      <div class="p-2 bg-green-100">Vertical Item 3</div>
+    </Stack>
+  </div>
+</template>
+
+<script setup>
+import { Stack } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Stack Props
+
+<Properties>
+  <Property name="spacing" type="'extraTight' | 'tight' | 'baseTight' | 'loose' | 'extraLoose' | 'none'">
+    The spacing between stack items
+  </Property>
+  <Property name="vertical" type="boolean">
+    Whether to stack items vertically
+  </Property>
+  <Property name="alignment" type="'start' | 'center' | 'end'">
+    The alignment of stack items
+  </Property>
+  <Property name="wrap" type="boolean">
+    Whether to allow wrapping of items
+  </Property>
+  <Property name="as" type="ElementType">
+    The HTML element to render (default: 'div')
+  </Property>
+</Properties>
+
+## MediaCard {{ anchor: false }}
+
+MediaCard is a specialized card component for displaying media content with actions and metadata.
+
+<EnhancedCodeGroup 
+  component="MediaCard" 
+  componentProps={{ title: 'Card Title', children: 'Card content goes here' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { MediaCard } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="max-w-md">
+      <MediaCard 
+        title="Product Name"
+        url="https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
+      >
+        <p>This is a media card with an image, title, and content.</p>
+      </MediaCard>
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="max-w-md">
+    <MediaCard 
+      title="Product Name"
+      url="https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
+    >
+      <p>This is a media card with an image, title, and content.</p>
+    </MediaCard>
+  </div>
+</template>
+
+<script setup>
+import { MediaCard } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### MediaCard Props
+
+<Properties>
+  <Property name="title" type="string">
+    The title of the media card
+  </Property>
+  <Property name="url" type="string">
+    URL of the media image
+  </Property>
+  <Property name="promotedAction" type="IAction">
+    Primary action button configuration
+  </Property>
+  <Property name="primaryAction" type="IAction[]">
+    Array of primary action buttons
+  </Property>
+  <Property name="secondaryActions" type="IAction[]">
+    Array of secondary action buttons
+  </Property>
+  <Property name="popoverActions" type="IAction[]">
+    Array of actions for the popover menu
+  </Property>
+</Properties>
+
+## EmptyState {{ anchor: false }}
+
+EmptyState provides a visual representation when there's no content to display.
+
+<EnhancedCodeGroup 
+  component="EmptyState" 
+  componentProps={{ heading: 'No items found', children: 'Try adjusting your search or filter criteria.' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { EmptyState } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <EmptyState 
+      heading="No products found"
+      thumb="📦"
+    >
+      Try adjusting your search criteria or browse our categories to find what you're looking for.
+    </EmptyState>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <EmptyState 
+    heading="No products found"
+    thumb="📦"
+  >
+    Try adjusting your search criteria or browse our categories to find what you're looking for.
+  </EmptyState>
+</template>
+
+<script setup>
+import { EmptyState } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### EmptyState Props
+
+<Properties>
+  <Property name="heading" type="string">
+    The main heading for the empty state
+  </Property>
+  <Property name="thumb" type="IconType | string">
+    Icon or image to display
+  </Property>
+  <Property name="actions" type="IActionVariant[]">
+    Array of action buttons
+  </Property>
+  <Property name="className" type="string">
+    Additional CSS classes
+  </Property>
+</Properties>
+
+</ComponentPreviewProvider>

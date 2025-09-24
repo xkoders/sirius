@@ -1,0 +1,252 @@
+import { ComponentPreviewProvider } from '@/components/ComponentPreview'
+
+export const metadata = {
+  title: 'Typography',
+  description: 'Typography components for consistent text styling',
+}
+
+export const sections = [
+  { title: 'Heading', id: 'heading' },
+  { title: 'Title', id: 'title' },
+  { title: 'Subtitle', id: 'subtitle' },
+  { title: 'Text', id: 'text' },
+]
+
+<ComponentPreviewProvider defaultFramework="react">
+
+# Typography
+
+Typography components provide semantic HTML elements with consistent styling and spacing.
+
+<Note>
+Typography components automatically handle responsive design and accessibility requirements. They provide semantic meaning and consistent visual hierarchy.
+</Note>
+
+## Heading {{ anchor: false }}
+
+Headings provide semantic structure for page and section titles.
+
+<EnhancedCodeGroup 
+  component="Heading" 
+  componentProps={{ level: 2, children: 'Section Heading' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Heading } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="space-y-4">
+      <Heading level={1}>Main Heading</Heading>
+      <Heading level={2}>Section Heading</Heading>
+      <Heading level={3}>Subsection Heading</Heading>
+      <Heading level={4}>Minor Heading</Heading>
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="space-y-4">
+    <Heading :level="1">Main Heading</Heading>
+    <Heading :level="2">Section Heading</Heading>
+    <Heading :level="3">Subsection Heading</Heading>
+    <Heading :level="4">Minor Heading</Heading>
+  </div>
+</template>
+
+<script setup>
+import { Heading } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Heading Props
+
+<Properties>
+  <Property name="level" type="1 | 2 | 3 | 4 | 5 | 6">
+    The heading level (h1-h6)
+  </Property>
+  <Property name="className" type="string">
+    Additional CSS classes
+  </Property>
+</Properties>
+
+## Title {{ anchor: false }}
+
+Titles are used for prominent headings and page titles.
+
+<EnhancedCodeGroup 
+  component="Title" 
+  componentProps={{ children: 'Page Title' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Title } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="space-y-4">
+      <Title>Welcome to Our Platform</Title>
+      <Title>Product Dashboard</Title>
+      <Title>User Settings</Title>
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="space-y-4">
+    <Title>Welcome to Our Platform</Title>
+    <Title>Product Dashboard</Title>
+    <Title>User Settings</Title>
+  </div>
+</template>
+
+<script setup>
+import { Title } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Title Props
+
+<Properties>
+  <Property name="className" type="string">
+    Additional CSS classes
+  </Property>
+</Properties>
+
+## Subtitle {{ anchor: false }}
+
+Subtitles provide secondary headings and section descriptions.
+
+<EnhancedCodeGroup 
+  component="Subtitle" 
+  componentProps={{ children: 'Page subtitle or description' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Subtitle } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="space-y-4">
+      <Subtitle>Manage your account settings and preferences</Subtitle>
+      <Subtitle>View and edit your profile information</Subtitle>
+      <Subtitle>Configure notification preferences</Subtitle>
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="space-y-4">
+    <Subtitle>Manage your account settings and preferences</Subtitle>
+    <Subtitle>View and edit your profile information</Subtitle>
+    <Subtitle>Configure notification preferences</Subtitle>
+  </div>
+</template>
+
+<script setup>
+import { Subtitle } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Subtitle Props
+
+<Properties>
+  <Property name="className" type="string">
+    Additional CSS classes
+  </Property>
+</Properties>
+
+## Text {{ anchor: false }}
+
+Text components provide body text with various sizes and weights.
+
+<EnhancedCodeGroup 
+  component="Text" 
+  componentProps={{ children: 'This is body text with consistent styling.' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Text } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="space-y-4">
+      <Text>This is regular body text with consistent styling and spacing.</Text>
+      <Text size="small">This is smaller text for secondary information.</Text>
+      <Text size="large">This is larger text for emphasis.</Text>
+      <Text muted>This is muted text for less important information.</Text>
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="space-y-4">
+    <Text>This is regular body text with consistent styling and spacing.</Text>
+    <Text size="small">This is smaller text for secondary information.</Text>
+    <Text size="large">This is larger text for emphasis.</Text>
+    <Text muted>This is muted text for less important information.</Text>
+  </div>
+</template>
+
+<script setup>
+import { Text } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Text Props
+
+<Properties>
+  <Property name="size" type="'small' | 'medium' | 'large'">
+    The size of the text
+  </Property>
+  <Property name="muted" type="boolean">
+    Whether to use muted text color
+  </Property>
+  <Property name="className" type="string">
+    Additional CSS classes
+  </Property>
+</Properties>
+
+## Typography Best Practices
+
+### Semantic Structure
+- Use `Heading` components for document structure (h1-h6)
+- Use `Title` for page-level headings
+- Use `Subtitle` for section descriptions
+- Use `Text` for body content
+
+### Accessibility
+- Headings provide semantic structure for screen readers
+- Proper heading hierarchy improves navigation
+- Consistent spacing improves readability
+
+### Responsive Design
+- Typography components automatically adapt to screen sizes
+- Consistent spacing across all breakpoints
+- Optimized line heights for readability
+
+</ComponentPreviewProvider>

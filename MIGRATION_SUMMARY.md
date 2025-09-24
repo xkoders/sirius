@@ -67,7 +67,7 @@ sirius/
 ### 2. Vue Package (`@adersolutions/sirius-vue`)
 - **Purpose**: Vue component library
 - **Installation**: `npm install @adersolutions/sirius-vue`
-- **Usage**: `import { SiriusButton, SiriusBadge } from '@adersolutions/sirius-vue'`
+- **Usage**: `import { Button, Badge } from '@adersolutions/sirius-vue'`
 - **Build**: `pnpm build:vue`
 
 ### 3. Examples Package
@@ -105,11 +105,11 @@ pnpm add @adersolutions/sirius-vue
 
 ```vue
 <template>
-  <SiriusButton>Click me</SiriusButton>
+  <Button>Click me</Button>
 </template>
 
 <script setup>
-import { SiriusButton } from '@adersolutions/sirius-vue'
+import { Button } from '@adersolutions/sirius-vue'
 import '@adersolutions/sirius-vue/style.css'
 </script>
 ```

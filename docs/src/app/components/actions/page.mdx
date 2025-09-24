@@ -1,0 +1,89 @@
+import { ComponentPreviewProvider } from '@/components/ComponentPreview'
+
+export const metadata = {
+  title: 'Actions',
+  description: 'Action components for user interactions',
+}
+
+export const sections = [
+  { title: 'Button', id: 'button' },
+]
+
+<ComponentPreviewProvider defaultFramework="react">
+
+# Actions
+
+Action components provide interactive elements that allow users to perform actions within your application.
+
+## Button {{ anchor: false }}
+
+Buttons are essential interactive elements that allow users to perform actions. Our button component supports multiple variants, sizes, and states.
+
+<EnhancedCodeGroup 
+  component="Button" 
+  componentProps={{ children: 'Click me', variant: 'primary' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Button } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="flex gap-2 flex-wrap">
+      <Button variant="primary">Primary</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="outline">Outline</Button>
+      <Button disabled>Disabled</Button>
+      <Button loading>Loading</Button>
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="flex gap-2 flex-wrap">
+    <Button variant="primary">Primary</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="outline">Outline</Button>
+    <Button disabled>Disabled</Button>
+    <Button loading>Loading</Button>
+  </div>
+</template>
+
+<script setup>
+import { Button } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Button Props
+
+<Properties>
+  <Property name="variant" type="'primary' | 'secondary' | 'outline' | 'none'">
+    The visual style variant of the button
+  </Property>
+  <Property name="size" type="'small' | 'medium' | 'large' | 'slim' | 'none'">
+    The size of the button
+  </Property>
+  <Property name="disabled" type="boolean">
+    Whether the button is disabled
+  </Property>
+  <Property name="loading" type="boolean">
+    Whether the button is in loading state
+  </Property>
+  <Property name="fullwidth" type="boolean">
+    Whether the button should take full width
+  </Property>
+  <Property name="outline" type="boolean">
+    Whether to use outline style
+  </Property>
+  <Property name="onClick" type="() => void">
+    Click handler function
+  </Property>
+</Properties>
+
+</ComponentPreviewProvider>

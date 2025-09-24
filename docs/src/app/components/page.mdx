@@ -1,0 +1,123 @@
+import { ComponentPreviewProvider } from '@/components/ComponentPreview'
+
+export const metadata = {
+  title: 'Components',
+  description: 'UI Components documentation for React and Vue frameworks',
+}
+
+export const sections = [
+  { title: 'Actions', id: 'actions' },
+  { title: 'Feedbacks', id: 'feedbacks' },
+  { title: 'Forms', id: 'forms' },
+  { title: 'Layout', id: 'layout' },
+  { title: 'Navigation', id: 'navigation' },
+  { title: 'Overlays', id: 'overlays' },
+  { title: 'Typography', id: 'typography' },
+]
+
+<ComponentPreviewProvider defaultFramework="react">
+
+# Components
+
+Explore our comprehensive UI component library available for both React and Vue frameworks. Each component is designed with consistency, accessibility, and developer experience in mind. {{ className: 'lead' }}
+
+## Component Categories
+
+Our components are organized into logical categories to help you find what you need:
+
+### [Actions](/components/actions)
+Interactive elements that allow users to perform actions.
+- **Button**: Primary, secondary, outline variants with loading states
+
+### [Feedbacks](/components/feedbacks)
+Visual indicators and notifications for user feedback.
+- **Badge**: Status indicators with multiple variants
+- **Spinner**: Loading indicators with different sizes
+- **Toast**: Temporary notification messages
+- **Banner**: Important alerts and information
+
+### [Forms](/components/forms)
+Input components for data collection and user interaction.
+- **TextField**: Text input with validation and multiline support
+- **Checkbox**: Selection inputs with indeterminate states
+- **Tabs**: Content organization with tabbed interface
+- **SearchField**: Specialized search input component
+
+### [Layout](/components/layout)
+Structural components for organizing and arranging content.
+- **Box**: Flexible containers with shadows and rounded corners
+- **Stack**: Layout with consistent spacing between elements
+- **MediaCard**: Specialized cards for media content
+- **EmptyState**: Visual representation for empty content
+
+### [Navigation](/components/navigation)
+Components for app structure and routing.
+- **Navigation**: Structured menus with sections and sub-navigation
+
+### [Overlays](/components/overlays)
+Layered components that appear above the main interface.
+- **Modal**: Overlay dialogs with accessibility features
+- **Tooltip**: Contextual hover information
+
+### [Typography](/components/typography)
+Text components for consistent styling and semantic structure.
+- **Heading**: Semantic headings with different levels
+- **Title**: Page and section titles
+- **Subtitle**: Secondary headings and descriptions
+- **Text**: Body text with various sizes and weights
+
+## Getting Started
+
+### Installation
+
+Install the Sirius UI packages for your preferred framework:
+
+```bash
+# For React
+npm install @adersolutions/sirius-react
+
+# For Vue
+npm install @adersolutions/sirius-vue
+```
+
+### Basic Usage
+
+```tsx {{ title: 'React' }}
+import { Button, Badge, TextField } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div>
+      <Button variant="primary">Click me</Button>
+      <Badge status="success">New</Badge>
+      <TextField label="Email" placeholder="Enter your email" />
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div>
+    <Button variant="primary">Click me</Button>
+    <Badge status="success">New</Badge>
+    <TextField label="Email" placeholder="Enter your email" />
+  </div>
+</template>
+
+<script setup>
+import { Button, Badge, TextField } from '@adersolutions/sirius-vue'
+</script>
+```
+
+## Features
+
+- **Dual Framework Support**: Available for both React and Vue
+- **Live Previews**: Interactive component examples with real-time rendering
+- **Comprehensive Documentation**: Detailed props and usage examples
+- **Accessibility**: Built with accessibility best practices
+- **Responsive Design**: Mobile-first approach with responsive components
+- **Dark Mode**: Full support for light and dark themes
+- **TypeScript**: Complete TypeScript support with type definitions
+
+</ComponentPreviewProvider>

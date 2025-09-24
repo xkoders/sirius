@@ -36,14 +36,14 @@ pnpm add @adersolutions/sirius-vue
 ```vue
 <template>
   <div>
-    <SiriusText>Hello World</SiriusText>
-    <SiriusButton>Click me</SiriusButton>
-    <SiriusBadge>New</SiriusBadge>
+    <Text>Hello World</Text>
+    <Button>Click me</Button>
+    <Badge>New</Badge>
   </div>
 </template>
 
 <script setup>
-import { SiriusText, SiriusButton, SiriusBadge } from '@adersolutions/sirius-vue'
+import { Text, Button, Badge } from '@adersolutions/sirius-vue'
 import '@adersolutions/sirius-vue/style.css'
 </script>
 ```

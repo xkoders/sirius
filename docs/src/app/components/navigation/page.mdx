@@ -1,0 +1,107 @@
+import { ComponentPreviewProvider } from '@/components/ComponentPreview'
+
+export const metadata = {
+  title: 'Navigation',
+  description: 'Navigation components for app structure and routing',
+}
+
+
+
+<ComponentPreviewProvider defaultFramework="react">
+
+# Navigation
+
+Navigation components provide structure and routing for your application.
+
+
+Navigation components provide structured navigation menus with sections, items, and sub-navigation support.
+
+<EnhancedCodeGroup 
+  component="Navigation" 
+  componentProps={{ minimized: false }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Navigation } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <Navigation minimized={false}>
+      <Navigation.Section title="Main" items={[
+        { url: '/dashboard', label: 'Dashboard', icon: 'HomeIcon' },
+        { url: '/products', label: 'Products', icon: 'PackageIcon', badge: 'New' },
+        { url: '/orders', label: 'Orders', icon: 'ShoppingCartIcon' }
+      ]} />
+      <Navigation.Section title="Settings" items={[
+        { url: '/settings', label: 'Settings', icon: 'CogIcon' },
+        { url: '/profile', label: 'Profile', icon: 'UserIcon' }
+      ]} />
+    </Navigation>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <Navigation :minimized="false">
+    <NavigationSection title="Main" :items="mainItems" />
+    <NavigationSection title="Settings" :items="settingsItems" />
+  </Navigation>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { Navigation, NavigationSection } from '@adersolutions/sirius-vue'
+
+const mainItems = ref([
+  { url: '/dashboard', label: 'Dashboard', icon: 'HomeIcon' },
+  { url: '/products', label: 'Products', icon: 'PackageIcon', badge: 'New' },
+  { url: '/orders', label: 'Orders', icon: 'ShoppingCartIcon' }
+])
+
+const settingsItems = ref([
+  { url: '/settings', label: 'Settings', icon: 'CogIcon' },
+  { url: '/profile', label: 'Profile', icon: 'UserIcon' }
+])
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Navigation Props
+
+<Properties>
+  <Property name="minimized" type="boolean">
+    Whether the navigation is in minimized state
+  </Property>
+  <Property name="className" type="string">
+    Additional CSS classes
+  </Property>
+</Properties>
+
+### Navigation.Item Props
+
+<Properties>
+  <Property name="url" type="string">
+    The URL for the navigation item
+  </Property>
+  <Property name="label" type="string">
+    The display label for the item
+  </Property>
+  <Property name="icon" type="IconType">
+    Optional icon for the item
+  </Property>
+  <Property name="badge" type="string | ReactNode">
+    Optional badge to display on the item
+  </Property>
+  <Property name="selected" type="boolean">
+    Whether the item is currently selected
+  </Property>
+  <Property name="disabled" type="boolean">
+    Whether the item is disabled
+  </Property>
+</Properties>
+
+</ComponentPreviewProvider>

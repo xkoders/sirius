@@ -1,0 +1,316 @@
+import { ComponentPreviewProvider } from '@/components/ComponentPreview'
+
+export const metadata = {
+  title: 'Forms',
+  description: 'Form components for user input and data collection',
+}
+
+export const sections = [
+  { title: 'TextField', id: 'textfield' },
+  { title: 'Checkbox', id: 'checkbox' },
+  { title: 'Tabs', id: 'tabs' },
+  { title: 'SearchField', id: 'searchfield' },
+]
+
+<ComponentPreviewProvider defaultFramework="react">
+
+# Forms
+
+Form components provide interactive elements for user input and data collection.
+
+## TextField {{ anchor: false }}
+
+Text fields allow users to input text data with various configurations and validation states.
+
+<EnhancedCodeGroup 
+  component="TextField" 
+  componentProps={{ label: 'Email', placeholder: 'Enter your email' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { TextField } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  const [value, setValue] = useState('')
+  
+  return (
+    <div className="space-y-4">
+      <TextField 
+        label="Email" 
+        placeholder="Enter your email"
+        value={value}
+        onChange={setValue}
+      />
+      <TextField 
+        label="Password" 
+        type="password"
+        error="Password is required"
+      />
+      <TextField 
+        label="Multiline" 
+        multiline={3}
+        placeholder="Enter description"
+      />
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="space-y-4">
+    <TextField 
+      label="Email" 
+      placeholder="Enter your email"
+      v-model="email"
+    />
+    <TextField 
+      label="Password" 
+      type="password"
+      error="Password is required"
+    />
+    <TextField 
+      label="Multiline" 
+      :multiline="3"
+      placeholder="Enter description"
+    />
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { TextField } from '@adersolutions/sirius-vue'
+
+const email = ref('')
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### TextField Props
+
+<Properties>
+  <Property name="label" type="string | ReactNode">
+    The label for the input field
+  </Property>
+  <Property name="value" type="string">
+    The current value of the input
+  </Property>
+  <Property name="onChange" type="(value: string) => void">
+    Callback when the value changes
+  </Property>
+  <Property name="size" type="'sm' | 'md' | 'lg'">
+    The size of the input field
+  </Property>
+  <Property name="error" type="string">
+    Error message to display
+  </Property>
+  <Property name="multiline" type="1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10">
+    Number of lines for multiline input
+  </Property>
+  <Property name="prefix" type="string | IconType">
+    Prefix content or icon
+  </Property>
+  <Property name="suffix" type="string | IconType">
+    Suffix content or icon
+  </Property>
+</Properties>
+
+## Checkbox {{ anchor: false }}
+
+Checkboxes allow users to select one or more options from a set.
+
+<EnhancedCodeGroup 
+  component="Checkbox" 
+  componentProps={{ label: 'Accept terms', checked: true }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Checkbox } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  const [checked, setChecked] = useState(true)
+  const [indeterminate, setIndeterminate] = useState(false)
+  
+  return (
+    <div className="space-y-4">
+      <Checkbox 
+        label="Accept terms and conditions"
+        checked={checked}
+        onChange={setChecked}
+      />
+      <Checkbox 
+        label="Subscribe to newsletter"
+        checked={false}
+      />
+      <Checkbox 
+        label="Indeterminate state"
+        indeterminate={indeterminate}
+        onChange={() => setIndeterminate(!indeterminate)}
+      />
+      <Checkbox 
+        label="Disabled checkbox"
+        disabled
+        checked={true}
+      />
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="space-y-4">
+    <Checkbox 
+      label="Accept terms and conditions"
+      v-model="checked"
+    />
+    <Checkbox 
+      label="Subscribe to newsletter"
+      :checked="false"
+    />
+    <Checkbox 
+      label="Indeterminate state"
+      :indeterminate="indeterminate"
+      @change="indeterminate = !indeterminate"
+    />
+    <Checkbox 
+      label="Disabled checkbox"
+      disabled
+      :checked="true"
+    />
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { Checkbox } from '@adersolutions/sirius-vue'
+
+const checked = ref(true)
+const indeterminate = ref(false)
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Checkbox Props
+
+<Properties>
+  <Property name="label" type="string">
+    The label text for the checkbox
+  </Property>
+  <Property name="checked" type="boolean">
+    Whether the checkbox is checked
+  </Property>
+  <Property name="indeterminate" type="boolean">
+    Whether the checkbox is in indeterminate state
+  </Property>
+  <Property name="disabled" type="boolean">
+    Whether the checkbox is disabled
+  </Property>
+  <Property name="onChange" type="(value: boolean, e?: ChangeEvent) => void">
+    Callback when the checkbox state changes
+  </Property>
+</Properties>
+
+## Tabs {{ anchor: false }}
+
+Tabs organize content into separate sections that can be switched between.
+
+<EnhancedCodeGroup 
+  component="Tabs" 
+  componentProps={{ tabs: [{ label: 'Tab 1' }, { label: 'Tab 2' }, { label: 'Tab 3' }], selected: 0 }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+sdsd
+
+</EnhancedCodeGroup>
+
+### Tabs Props
+
+<Properties>
+  <Property name="tabs" type="TabsProps[]">
+    Array of tab configurations
+  </Property>
+  <Property name="selected" type="string | number">
+    Currently selected tab
+  </Property>
+  <Property name="onChange" type="(index: number, tab: TabsProps) => void">
+    Callback when tab selection changes
+  </Property>
+  <Property name="filled" type="boolean">
+    Whether to use filled tab style
+  </Property>
+  <Property name="canCreateTab" type="boolean">
+    Whether users can create new tabs
+  </Property>
+</Properties>
+
+## SearchField {{ anchor: false }}
+
+Search fields provide a specialized input for search functionality.
+
+<EnhancedCodeGroup 
+  component="SearchField" 
+  componentProps={{ placeholder: 'Search...', value: '' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { SearchField } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  const [searchValue, setSearchValue] = useState('')
+  
+  return (
+    <SearchField 
+      value={searchValue}
+      onChange={setSearchValue}
+      placeholder="Search products..."
+    />
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <SearchField 
+    v-model="searchValue"
+    placeholder="Search products..."
+  />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { SearchField } from '@adersolutions/sirius-vue'
+
+const searchValue = ref('')
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### SearchField Props
+
+<Properties>
+  <Property name="value" type="string">
+    The current search value
+  </Property>
+  <Property name="onChange" type="(value: string) => void">
+    Callback when search value changes
+  </Property>
+  <Property name="placeholder" type="string">
+    Placeholder text for the search field
+  </Property>
+  <Property name="className" type="string">
+    Additional CSS classes
+  </Property>
+</Properties>
+
+</ComponentPreviewProvider>

@@ -14,6 +14,12 @@ importers:
 
   docs:
     dependencies:
+      '@adersolutions/sirius-react':
+        specifier: workspace:*
+        version: link:../packages/react
+      '@adersolutions/sirius-vue':
+        specifier: workspace:*
+        version: link:../packages/vue
       '@algolia/autocomplete-core':
         specifier: ^1.19.2
         version: 1.19.4(@algolia/client-search@5.35.0)(algoliasearch@5.35.0)(search-insights@2.17.3)

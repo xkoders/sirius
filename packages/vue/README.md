@@ -27,17 +27,17 @@ npm install vue@^3.3.0
 ```vue
 <template>
   <div>
-    <SiriusButton variant="primary">Click me</SiriusButton>
-    <SiriusBadge color="blue">New</SiriusBadge>
-    <SiriusSpinner size="medium" />
+    <Button variant="primary">Click me</Button>
+    <Badge color="blue">New</Badge>
+    <Spinner size="medium" />
   </div>
 </template>
 
 <script setup>
 import { 
-  SiriusButton, 
-  SiriusBadge, 
-  SiriusSpinner 
+  Button, 
+  Badge, 
+  Spinner 
 } from '@adersolutions/sirius-vue';
 import '@adersolutions/sirius-vue/style.css';
 </script>

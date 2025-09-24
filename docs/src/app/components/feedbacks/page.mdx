@@ -1,0 +1,254 @@
+import { ComponentPreviewProvider } from '@/components/ComponentPreview'
+
+export const metadata = {
+  title: 'Feedbacks',
+  description: 'Feedback components for user notifications and status indicators',
+}
+
+export const sections = [
+  { title: 'Badge', id: 'badge' },
+  { title: 'Spinner', id: 'spinner' },
+  { title: 'Toast', id: 'toast' },
+  { title: 'Banner', id: 'banner' },
+]
+
+<ComponentPreviewProvider defaultFramework="react">
+
+# Feedbacks
+
+Feedback components provide visual indicators and notifications to inform users about the current state of the application.
+
+## Badge {{ anchor: false }}
+
+Badges are small status indicators that provide quick visual information about an item's state.
+
+<EnhancedCodeGroup 
+  component="Badge" 
+  componentProps={{ children: 'New', status: 'success' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Badge } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="flex gap-2 flex-wrap">
+      <Badge status="default">Default</Badge>
+      <Badge status="info">Info</Badge>
+      <Badge status="warning">Warning</Badge>
+      <Badge status="critical">Critical</Badge>
+      <Badge status="success">Success</Badge>
+      <Badge status="pending">Pending</Badge>
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="flex gap-2 flex-wrap">
+    <Badge status="default">Default</Badge>
+    <Badge status="info">Info</Badge>
+    <Badge status="warning">Warning</Badge>
+    <Badge status="critical">Critical</Badge>
+    <Badge status="success">Success</Badge>
+    <Badge status="pending">Pending</Badge>
+  </div>
+</template>
+
+<script setup>
+import { Badge } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Badge Props
+
+<Properties>
+  <Property name="status" type="'default' | 'info' | 'warning' | 'critical' | 'success' | 'pending'">
+    The status variant of the badge
+  </Property>
+  <Property name="type" type="'incomplete' | 'halfComplete' | 'complete' | 'dashed'">
+    The type of badge (for progress indicators)
+  </Property>
+  <Property name="icon" type="IconType">
+    Optional icon to display in the badge
+  </Property>
+</Properties>
+
+## Spinner {{ anchor: false }}
+
+Spinners provide visual feedback when content is loading or processing.
+
+<EnhancedCodeGroup 
+  component="Spinner" 
+  componentProps={{ size: 'medium' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Spinner } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="flex gap-4 items-center">
+      <Spinner size="small" />
+      <Spinner size="medium" />
+      <Spinner size="large" />
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="flex gap-4 items-center">
+    <Spinner size="small" />
+    <Spinner size="medium" />
+    <Spinner size="large" />
+  </div>
+</template>
+
+<script setup>
+import { Spinner } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Spinner Props
+
+<Properties>
+  <Property name="size" type="'small' | 'medium' | 'large' | 'none'">
+    The size of the spinner
+  </Property>
+  <Property name="className" type="string">
+    Additional CSS classes
+  </Property>
+</Properties>
+
+## Toast {{ anchor: false }}
+
+Toast notifications provide temporary feedback messages to users.
+
+<EnhancedCodeGroup 
+  component="Toast" 
+  componentProps={{ content: 'Operation completed successfully', type: 'success' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Toast } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="space-y-2">
+      <Toast content="Success message" type="success" />
+      <Toast content="Error message" type="error" />
+      <Toast content="Info message" type="info" />
+      <Toast content="Warning message" type="warning" />
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="space-y-2">
+    <Toast content="Success message" type="success" />
+    <Toast content="Error message" type="error" />
+    <Toast content="Info message" type="info" />
+    <Toast content="Warning message" type="warning" />
+  </div>
+</template>
+
+<script setup>
+import { Toast } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Toast Props
+
+<Properties>
+  <Property name="content" type="string | ReactNode">
+    The content to display in the toast
+  </Property>
+  <Property name="type" type="'success' | 'error' | 'info' | 'warning' | 'default'">
+    The type of toast notification
+  </Property>
+  <Property name="duration" type="number">
+    Duration in milliseconds before auto-dismiss (default: 4500)
+  </Property>
+  <Property name="onDismiss" type="() => void">
+    Callback when toast is dismissed
+  </Property>
+</Properties>
+
+## Banner {{ anchor: false }}
+
+Banners provide important information or alerts to users.
+
+<EnhancedCodeGroup 
+  component="Banner" 
+  componentProps={{ children: 'Important information', status: 'info' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Banner } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="space-y-4">
+      <Banner status="info">Information banner</Banner>
+      <Banner status="success">Success banner</Banner>
+      <Banner status="warning">Warning banner</Banner>
+      <Banner status="critical">Critical banner</Banner>
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="space-y-4">
+    <Banner status="info">Information banner</Banner>
+    <Banner status="success">Success banner</Banner>
+    <Banner status="warning">Warning banner</Banner>
+    <Banner status="critical">Critical banner</Banner>
+  </div>
+</template>
+
+<script setup>
+import { Banner } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Banner Props
+
+<Properties>
+  <Property name="status" type="'default' | 'info' | 'warning' | 'critical' | 'success' | 'pending'">
+    The status variant of the banner
+  </Property>
+  <Property name="appearance" type="'default' | 'card'">
+    The visual appearance of the banner
+  </Property>
+  <Property name="title" type="string">
+    Optional title for the banner
+  </Property>
+  <Property name="onDismiss" type="() => void">
+    Callback when banner is dismissed
+  </Property>
+</Properties>
+
+</ComponentPreviewProvider>

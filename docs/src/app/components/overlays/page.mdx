@@ -1,0 +1,201 @@
+import { ComponentPreviewProvider } from '@/components/ComponentPreview'
+
+export const metadata = {
+  title: 'Overlays',
+  description: 'Overlay components for modals, tooltips, and layered content',
+}
+
+export const sections = [
+  { title: 'Modal', id: 'modal' },
+  { title: 'Tooltip', id: 'tooltip' },
+]
+
+<ComponentPreviewProvider defaultFramework="react">
+
+# Overlays
+
+Overlay components provide layered content that appears above the main interface.
+
+## Modal {{ anchor: false }}
+
+Modals are overlay components that display content in a focused layer above the main interface.
+
+<EnhancedCodeGroup 
+  component="Modal" 
+  componentProps={{ show: true, title: 'Example Modal', children: 'Modal content goes here' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Modal } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  const [showModal, setShowModal] = useState(false)
+  
+  return (
+    <div>
+      <Button onClick={() => setShowModal(true)}>
+        Open Modal
+      </Button>
+      
+      <Modal 
+        show={showModal}
+        title="Confirm Action"
+        onClose={() => setShowModal(false)}
+      >
+        <p>Are you sure you want to perform this action?</p>
+        <div className="flex gap-2 mt-4">
+          <Button onClick={() => setShowModal(false)}>Cancel</Button>
+          <Button variant="primary" onClick={() => setShowModal(false)}>
+            Confirm
+          </Button>
+        </div>
+      </Modal>
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div>
+    <Button @click="showModal = true">
+      Open Modal
+    </Button>
+    
+    <Modal 
+      :show="showModal"
+      title="Confirm Action"
+      @close="showModal = false"
+    >
+      <p>Are you sure you want to perform this action?</p>
+      <div class="flex gap-2 mt-4">
+        <Button @click="showModal = false">Cancel</Button>
+        <Button variant="primary" @click="showModal = false">
+          Confirm
+        </Button>
+      </div>
+    </Modal>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { Modal, Button } from '@adersolutions/sirius-vue'
+
+const showModal = ref(false)
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Modal Props
+
+<Properties>
+  <Property name="show" type="boolean">
+    Whether the modal is visible
+  </Property>
+  <Property name="title" type="string">
+    The title of the modal
+  </Property>
+  <Property name="onClose" type="() => void">
+    Callback when the modal should be closed
+  </Property>
+  <Property name="closeOnEscape" type="boolean">
+    Whether to close modal on Escape key (default: true)
+  </Property>
+  <Property name="closeOnOverlayClick" type="boolean">
+    Whether to close modal when clicking overlay (default: true)
+  </Property>
+  <Property name="aria-label" type="string">
+    Accessibility label for the modal
+  </Property>
+</Properties>
+
+## Tooltip {{ anchor: false }}
+
+Tooltips provide contextual information when users hover over elements.
+
+<EnhancedCodeGroup 
+  component="Tooltip" 
+  componentProps={{ content: 'This is a tooltip', children: 'Hover me' }}
+  showPreview={true}
+  frameworks={['react', 'vue']}
+>
+
+```tsx {{ title: 'React' }}
+import { Tooltip } from '@adersolutions/sirius-react'
+
+function MyComponent() {
+  return (
+    <div className="flex gap-4 items-center">
+      <Tooltip content="This is a tooltip">
+        <Button>Hover me</Button>
+      </Tooltip>
+      
+      <Tooltip content="Tooltip on the right" align="right">
+        <Button>Right aligned</Button>
+      </Tooltip>
+      
+      <Tooltip content="Dark tooltip" dark>
+        <Button>Dark tooltip</Button>
+      </Tooltip>
+      
+      <Tooltip content="Tooltip below" down>
+        <Button>Tooltip below</Button>
+      </Tooltip>
+    </div>
+  )
+}
+```
+
+```vue {{ title: 'Vue' }}
+<template>
+  <div class="flex gap-4 items-center">
+    <Tooltip content="This is a tooltip">
+      <Button>Hover me</Button>
+    </Tooltip>
+    
+    <Tooltip content="Tooltip on the right" align="right">
+      <Button>Right aligned</Button>
+    </Tooltip>
+    
+    <Tooltip content="Dark tooltip" dark>
+      <Button>Dark tooltip</Button>
+    </Tooltip>
+    
+    <Tooltip content="Tooltip below" down>
+      <Button>Tooltip below</Button>
+    </Tooltip>
+  </div>
+</template>
+
+<script setup>
+import { Tooltip, Button } from '@adersolutions/sirius-vue'
+</script>
+```
+
+</EnhancedCodeGroup>
+
+### Tooltip Props
+
+<Properties>
+  <Property name="content" type="string | ReactNode">
+    The content to display in the tooltip
+  </Property>
+  <Property name="align" type="'left' | 'right' | 'center'">
+    The alignment of the tooltip (default: 'center')
+  </Property>
+  <Property name="down" type="boolean">
+    Whether to show tooltip below the element
+  </Property>
+  <Property name="dark" type="boolean">
+    Whether to use dark theme for the tooltip
+  </Property>
+  <Property name="className" type="string">
+    Additional CSS classes
+  </Property>
+</Properties>
+
+</ComponentPreviewProvider>
